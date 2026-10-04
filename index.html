@@ -83,7 +83,8 @@
   }
 
   /* ===== hero ===== */
-  .hero{position:relative; background:var(--surface); border-bottom:1px solid var(--line); overflow:hidden}
+  .hero{position:relative; background:var(--ink); border-bottom:1px solid var(--line); overflow:hidden;
+    min-height:clamp(25rem,62vh,34rem); display:flex; align-items:flex-end}
   .hero-ill{position:absolute; inset:0; z-index:0}
   .hero-ill svg{width:100%; height:100%; display:block; object-fit:cover}
   .hero-shade{
@@ -348,7 +349,81 @@
   footer p{font-size:.82rem; color:var(--ink-3); max-width:42em}
   footer .mono{font-family:var(--mono); font-size:.7rem; letter-spacing:.12em; color:var(--ink-3)}
 
+  /* ===== photos ===== */
+  .ph{width:100%; height:100%; object-fit:cover; display:block}
+  .hero-ill img{width:100%; height:100%; object-fit:cover; display:block; object-position:50% 58%}
+  .card .thumb img{width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform .6s cubic-bezier(.2,.7,.3,1), filter .4s ease}
+  @media (hover:hover){ .card:hover .thumb img{transform:scale(1.07)} }
+  .card .thumb::after{
+    content:""; position:absolute; inset:auto 0 0 0; height:42%;
+    background:linear-gradient(180deg, rgba(10,22,30,0), rgba(10,22,30,.42));
+    opacity:0; transition:opacity .4s ease; pointer-events:none;
+  }
+  @media (hover:hover){ .card:hover .thumb::after{opacity:1} }
+  .card .leafbadge{
+    position:absolute; right:.6rem; top:.6rem; width:1.6rem; height:1.6rem; color:#fff;
+    filter:drop-shadow(0 2px 6px rgba(10,22,30,.6));
+    opacity:0; transform:translateY(-8px) rotate(-40deg);
+    transition:opacity .35s ease, transform .45s cubic-bezier(.2,.7,.3,1);
+  }
+  @media (hover:hover){ .card:hover .leafbadge{opacity:1; transform:none} }
+  .shot{
+    position:relative; border-radius:6px; overflow:hidden;
+    border:1px solid var(--line); box-shadow:var(--shadow); background:var(--surface-2);
+  }
+  .shot img{display:block; width:100%; height:100%; object-fit:cover}
+  .shot figcaption{
+    position:absolute; inset:auto 0 0 0; padding:1.5rem .9rem .7rem;
+    background:linear-gradient(180deg, rgba(10,22,30,0), rgba(10,22,30,.85));
+    color:#F0F4F3; font-size:.78rem; display:flex; align-items:center; gap:.4rem;
+  }
+  .shot figcaption .mp{width:.85rem; height:.85rem; color:var(--amber); flex:0 0 auto}
+  .shot figcaption b{color:#fff; font-weight:500}
+
+  .tl-shot{margin:.9rem 0 0; max-width:30rem; aspect-ratio:4/3}
+  .tl-shot.wide{aspect-ratio:16/9; max-width:34rem}
+
+  /* ===== scroll progress ===== */
+  .progress{
+    position:absolute; left:0; bottom:-1px; height:2px; width:0;
+    background:linear-gradient(90deg, var(--maple), var(--maple-2), var(--amber));
+    z-index:2; transition:width .12s linear;
+  }
+
+  /* ===== maple divider ===== */
+  .mdiv{display:flex; align-items:center; justify-content:center; gap:.8rem; padding-block:.4rem}
+  .mdiv i{flex:1; max-width:7rem; height:1px; background:var(--line-strong); display:block}
+  .mdiv .mp{width:1.05rem; height:1.05rem; color:var(--maple)}
+  .mdiv .mp:nth-child(3){width:.8rem; height:.8rem; color:var(--maple-2)}
+  .mdiv .mp:nth-child(4){width:1.05rem; height:1.05rem; color:var(--amber)}
+
+  /* ===== back to top ===== */
+  .totop{
+    position:fixed; right:1rem; bottom:1rem; z-index:50;
+    width:2.9rem; height:2.9rem; border-radius:50%; border:1px solid var(--line);
+    background:var(--surface); color:var(--maple); box-shadow:var(--shadow-lift);
+    display:grid; place-items:center; cursor:pointer; padding:0;
+    opacity:0; visibility:hidden; transform:translateY(12px);
+    transition:opacity .3s ease, transform .3s ease, visibility .3s;
+  }
+  .totop.on{opacity:1; visibility:visible; transform:none}
+  .totop .mp{width:1.3rem; height:1.3rem; transition:transform .45s cubic-bezier(.2,.7,.3,1)}
+  @media (hover:hover){ .totop:hover .mp{transform:rotate(-24deg) scale(1.12)} }
+
+  /* ===== scroll reveal ===== */
+  .rv{transition:none}
+  .rv.rv-armed{transition:opacity .75s cubic-bezier(.2,.7,.3,1), transform .75s cubic-bezier(.2,.7,.3,1)}
+  .rv.rv-pre{opacity:.12; transform:translateY(24px)}
+  .cards .rv-pre:nth-child(2){transition-delay:.08s}
+  .cards .rv-pre:nth-child(3){transition-delay:.16s}
+  .foods .rv-pre:nth-child(2){transition-delay:.08s}
+  .foods .rv-pre:nth-child(3){transition-delay:.16s}
+
   /* ===== motion ===== */
+  @keyframes kenburns{0%{transform:scale(1.04) translate3d(0,0,0)} 100%{transform:scale(1.14) translate3d(-1.2%,-1.6%,0)}}
+  @keyframes pulsering{0%{box-shadow:0 0 0 0 var(--maple-soft)} 70%{box-shadow:0 0 0 7px rgba(192,59,34,0)} 100%{box-shadow:0 0 0 0 rgba(192,59,34,0)}}
+  @keyframes sway{0%,100%{transform:rotate(-9deg)} 50%{transform:rotate(9deg)}}
   @keyframes leaf-fall{
     0%  {transform:translate3d(0,-60px,0)}
     25% {transform:translate3d(30px,180px,0)}
@@ -364,10 +439,19 @@
   @keyframes drift{0%,100%{transform:translateX(0)} 50%{transform:translateX(-14px)}}
   @keyframes bob{0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)}}
 
+  @media (prefers-reduced-motion: reduce){
+    .rv.rv-pre{opacity:1; transform:none}
+  }
   @media (prefers-reduced-motion: no-preference){
     html{scroll-behavior:smooth}
     .leaf{animation:leaf-fall var(--d) linear var(--delay) infinite}
     .leaf .mp{animation:leaf-spin calc(var(--d) / 2.6) linear infinite}
+    .hero-ill img{animation:kenburns 26s ease-in-out infinite alternate}
+    .tl-item.is-key .tl-body::before{animation:pulsering 2.8s ease-out infinite}
+    .mdiv .mp{animation:sway 5s ease-in-out infinite}
+    .mdiv .mp:nth-child(3){animation-delay:.5s; animation-duration:6.2s}
+    .mdiv .mp:nth-child(4){animation-delay:1s; animation-duration:4.4s}
+    .sechead .kicker .mp{animation:sway 6s ease-in-out infinite}
     .hero .inner>*{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
     .hero .inner>*:nth-child(2){animation-delay:.08s}
     .hero .inner>*:nth-child(3){animation-delay:.16s}
@@ -437,74 +521,13 @@
       <a href="#move">交通</a>
     </nav>
   </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 </div>
 
 <!-- ============================ HERO ============================ -->
 <header class="hero" id="top">
   <div class="hero-ill" aria-hidden="true">
-    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="hsky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#1D3A4E"/>
-          <stop offset="42%" stop-color="#5E6E78"/>
-          <stop offset="70%" stop-color="#C98A52"/>
-          <stop offset="100%" stop-color="#E9B472"/>
-        </linearGradient>
-        <linearGradient id="hsea" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#9E7A55"/>
-          <stop offset="45%" stop-color="#3C5765"/>
-          <stop offset="100%" stop-color="#17303D"/>
-        </linearGradient>
-        <linearGradient id="hsand" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#4A4339"/>
-          <stop offset="100%" stop-color="#241F1B"/>
-        </linearGradient>
-      </defs>
-      <rect width="400" height="225" fill="url(#hsky)"/>
-      <circle cx="286" cy="118" r="17" fill="#FFE2AE" opacity=".95"/>
-      <circle cx="286" cy="118" r="30" fill="#FFD79A" opacity=".16"/>
-      <!-- distant mountains -->
-      <path d="M0 126 L34 108 L58 120 L88 100 L116 122 L140 128 L0 128 Z" fill="#2B4252" opacity=".85"/>
-      <path d="M330 126 L352 110 L372 122 L400 106 L400 128 L330 128 Z" fill="#2B4252" opacity=".85"/>
-      <!-- gwangan bridge, far left -->
-      <g opacity=".8" fill="#223A49">
-        <rect x="0" y="122" width="150" height="2.6"/>
-        <rect x="26" y="104" width="3" height="20"/><rect x="74" y="104" width="3" height="20"/><rect x="122" y="104" width="3" height="20"/>
-        <path d="M0 118 L27 105 L75 118 L123 105 L150 118" stroke="#223A49" stroke-width="1.2" fill="none"/>
-      </g>
-      <!-- marine city skyline -->
-      <g fill="#1B3140">
-        <rect x="196" y="78" width="13" height="50"/><rect x="211" y="62" width="16" height="66"/>
-        <rect x="229" y="88" width="11" height="40"/><rect x="242" y="52" width="18" height="76"/>
-        <rect x="262" y="84" width="12" height="44"/><rect x="276" y="70" width="15" height="58"/>
-        <rect x="293" y="92" width="10" height="36"/><rect x="305" y="74" width="16" height="54"/>
-        <rect x="323" y="96" width="11" height="32"/>
-      </g>
-      <g fill="#FFD79A">
-        <rect class="twk" x="214" y="70" width="3" height="3"/><rect class="twk" x="220" y="80" width="3" height="3"/>
-        <rect class="twk" x="246" y="62" width="3" height="3"/><rect class="twk" x="252" y="76" width="3" height="3"/>
-        <rect class="twk" x="246" y="92" width="3" height="3"/><rect class="twk" x="280" y="80" width="3" height="3"/>
-        <rect class="twk" x="286" y="94" width="3" height="3"/><rect class="twk" x="309" y="84" width="3" height="3"/>
-        <rect class="twk" x="315" y="98" width="3" height="3"/><rect class="twk" x="200" y="90" width="3" height="3"/>
-      </g>
-      <!-- sea -->
-      <rect x="0" y="128" width="400" height="56" fill="url(#hsea)"/>
-      <g opacity=".5" stroke="#E7C79C" fill="none" stroke-width="1.4" stroke-linecap="round">
-        <path class="wv" d="M258 136 h30 M300 142 h26 M270 150 h34"/>
-        <path class="wv2" d="M40 140 h40 M120 148 h34 M180 158 h30 M60 164 h44"/>
-      </g>
-      <!-- beach -->
-      <path d="M0 184 C70 172 150 190 230 180 C300 172 350 186 400 178 L400 225 L0 225 Z" fill="url(#hsand)"/>
-      <g opacity=".3" stroke="#E7C79C" fill="none" stroke-width="1.2">
-        <path class="wv" d="M0 186 C80 176 160 192 240 183 C310 175 352 188 400 180"/>
-      </g>
-      <!-- seagulls -->
-      <g stroke="#E9DCC6" stroke-width="1.5" fill="none" opacity=".8" stroke-linecap="round">
-        <path class="bob" d="M74 70 l6 -5 l6 5"/>
-        <path class="bob" d="M100 56 l5 -4 l5 4"/>
-        <path class="bob" d="M138 80 l5 -4 l5 4"/>
-      </g>
-    </svg>
+    <img src="img/haeundae-beach.jpg" alt="">
   </div>
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="leaves" aria-hidden="true">
@@ -517,6 +540,13 @@
     <span class="leaf" style="--x:78%; --d:12.5s; --delay:8.8s; --s:1.2; --c:#9E3A24"><svg class="mp"><use href="#maple"/></svg></span>
     <span class="leaf" style="--x:88%; --d:18s;   --delay:4.9s; --s:.85; --c:#E0A541"><svg class="mp"><use href="#maple"/></svg></span>
     <span class="leaf" style="--x:96%; --d:15s;   --delay:10.4s;--s:.6;  --c:#C8502C"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:11%; --d:21s;   --delay:6.2s; --s:1.45;--c:#A8351F"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:23%; --d:10s;   --delay:12.1s;--s:.5;  --c:#E8B45A"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:35%; --d:16.5s; --delay:9.4s; --s:.95; --c:#D06038"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:47%; --d:13.5s; --delay:14s;  --s:.72; --c:#C8502C"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:60%; --d:20s;   --delay:11.6s;--s:1.35;--c:#D98B32"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:72%; --d:11s;   --delay:6.8s; --s:.55; --c:#E0A541"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:84%; --d:17.5s; --delay:13.2s;--s:1.05;--c:#B33E22"><svg class="mp"><use href="#maple"/></svg></span>
   </div>
 
   <div class="wrap">
@@ -538,7 +568,14 @@
 </header>
 
 <!-- ============================ HIGHLIGHTS ============================ -->
-<section class="sec" id="highlights">
+<section class="sec maple-feat" id="highlights">
+  <div class="leaves" aria-hidden="true">
+    <span class="leaf" style="--x:7%; --d:23s; --delay:0s; --s:.6; --c:#C0402A"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:26%; --d:19s; --delay:5s; --s:.45; --c:#D98B32"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:48%; --d:26s; --delay:9s; --s:.75; --c:#B33E22"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:69%; --d:21s; --delay:14s; --s:.5; --c:#E0A541"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:88%; --d:17s; --delay:3s; --s:.65; --c:#C8502C"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
+  </div>
   <div class="wrap">
     <div class="sechead">
       <p class="kicker"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span>Highlights</span></p>
@@ -550,32 +587,8 @@
       <!-- card 1 sky capsule -->
       <article class="card">
         <div class="thumb">
-          <svg viewBox="0 0 400 225" role="img" aria-label="天空膠囊列車沿海岸行駛的插畫">
-            <defs><linearGradient id="c1s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8FC6D6"/><stop offset="100%" stop-color="#E3EFE4"/></linearGradient>
-            <linearGradient id="c1w" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4E95A8"/><stop offset="100%" stop-color="#1F5468"/></linearGradient></defs>
-            <rect width="400" height="225" fill="url(#c1s)"/>
-            <circle cx="330" cy="46" r="20" fill="#FFF0CE"/>
-            <path d="M0 120 L60 98 L110 116 L150 104 L190 120 L0 120 Z" fill="#8FA98D" opacity=".7"/>
-            <rect y="120" width="400" height="105" fill="url(#c1w)"/>
-            <g opacity=".45" stroke="#CFE9EE" fill="none" stroke-width="1.6" stroke-linecap="round">
-              <path class="wv" d="M30 152 h36 M110 166 h30 M210 158 h40 M300 172 h34"/>
-              <path class="wv2" d="M60 184 h44 M170 192 h36 M280 200 h40"/>
-            </g>
-            <!-- pine cliff left -->
-            <path d="M0 104 L46 86 L84 112 L84 225 L0 225 Z" fill="#3E5B4A"/>
-            <g fill="#2C4537"><path d="M18 88 l8 -18 l8 18 z"/><path d="M40 80 l7 -16 l7 16 z"/><path d="M62 100 l7 -15 l7 15 z"/></g>
-            <!-- elevated track -->
-            <rect x="60" y="128" width="340" height="5" fill="#9AA6A0"/>
-            <g fill="#8C9892"><rect x="120" y="133" width="7" height="46"/><rect x="200" y="133" width="7" height="52"/><rect x="280" y="133" width="7" height="58"/><rect x="360" y="133" width="7" height="62"/></g>
-            <!-- capsules -->
-            <g class="ride">
-              <svg x="70" y="96" width="62" height="37" viewBox="0 0 100 60" style="color:#7FD1C4" aria-hidden="true"><use href="#capsule"/></svg>
-              <svg x="146" y="96" width="62" height="37" viewBox="0 0 100 60" style="color:#F09A86" aria-hidden="true"><use href="#capsule"/></svg>
-              <svg x="222" y="96" width="62" height="37" viewBox="0 0 100 60" style="color:#F3CE72" aria-hidden="true"><use href="#capsule"/></svg>
-            </g>
-            <!-- lighthouse -->
-            <g><rect x="366" y="92" width="10" height="30" fill="#F2EDE4"/><rect x="366" y="92" width="10" height="8" fill="#C0402A"/><rect x="364" y="86" width="14" height="7" rx="2" fill="#C0402A"/></g>
-          </svg>
+          <img src="img/sky-capsule.webp" alt="天空膠囊列車的綠色與藍色車廂行駛在海岸高架軌道上" loading="lazy" decoding="async" style="object-position:50% 50%">
+          <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
           <span class="ctag">Day 3 ‧ 10:00</span>
@@ -587,32 +600,8 @@
       <!-- card 2 lotte world -->
       <article class="card">
         <div class="thumb">
-          <svg viewBox="0 0 400 225" role="img" aria-label="樂天樂園摩天輪與楓之谷角色插畫">
-            <defs><linearGradient id="c2s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7EB7D8"/><stop offset="100%" stop-color="#FBE6C9"/></linearGradient></defs>
-            <rect width="400" height="225" fill="url(#c2s)"/>
-            <g fill="#FFFFFF" opacity=".7"><ellipse cx="70" cy="44" rx="26" ry="12"/><ellipse cx="94" cy="38" rx="18" ry="10"/><ellipse cx="320" cy="60" rx="22" ry="10"/></g>
-            <!-- hills -->
-            <path d="M0 170 C60 148 120 176 180 160 C240 146 320 174 400 156 L400 225 L0 225 Z" fill="#7FA86B"/>
-            <path d="M0 192 C80 180 160 200 250 188 C320 178 360 196 400 188 L400 225 L0 225 Z" fill="#5E8A52"/>
-            <!-- coaster -->
-            <path d="M14 168 L52 112 L92 160 L132 104 L174 158" stroke="#B9794A" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <g fill="#A96A3F"><rect x="50" y="118" width="4" height="52"/><rect x="90" y="158" width="4" height="26"/><rect x="130" y="110" width="4" height="62"/></g>
-            <g fill="#C0402A"><rect x="118" y="112" width="14" height="9" rx="3"/><rect x="134" y="116" width="14" height="9" rx="3"/></g>
-            <!-- ferris wheel -->
-            <g stroke="#4E6473" stroke-width="2.5" fill="none" class="wheel">
-              <circle cx="296" cy="86" r="44"/>
-              <path d="M296 42 V130 M252 86 H340 M265 55 L327 117 M327 55 L265 117"/>
-            </g>
-            <g fill="#E8762C"><circle cx="296" cy="42" r="6"/><circle cx="340" cy="86" r="6"/><circle cx="296" cy="130" r="6"/><circle cx="252" cy="86" r="6"/></g>
-            <g fill="#F5A3BC"><circle cx="327" cy="55" r="6"/><circle cx="327" cy="117" r="6"/><circle cx="265" cy="55" r="6"/><circle cx="265" cy="117" r="6"/></g>
-            <g stroke="#4E6473" stroke-width="3" fill="none"><path d="M296 86 L280 172 M296 86 L312 172"/></g>
-            <!-- characters -->
-            <svg x="188" y="146" width="48" height="48" viewBox="0 0 100 100" class="bob" aria-hidden="true"><use href="#mushroom"/></svg>
-            <svg x="236" y="152" width="42" height="42" viewBox="0 0 100 100" aria-hidden="true"><use href="#pinkbean"/></svg>
-            <!-- leaves -->
-            <g fill="#C0402A" opacity=".85"><svg x="30" y="40" width="20" height="20" viewBox="0 0 100 100"><use href="#maple"/></svg></g>
-            <g fill="#D98B32" opacity=".85"><svg x="356" y="140" width="16" height="16" viewBox="0 0 100 100"><use href="#maple"/></svg></g>
-          </svg>
+          <img src="img/lotte-maple.jpg" alt="樂天樂園楓之谷聯名主視覺" loading="lazy" decoding="async" style="object-position:50% 56%">
+          <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
           <span class="ctag">Day 2 ‧ 10:00</span>
@@ -624,44 +613,8 @@
       <!-- card 3 hwangnyeongsan -->
       <article class="card">
         <div class="thumb">
-          <svg viewBox="0 0 400 225" role="img" aria-label="荒嶺山俯瞰釜山夜景插畫">
-            <defs><linearGradient id="c3s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#101E35"/><stop offset="60%" stop-color="#2C3A55"/><stop offset="100%" stop-color="#6A4F57"/></linearGradient></defs>
-            <rect width="400" height="225" fill="url(#c3s)"/>
-            <circle cx="64" cy="42" r="14" fill="#F4ECD6"/>
-            <circle cx="64" cy="42" r="26" fill="#F4ECD6" opacity=".12"/>
-            <g fill="#FFFFFF" opacity=".8">
-              <circle class="twk" cx="140" cy="30" r="1.3"/><circle class="twk" cx="200" cy="48" r="1.1"/>
-              <circle class="twk" cx="268" cy="26" r="1.4"/><circle class="twk" cx="320" cy="54" r="1.2"/>
-              <circle class="twk" cx="360" cy="30" r="1.3"/><circle class="twk" cx="110" cy="60" r="1"/>
-            </g>
-            <!-- far ridge -->
-            <path d="M0 120 L50 100 L100 116 L160 96 L220 118 L280 102 L340 120 L400 104 L400 132 L0 132 Z" fill="#1A2740"/>
-            <!-- city lights field -->
-            <rect y="130" width="400" height="52" fill="#141F31"/>
-            <g fill="#FFD68E">
-              <rect class="twk" x="22" y="140" width="3" height="3"/><rect class="twk" x="40" y="152" width="3" height="3"/>
-              <rect class="twk" x="58" y="136" width="3" height="3"/><rect class="twk" x="76" y="160" width="3" height="3"/>
-              <rect class="twk" x="96" y="144" width="3" height="3"/><rect class="twk" x="116" y="168" width="3" height="3"/>
-              <rect class="twk" x="136" y="138" width="3" height="3"/><rect class="twk" x="156" y="156" width="3" height="3"/>
-              <rect class="twk" x="176" y="146" width="3" height="3"/><rect class="twk" x="196" y="170" width="3" height="3"/>
-              <rect class="twk" x="216" y="140" width="3" height="3"/><rect class="twk" x="236" y="162" width="3" height="3"/>
-              <rect class="twk" x="256" y="148" width="3" height="3"/><rect class="twk" x="276" y="136" width="3" height="3"/>
-              <rect class="twk" x="296" y="166" width="3" height="3"/><rect class="twk" x="316" y="144" width="3" height="3"/>
-              <rect class="twk" x="336" y="158" width="3" height="3"/><rect class="twk" x="356" y="140" width="3" height="3"/>
-              <rect class="twk" x="376" y="152" width="3" height="3"/><rect class="twk" x="30" y="172" width="3" height="3"/>
-            </g>
-            <!-- lit gwangan bridge -->
-            <g><rect x="140" y="178" width="260" height="2.4" fill="#4C6A80"/>
-              <rect x="200" y="160" width="3" height="20" fill="#4C6A80"/><rect x="290" y="160" width="3" height="20" fill="#4C6A80"/>
-              <path d="M140 176 L201 161 L291 176 L400 161" stroke="#7FD1DE" stroke-width="1.2" fill="none" opacity=".8"/>
-              <g fill="#9FE6F0"><circle class="twk" cx="170" cy="177" r="1.4"/><circle class="twk" cx="230" cy="177" r="1.4"/><circle class="twk" cx="320" cy="177" r="1.4"/><circle class="twk" cx="370" cy="175" r="1.4"/></g>
-            </g>
-            <!-- foreground peak + beacon -->
-            <path d="M0 196 L70 150 L130 182 L190 206 L0 225 Z" fill="#0B1420"/>
-            <g fill="#2A3242"><path d="M58 152 l14 -10 l14 10 v14 h-28 z"/></g>
-            <g fill="#E0802B" opacity=".9"><path d="M68 140 q4 -10 8 0 q-4 -4 -8 0 z"/></g>
-            <text x="98" y="214" fill="#8EA2AE" font-family="monospace" font-size="9" letter-spacing="1">427 m</text>
-          </svg>
+          <img src="img/hwangnyeongsan.jpg" alt="從荒嶺山木棧步道俯瞰釜山市區夜景" loading="lazy" decoding="async" style="object-position:50% 32%">
+          <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
           <span class="ctag">Day 4 ‧ 16:40</span>
@@ -714,6 +667,7 @@
             <!-- maple on sand -->
             <g fill="#C0402A"><svg x="296" y="194" width="22" height="22" viewBox="0 0 100 100"><use href="#maple"/></svg></g>
           </svg>
+          <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
           <span class="ctag">Day 3 ‧ 07:30</span>
@@ -725,31 +679,8 @@
       <!-- card 5 T1 -->
       <article class="card">
         <div class="thumb">
-          <svg viewBox="0 0 400 225" role="img" aria-label="電競基地的螢幕與舞台燈光插畫">
-            <defs><linearGradient id="c5s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#16202E"/><stop offset="100%" stop-color="#28303E"/></linearGradient>
-            <linearGradient id="c5g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E2503C"/><stop offset="100%" stop-color="#8E2A28"/></linearGradient></defs>
-            <rect width="400" height="225" fill="url(#c5s)"/>
-            <!-- stage beams -->
-            <g opacity=".22"><path d="M60 0 L20 150 L110 150 Z" fill="#E2503C"/><path d="M200 0 L160 150 L250 150 Z" fill="#64C8D8"/><path d="M340 0 L300 150 L390 150 Z" fill="#E2503C"/></g>
-            <!-- big screen -->
-            <rect x="108" y="30" width="184" height="78" rx="4" fill="#0C131C" stroke="#3C4A5C" stroke-width="2"/>
-            <rect x="118" y="40" width="164" height="58" rx="2" fill="url(#c5g)" opacity=".5"/>
-            <text x="200" y="76" fill="#FFE9E2" font-family="monospace" font-size="26" font-weight="bold" text-anchor="middle" letter-spacing="4">T1</text>
-            <g fill="#8FE3EE"><rect class="twk" x="126" y="88" width="24" height="3"/><rect class="twk" x="156" y="88" width="16" height="3"/><rect class="twk" x="248" y="88" width="30" height="3"/></g>
-            <!-- desk -->
-            <rect x="40" y="150" width="320" height="8" rx="2" fill="#39434F"/>
-            <rect x="40" y="158" width="320" height="4" fill="#E2503C" opacity=".7"/>
-            <!-- monitors + chairs -->
-            <g>
-              <rect x="64" y="118" width="48" height="30" rx="2" fill="#0E151F" stroke="#44515F"/><rect x="70" y="124" width="36" height="18" fill="#2E7E8C" opacity=".8"/>
-              <rect x="176" y="112" width="52" height="34" rx="2" fill="#0E151F" stroke="#44515F"/><rect x="182" y="118" width="40" height="22" fill="#B8422F" opacity=".8"/>
-              <rect x="288" y="118" width="48" height="30" rx="2" fill="#0E151F" stroke="#44515F"/><rect x="294" y="124" width="36" height="18" fill="#2E7E8C" opacity=".8"/>
-            </g>
-            <g fill="#1E2733"><rect x="74" y="162" width="28" height="36" rx="6"/><rect x="186" y="162" width="32" height="40" rx="6"/><rect x="298" y="162" width="28" height="36" rx="6"/></g>
-            <g fill="#E2503C"><rect x="78" y="166" width="20" height="5" rx="2"/><rect x="191" y="166" width="22" height="5" rx="2"/><rect x="302" y="166" width="20" height="5" rx="2"/></g>
-            <!-- beer glass for the PUB -->
-            <g><path d="M352 126 h18 l-2 24 h-14 z" fill="#E9B04A"/><rect x="350" y="122" width="22" height="5" rx="2" fill="#F6E2BE"/></g>
-          </svg>
+          <img src="img/t1-base.jpg" alt="T1 BASE CAMP 釜山店紅色招牌的夜間街景" loading="lazy" decoding="async" style="object-position:50% 38%">
+          <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
           <span class="ctag">Day 3 ‧ 15:30</span>
@@ -761,38 +692,8 @@
       <!-- card 6 gwangalli / food -->
       <article class="card">
         <div class="thumb">
-          <svg viewBox="0 0 400 225" role="img" aria-label="廣安大橋與廣安里海灘插畫">
-            <defs><linearGradient id="c6s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2D4F6B"/><stop offset="100%" stop-color="#E7A86E"/></linearGradient>
-            <linearGradient id="c6w" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#B8865C"/><stop offset="100%" stop-color="#27485C"/></linearGradient></defs>
-            <rect width="400" height="225" fill="url(#c6s)"/>
-            <circle cx="300" cy="104" r="15" fill="#FFE4B4"/>
-            <!-- city behind -->
-            <g fill="#223A4C">
-              <rect x="10" y="88" width="14" height="42"/><rect x="28" y="72" width="12" height="58"/><rect x="44" y="96" width="16" height="34"/>
-              <rect x="64" y="80" width="12" height="50"/><rect x="80" y="100" width="14" height="30"/><rect x="330" y="92" width="14" height="38"/>
-              <rect x="348" y="78" width="12" height="52"/><rect x="364" y="98" width="16" height="32"/>
-            </g>
-            <g fill="#FFD68E"><rect class="twk" x="31" y="80" width="3" height="3"/><rect class="twk" x="67" y="90" width="3" height="3"/><rect class="twk" x="351" y="86" width="3" height="3"/><rect class="twk" x="14" y="98" width="3" height="3"/></g>
-            <!-- bridge -->
-            <g>
-              <rect x="0" y="128" width="400" height="4" fill="#3C5A6E"/>
-              <g fill="#44647A"><rect x="118" y="88" width="5" height="44"/><rect x="262" y="88" width="5" height="44"/></g>
-              <path d="M0 122 L120 89 L264 122 L400 89" stroke="#6FB8C8" stroke-width="1.6" fill="none"/>
-              <path d="M0 110 L120 89 M120 89 L264 110 M264 122 L400 100" stroke="#6FB8C8" stroke-width="1" fill="none" opacity=".6"/>
-              <g fill="#A7E8F2"><circle class="twk" cx="60" cy="126" r="1.6"/><circle class="twk" cx="160" cy="126" r="1.6"/><circle class="twk" cx="220" cy="126" r="1.6"/><circle class="twk" cx="330" cy="126" r="1.6"/></g>
-            </g>
-            <!-- sea -->
-            <rect y="132" width="400" height="60" fill="url(#c6w)"/>
-            <g opacity=".5" stroke="#F3DCB4" fill="none" stroke-width="1.5" stroke-linecap="round">
-              <path class="wv" d="M280 142 h34 M310 152 h26"/>
-              <path class="wv2" d="M40 150 h40 M130 162 h34 M210 172 h30"/>
-            </g>
-            <!-- beach -->
-            <path d="M0 190 C90 180 180 198 270 188 C330 181 360 194 400 188 L400 225 L0 225 Z" fill="#C9A878"/>
-            <!-- parasol + chimek vibe -->
-            <g><rect x="76" y="196" width="3" height="20" fill="#7A6A52"/><path d="M58 196 q20 -16 40 0 z" fill="#C0402A"/></g>
-            <g><rect x="300" y="200" width="3" height="16" fill="#7A6A52"/><path d="M286 200 q16 -13 32 0 z" fill="#D98B32"/></g>
-          </svg>
+          <img src="img/gwangan-bridge.jpg" alt="夜晚亮燈的廣安大橋與海面倒影" loading="lazy" decoding="async" style="object-position:50% 50%">
+          <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
           <span class="ctag">Day 4 ‧ 13:00</span>
@@ -803,6 +704,8 @@
     </div>
   </div>
 </section>
+
+<div class="mdiv wrap" aria-hidden="true"><i></i><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><i></i></div>
 
 <!-- ============================ MAPLESTORY FEATURE ============================ -->
 <section class="sec warm maple-feat" id="maplestory">
@@ -1079,6 +982,10 @@
           <div><dt>預約</dt><dd><b>線上先訂</b>，熱門時段會滿。一艙 4 人同價，人少也是整艙包</dd></div>
           <div><dt>營運</dt><dd>約 09:30 起跑，冬季末班較早，訂票頁會顯示當日場次</dd></div>
         </dl>
+        <figure class="shot tl-shot wide">
+          <img src="img/sky-capsule.webp" alt="天空膠囊列車的綠色 45 號與藍色 25 號車廂行駛在海岸高架軌道上" loading="lazy" decoding="async" style="object-position:50% 50%">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>認車廂</b>：每台有編號，上車前先對一下票上的號碼</span></figcaption>
+        </figure>
       </div></li>
       <li class="tl-item is-place"><div class="tl-time">10:40</div><div class="tl-body">
         <h3 class="tl-name">青沙浦踏石展望台 <span class="kr">청사포 다릿돌 전망대</span></h3>
@@ -1104,6 +1011,10 @@
           <div><dt>怎麼玩</dt><dd>開一台機、喝一杯聯名、買周邊、拍照亭留念。粉絲可以待上兩小時</dd></div>
           <div><dt>先查</dt><dd>遇 LCK 賽季會有<b>觀賽活動或包場</b>，去之前看一下官方 IG 公告</dd></div>
         </dl>
+        <figure class="shot tl-shot wide">
+          <img src="img/t1-base.jpg" alt="T1 BASE CAMP 釜山店的紅色外牆招牌與夜間街景" loading="lazy" decoding="async" style="object-position:50% 36%">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>找路看這個</b>：紅底白字 BASE CAMP，招牌上方就是 MARY SOL（마리쏠）飯店</span></figcaption>
+        </figure>
       </div></li>
       <li class="tl-item is-place"><div class="tl-time">17:00</div><div class="tl-body">
         <h3 class="tl-name">冬柏島海岸步道 <span class="kr">동백섬</span></h3>
@@ -1171,6 +1082,10 @@
       <li class="tl-item is-place"><div class="tl-time">13:00</div><div class="tl-body">
         <h3 class="tl-name">廣安里海灘與廣安大橋 <span class="kr">광안리해수욕장</span></h3>
         <p class="tl-desc">海雲台是觀光區，<b>廣安里是釜山人自己的海邊</b>。眼前橫過海面的是 <b>7.4 公里長的廣安大橋</b>，沙灘後面整排是炸雞啤酒（치맥）店和海景咖啡廳。白天先認路，晚上大橋會打燈。</p>
+        <figure class="shot tl-shot wide">
+          <img src="img/gwangan-bridge.jpg" alt="夜晚亮著紫粉色燈光的廣安大橋與海面倒影" loading="lazy" decoding="async" style="object-position:50% 50%">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>晚上再來一次</b>：大橋入夜打燈，沙灘整排都是坐著喝啤酒的人</span></figcaption>
+        </figure>
       </div></li>
       <li class="tl-item is-place"><div class="tl-time">14:30</div><div class="tl-body">
         <h3 class="tl-name">水邊最高豬肉湯飯 <span class="kr">수변최고돼지국밥 민락본점</span></h3>
@@ -1191,6 +1106,10 @@
           <div><dt>保暖</dt><dd>山頂風大、比市區冷好幾度，<b>防風外套必帶</b></dd></div>
           <div><dt>歇腳</dt><dd>展望台旁有咖啡廳 <b>Bluebang（블루뱅）황령산店</b>，落地窗直接看夜景</dd></div>
         </dl>
+        <figure class="shot tl-shot">
+          <img src="img/hwangnyeongsan.jpg" alt="從荒嶺山木棧步道往下看釜山市區的夜景" loading="lazy" decoding="async" style="object-position:50% 40%">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>就是這個畫面</b>：木棧步道往下走，整座釜山在腳下攤開</span></figcaption>
+        </figure>
       </div></li>
       <li class="tl-item is-move"><div class="tl-time">19:00</div><div class="tl-body"><p class="tl-plain">計程車下山往西面，約 15 分。<b>山上有時叫不到車</b>——上山時留司機電話，或請咖啡廳幫忙叫，別打算走下山（山路彎又暗）。</p></div></li>
       <li class="tl-item is-key"><div class="tl-time">19:30</div><div class="tl-body">
@@ -1271,8 +1190,16 @@
   </div>
 </section>
 
+<div class="mdiv wrap" aria-hidden="true"><i></i><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><i></i></div>
+
 <!-- ============================ FOOD ============================ -->
-<section class="sec" id="food">
+<section class="sec maple-feat" id="food">
+  <div class="leaves" aria-hidden="true">
+    <span class="leaf" style="--x:12%; --d:25s; --delay:2s; --s:.5; --c:#D98B32"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:40%; --d:20s; --delay:8s; --s:.7; --c:#C0402A"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:66%; --d:28s; --delay:13s; --s:.42; --c:#E0A541"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:91%; --d:22s; --delay:6s; --s:.58; --c:#B33E22"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
+  </div>
   <div class="wrap">
     <div class="sechead">
       <p class="kicker"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span>Food</span></p>
@@ -1420,6 +1347,8 @@
   </div>
 </section>
 
+<div class="mdiv wrap" aria-hidden="true"><i></i><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><i></i></div>
+
 <!-- ============================ TRANSPORT ============================ -->
 <section class="sec" id="move">
   <div class="wrap">
@@ -1472,6 +1401,10 @@
   </div>
 </section>
 
+<button class="totop" id="totop" type="button" aria-label="回到頁首">
+  <svg class="mp" aria-hidden="true"><use href="#maple"/></svg>
+</button>
+
 <footer>
   <div class="wrap">
     <p class="fl">
@@ -1498,14 +1431,62 @@
       a.setAttribute('aria-current', (best && a.getAttribute('href') === '#' + best) ? 'true' : 'false');
     });
   }
-  if (targets.length) {
+  /* ---- scroll progress bar ---- */
+  var bar = document.getElementById('progress');
+  function drawProgress(){
+    if (!bar) return;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+    bar.style.width = Math.max(0, Math.min(100, pct)) + '%';
+  }
+
+  /* ---- back to top ---- */
+  var toTop = document.getElementById('totop');
+  if (toTop) {
+    toTop.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: reduced() ? 'auto' : 'smooth' });
+    });
+  }
+  function reduced(){
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function onScroll(){
     markActive();
-    var ticking = false;
-    window.addEventListener('scroll', function(){
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(function(){ markActive(); ticking = false; });
-    }, { passive: true });
+    drawProgress();
+    if (toTop) toTop.classList.toggle('on', window.scrollY > 600);
+  }
+  onScroll();
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function(){ onScroll(); ticking = false; });
+  }, { passive: true });
+  window.addEventListener('resize', drawProgress, { passive: true });
+
+  /* ---- reveal on scroll (only for things below the fold, so the
+         first frame of the page is never blank) ---- */
+  if ('IntersectionObserver' in window && !reduced()) {
+    var items = Array.prototype.slice.call(document.querySelectorAll(
+      '.card, .food, .daybanner, .tl-shot, .tablewrap, .checks, .mfart'
+    ));
+    var hidden = items.filter(function(el){
+      return el.getBoundingClientRect().top > window.innerHeight * 0.92;
+    });
+    hidden.forEach(function(el){ el.classList.add('rv', 'rv-pre'); });
+    window.requestAnimationFrame(function(){
+      hidden.forEach(function(el){ el.classList.add('rv-armed'); });
+      var ro = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) {
+            e.target.classList.remove('rv-pre');
+            ro.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      hidden.forEach(function(el){ ro.observe(el); });
+    });
   }
 
   /* ---- booking checklist: shared via db when available, local otherwise ---- */
