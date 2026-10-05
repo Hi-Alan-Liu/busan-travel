@@ -3,11 +3,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
   :root{
-    --ground:#EDF0EF; --surface:#FFFFFF; --surface-2:#F6F8F7; --band:#FCF3E9;
-    --ink:#11222D; --ink-2:#465E6A; --ink-3:#7A8E97;
-    --line:#D2DBD9; --line-strong:#B2C0BE;
-    --sea:#0E6C7A; --sea-soft:#DAE9EB;
-    --maple:#C03B22; --maple-2:#E0802B; --amber:#D9A441; --maple-soft:#F7E3D9;
+    --ground:#F3F1EC; --surface:#FFFFFF; --surface-2:#F8F6F1; --band:#FDEEDC;
+    --ink:#14222B; --ink-2:#4A6069; --ink-3:#7E9099;
+    --line:#DFD9CF; --line-strong:#C2B9AC;
+    --sea:#0E8FA1; --sea-soft:#D6EEF1;
+    --maple:#DC4722; --maple-2:#F2922E; --amber:#EFB942; --maple-soft:#FBDFD2;
+    --d1:#4257A6; --d1b:#E3E7F8;
+    --d2:#E8762C; --d2b:#FCE6D2;
+    --d3:#0E8FA1; --d3b:#D6EEF1;
+    --d4:#A1428C; --d4b:#F6DDF0;
+    --d5:#D99A2B; --d5b:#FBEBCE;
     --shadow:0 1px 2px rgba(17,34,45,.05), 0 8px 24px -12px rgba(17,34,45,.18);
     --shadow-lift:0 2px 4px rgba(17,34,45,.06), 0 18px 40px -16px rgba(17,34,45,.26);
     --serif:"Noto Serif TC",Georgia,serif;
@@ -17,21 +22,31 @@
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --ground:#0A141B; --surface:#102029; --surface-2:#152833; --band:#1F1711;
-      --ink:#E2EBE9; --ink-2:#A0B4BA; --ink-3:#778C94;
-      --line:#223640; --line-strong:#34505E;
-      --sea:#56BECB; --sea-soft:#113139;
-      --maple:#F0734F; --maple-2:#E89B4A; --amber:#E0B457; --maple-soft:#3A2017;
+      --ground:#0B151C; --surface:#11212B; --surface-2:#162A35; --band:#241A12;
+      --ink:#E3ECEA; --ink-2:#A2B5BB; --ink-3:#798E96;
+      --line:#2A3A42; --line-strong:#3D5563;
+      --sea:#5ECBD8; --sea-soft:#123840;
+      --maple:#FF7A52; --maple-2:#F7A94C; --amber:#F0C564; --maple-soft:#44231A;
+      --d1:#8595E8; --d1b:#1C2345;
+      --d2:#FF9B55; --d2b:#3A2415;
+      --d3:#5ECBD8; --d3b:#123840;
+      --d4:#E481CC; --d4b:#381931;
+      --d5:#F0BE5E; --d5b:#3A2C12;
       --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
       --shadow-lift:0 2px 4px rgba(0,0,0,.45), 0 18px 40px -16px rgba(0,0,0,.7);
     }
   }
   :root[data-theme="dark"]{
-    --ground:#0A141B; --surface:#102029; --surface-2:#152833; --band:#1F1711;
-    --ink:#E2EBE9; --ink-2:#A0B4BA; --ink-3:#778C94;
-    --line:#223640; --line-strong:#34505E;
-    --sea:#56BECB; --sea-soft:#113139;
-    --maple:#F0734F; --maple-2:#E89B4A; --amber:#E0B457; --maple-soft:#3A2017;
+    --ground:#0B151C; --surface:#11212B; --surface-2:#162A35; --band:#241A12;
+    --ink:#E3ECEA; --ink-2:#A2B5BB; --ink-3:#798E96;
+    --line:#2A3A42; --line-strong:#3D5563;
+    --sea:#5ECBD8; --sea-soft:#123840;
+    --maple:#FF7A52; --maple-2:#F7A94C; --amber:#F0C564; --maple-soft:#44231A;
+    --d1:#8595E8; --d1b:#1C2345;
+    --d2:#FF9B55; --d2b:#3A2415;
+    --d3:#5ECBD8; --d3b:#123840;
+    --d4:#E481CC; --d4b:#381931;
+    --d5:#F0BE5E; --d5b:#3A2C12;
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
     --shadow-lift:0 2px 4px rgba(0,0,0,.45), 0 18px 40px -16px rgba(0,0,0,.7);
   }
@@ -89,7 +104,9 @@
   .hero-ill svg{width:100%; height:100%; display:block; object-fit:cover}
   .hero-shade{
     position:absolute; inset:0; z-index:1;
-    background:linear-gradient(180deg, rgba(10,22,30,.62) 0%, rgba(10,22,30,.30) 42%, rgba(10,22,30,.78) 100%);
+    background:
+      linear-gradient(180deg, rgba(10,20,28,.56) 0%, rgba(10,20,28,.14) 40%, rgba(18,14,10,.80) 100%),
+      linear-gradient(118deg, rgba(220,71,34,.34) 0%, rgba(242,146,46,.16) 46%, rgba(14,143,161,.26) 100%);
   }
   .hero .wrap{position:relative; z-index:3; padding-block:clamp(3rem,10vw,6rem) clamp(2rem,6vw,3.4rem)}
   .hero .inner{max-width:40rem; color:#F4F7F6}
@@ -114,7 +131,7 @@
   }
   .heroband div{padding:.8rem 1rem; display:flex; flex-direction:column; gap:.1rem}
   .heroband div+div{border-left:1px solid rgba(255,255,255,.18)}
-  .heroband dt{font-family:var(--mono); font-size:.6rem; letter-spacing:.16em; text-transform:uppercase; color:#CBD9D8}
+  .heroband dt{font-family:var(--mono); font-size:.6rem; letter-spacing:.16em; text-transform:uppercase; color:#F6CFA0}
   .heroband dd{margin:0; font-family:var(--mono); font-size:.92rem; font-weight:600; color:#fff; font-variant-numeric:tabular-nums}
   @media (max-width:720px){
     .heroband{grid-template-columns:repeat(2,1fr)}
@@ -134,7 +151,11 @@
   .sechead{display:flex; flex-direction:column; gap:.5rem; margin-bottom:1.8rem; max-width:44rem}
   .sechead .kicker{display:flex; align-items:center; gap:.5rem; color:var(--maple)}
   .sechead .kicker .mp{width:.95rem; height:.95rem}
-  .sechead .kicker span{font-family:var(--mono); font-size:.66rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3)}
+  .sechead .kicker span{
+    font-family:var(--mono); font-size:.64rem; font-weight:600; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--maple); background:var(--maple-soft);
+    padding:.26rem .6rem; border-radius:999px;
+  }
   .sechead h2{font-size:clamp(1.5rem,4.6vw,2.3rem); letter-spacing:.02em}
   .sechead p{color:var(--ink-2); font-size:.96rem}
   .sechead p b{color:var(--ink); font-weight:500}
@@ -202,7 +223,7 @@
   }
   .tl-item:last-child .tl-body{border-left-color:transparent; padding-bottom:.4rem}
   .tl-item.is-place .tl-body::before{background:var(--sea)}
-  .tl-item.is-key .tl-body::before{background:var(--maple); box-shadow:0 0 0 4px var(--maple-soft)}
+  .tl-item.is-key .tl-body::before{background:var(--tc,var(--maple)); box-shadow:0 0 0 4px var(--maple-soft)}
   .tl-item.is-move .tl-time{color:var(--ink-3); font-weight:400}
   @media (max-width:430px){ .tl-item{grid-template-columns:3.5rem} .tl-body{padding-left:1.1rem} }
 
@@ -234,33 +255,18 @@
     margin-top:.85rem; border-left:2px solid var(--amber); padding:.15rem 0 .15rem .9rem;
     display:flex; flex-direction:column; gap:.55rem;
   }
-  .alt-list .opt{font-size:.9rem; color:var(--ink-2)}
+  .alt-list .opt{font-size:.9rem; color:var(--ink-2); position:relative; padding-left:1.5rem}
+  .alt-list .opt::before{
+    content:""; position:absolute; left:0; top:.4em; width:.95rem; height:.95rem;
+    background:url("img/maple-leaf.png") center/contain no-repeat; opacity:.9;
+  }
   .alt-list .opt b{color:var(--ink); font-weight:500}
   .alt-list .opt .kr{font-family:var(--mono); font-size:.72rem; color:var(--ink-3)}
 
-  /* ===== maplestory feature ===== */
+  /* ===== leaf backdrop ===== */
   .maple-feat{position:relative; overflow:hidden}
   .maple-feat .leaves{z-index:0}
   .maple-feat .wrap{position:relative; z-index:1}
-  .mfgrid{display:grid; grid-template-columns:1.05fr .95fr; gap:2rem; align-items:center}
-  @media (max-width:860px){ .mfgrid{grid-template-columns:1fr; gap:1.5rem} }
-  .mfart{border-radius:6px; overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); aspect-ratio:16/9}
-  .mfart svg{width:100%; height:100%; display:block}
-  .mfbody{display:flex; flex-direction:column; gap:.9rem}
-  .mfbody h2{font-size:clamp(1.5rem,4.4vw,2.2rem)}
-  .mfbody p{color:var(--ink-2); font-size:.96rem}
-  .mfbody p b{color:var(--ink); font-weight:500}
-  .mfruns{
-    display:inline-flex; align-items:center; gap:.5rem; align-self:flex-start;
-    background:var(--maple); color:#fff; font-family:var(--mono); font-size:.72rem;
-    font-weight:600; letter-spacing:.1em; padding:.4rem .7rem; border-radius:3px;
-  }
-  .mfruns .mp{width:.9rem; height:.9rem}
-  .mflist{list-style:none; margin:.2rem 0 0; padding:0; display:flex; flex-direction:column; gap:.75rem}
-  .mflist li{display:grid; grid-template-columns:1.6rem 1fr; gap:.7rem; font-size:.92rem; color:var(--ink-2)}
-  .mflist .ic{width:1.6rem; height:1.6rem}
-  .mflist b{color:var(--ink); font-weight:500; display:block}
-  .mflist .kr{font-family:var(--mono); font-size:.7rem; color:var(--ink-3)}
 
   /* ===== food ===== */
   .foods{display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem}
@@ -348,6 +354,44 @@
   footer .fl .mp{width:1.1rem; height:1.1rem}
   footer p{font-size:.82rem; color:var(--ink-3); max-width:42em}
   footer .mono{font-family:var(--mono); font-size:.7rem; letter-spacing:.12em; color:var(--ink-3)}
+
+  /* ===== real maple leaf asset ===== */
+  .pleaf{display:block; width:100%; height:100%; object-fit:contain}
+  .brand .mark-img{width:1.75rem; height:1.75rem; flex:0 0 auto}
+  .totop .pleaf{width:1.5rem; height:1.5rem}
+  .mdiv .pleaf{width:1.5rem; height:1.5rem}
+
+  /* big faded leaf watermark behind section headings */
+  .sec{position:relative; overflow:hidden}
+  .wm{
+    position:absolute; pointer-events:none; opacity:.07; z-index:0;
+    width:clamp(9rem,22vw,17rem); transform:rotate(-16deg);
+  }
+  .wm.r{right:-3rem; top:1rem}
+  .wm.l{left:-4rem; bottom:1rem; transform:rotate(22deg)}
+  @media (max-width:760px){ .wm{display:none} }
+  .sec>.wrap{position:relative; z-index:1}
+
+  /* ===== day colour coding ===== */
+  .t1{--tc:var(--d1); --tbg:var(--d1b)}
+  .t2{--tc:var(--d2); --tbg:var(--d2b)}
+  .t3{--tc:var(--d3); --tbg:var(--d3b)}
+  .t4{--tc:var(--d4); --tbg:var(--d4b)}
+  .t5{--tc:var(--d5); --tbg:var(--d5b)}
+  .card .ctag{color:var(--tc,var(--sea)); background:var(--tbg,var(--sea-soft))}
+  .card::before{
+    content:""; display:block; height:3px; flex:0 0 auto;
+    background:linear-gradient(90deg, var(--tc,var(--sea)), var(--maple-2));
+    transform:scaleX(0); transform-origin:left; transition:transform .45s cubic-bezier(.2,.7,.3,1);
+  }
+  @media (hover:hover){ .card:hover::before{transform:scaleX(1)} }
+  .daybanner .cap .dnum{background:var(--tc,var(--maple))}
+  .dayband{
+    display:inline-flex; align-items:center; gap:.45rem; margin-bottom:.7rem;
+    font-family:var(--mono); font-size:.66rem; font-weight:600; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--tc,var(--maple));
+  }
+  .dayband i{display:block; width:2.2rem; height:2px; background:var(--tc,var(--maple)); border-radius:1px}
 
   /* ===== photos ===== */
   .ph{width:100%; height:100%; object-fit:cover; display:block}
@@ -445,7 +489,7 @@
   @media (prefers-reduced-motion: no-preference){
     html{scroll-behavior:smooth}
     .leaf{animation:leaf-fall var(--d) linear var(--delay) infinite}
-    .leaf .mp{animation:leaf-spin calc(var(--d) / 2.6) linear infinite}
+    .leaf .mp, .leaf .pleaf{animation:leaf-spin calc(var(--d) / 2.6) linear infinite}
     .hero-ill img{animation:kenburns 26s ease-in-out infinite alternate}
     .tl-item.is-key .tl-body::before{animation:pulsering 2.8s ease-out infinite}
     .mdiv .mp{animation:sway 5s ease-in-out infinite}
@@ -502,7 +546,7 @@
 <div class="topbar">
   <div class="wrap">
     <a class="brand" href="#top">
-      <svg class="mark mp" aria-hidden="true"><use href="#maple"/></svg>
+      <img class="mark-img" src="img/maple-leaf.png" alt="" aria-hidden="true">
       <span>
         <span class="bt">釜山海雲台五日</span>
         <span class="bs">Busan ‧ Autumn 2026</span>
@@ -515,7 +559,6 @@
       <a href="#d3">D3</a>
       <a href="#d4">D4</a>
       <a href="#d5">D5</a>
-      <a href="#maplestory">楓之谷</a>
       <a href="#food">美食</a>
       <a href="#book">預約</a>
       <a href="#move">交通</a>
@@ -532,21 +575,21 @@
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="leaves" aria-hidden="true">
     <span class="leaf" style="--x:5%;  --d:13s;   --delay:0s;   --s:1.0; --c:#C8502C"><svg class="mp"><use href="#maple"/></svg></span>
-    <span class="leaf" style="--x:17%; --d:17s;   --delay:2.4s; --s:.65; --c:#D98B32"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:17%; --d:17s;   --delay:2.4s; --s:.65; --c:#D98B32"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
     <span class="leaf" style="--x:29%; --d:11.5s; --delay:5.1s; --s:1.3; --c:#B33E22"><svg class="mp"><use href="#maple"/></svg></span>
-    <span class="leaf" style="--x:41%; --d:19s;   --delay:1.2s; --s:.8;  --c:#E0A541"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:41%; --d:19s;   --delay:1.2s; --s:.8;  --c:#E0A541"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
     <span class="leaf" style="--x:54%; --d:14.5s; --delay:7.3s; --s:1.1; --c:#C8502C"><svg class="mp"><use href="#maple"/></svg></span>
-    <span class="leaf" style="--x:66%; --d:16s;   --delay:3.6s; --s:.7;  --c:#D98B32"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:66%; --d:16s;   --delay:3.6s; --s:.7;  --c:#D98B32"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
     <span class="leaf" style="--x:78%; --d:12.5s; --delay:8.8s; --s:1.2; --c:#9E3A24"><svg class="mp"><use href="#maple"/></svg></span>
-    <span class="leaf" style="--x:88%; --d:18s;   --delay:4.9s; --s:.85; --c:#E0A541"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:88%; --d:18s;   --delay:4.9s; --s:.85; --c:#E0A541"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
     <span class="leaf" style="--x:96%; --d:15s;   --delay:10.4s;--s:.6;  --c:#C8502C"><svg class="mp"><use href="#maple"/></svg></span>
-    <span class="leaf" style="--x:11%; --d:21s;   --delay:6.2s; --s:1.45;--c:#A8351F"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:11%; --d:21s;   --delay:6.2s; --s:1.45;--c:#A8351F"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
     <span class="leaf" style="--x:23%; --d:10s;   --delay:12.1s;--s:.5;  --c:#E8B45A"><svg class="mp"><use href="#maple"/></svg></span>
-    <span class="leaf" style="--x:35%; --d:16.5s; --delay:9.4s; --s:.95; --c:#D06038"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:35%; --d:16.5s; --delay:9.4s; --s:.95; --c:#D06038"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
     <span class="leaf" style="--x:47%; --d:13.5s; --delay:14s;  --s:.72; --c:#C8502C"><svg class="mp"><use href="#maple"/></svg></span>
-    <span class="leaf" style="--x:60%; --d:20s;   --delay:11.6s;--s:1.35;--c:#D98B32"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:60%; --d:20s;   --delay:11.6s;--s:1.35;--c:#D98B32"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
     <span class="leaf" style="--x:72%; --d:11s;   --delay:6.8s; --s:.55; --c:#E0A541"><svg class="mp"><use href="#maple"/></svg></span>
-    <span class="leaf" style="--x:84%; --d:17.5s; --delay:13.2s;--s:1.05;--c:#B33E22"><svg class="mp"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:84%; --d:17.5s; --delay:13.2s;--s:1.05;--c:#B33E22"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
   </div>
 
   <div class="wrap">
@@ -569,6 +612,7 @@
 
 <!-- ============================ HIGHLIGHTS ============================ -->
 <section class="sec maple-feat" id="highlights">
+  <img class="wm r" src="img/maple-leaf.png" alt="" aria-hidden="true">
   <div class="leaves" aria-hidden="true">
     <span class="leaf" style="--x:7%; --d:23s; --delay:0s; --s:.6; --c:#C0402A"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
     <span class="leaf" style="--x:26%; --d:19s; --delay:5s; --s:.45; --c:#D98B32"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
@@ -585,7 +629,7 @@
 
     <div class="cards">
       <!-- card 1 sky capsule -->
-      <article class="card">
+      <article class="card t3">
         <div class="thumb">
           <img src="img/sky-capsule.webp" alt="天空膠囊列車的綠色與藍色車廂行駛在海岸高架軌道上" loading="lazy" decoding="async" style="object-position:50% 50%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
@@ -598,7 +642,7 @@
       </article>
 
       <!-- card 2 lotte world -->
-      <article class="card">
+      <article class="card t2">
         <div class="thumb">
           <img src="img/lotte-maple.jpg" alt="樂天樂園楓之谷聯名主視覺" loading="lazy" decoding="async" style="object-position:50% 56%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
@@ -611,7 +655,7 @@
       </article>
 
       <!-- card 3 hwangnyeongsan -->
-      <article class="card">
+      <article class="card t4">
         <div class="thumb">
           <img src="img/hwangnyeongsan.jpg" alt="從荒嶺山木棧步道俯瞰釜山市區夜景" loading="lazy" decoding="async" style="object-position:50% 32%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
@@ -624,49 +668,9 @@
       </article>
 
       <!-- card 4 haeundae sunrise -->
-      <article class="card">
+      <article class="card t3">
         <div class="thumb">
-          <svg viewBox="0 0 400 225" role="img" aria-label="海雲台沙灘日出插畫">
-            <defs><linearGradient id="c4s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2C4A72"/><stop offset="45%" stop-color="#C98E8A"/><stop offset="100%" stop-color="#F6D9A8"/></linearGradient>
-            <linearGradient id="c4w" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E2B077"/><stop offset="100%" stop-color="#3E637A"/></linearGradient>
-            <linearGradient id="c4p" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFE7B4" stop-opacity=".9"/><stop offset="100%" stop-color="#FFE7B4" stop-opacity="0"/></linearGradient></defs>
-            <rect width="400" height="225" fill="url(#c4s)"/>
-            <circle cx="236" cy="124" r="24" fill="#FFF4D4"/>
-            <circle cx="236" cy="124" r="42" fill="#FFE7B4" opacity=".28"/>
-            <circle cx="236" cy="124" r="62" fill="#FFE7B4" opacity=".12"/>
-            <!-- marine city far left -->
-            <g fill="#2B4056" opacity=".85">
-              <rect x="14" y="104" width="11" height="26"/><rect x="28" y="92" width="14" height="38"/>
-              <rect x="45" y="110" width="10" height="20"/><rect x="58" y="98" width="13" height="32"/><rect x="74" y="114" width="10" height="16"/>
-            </g>
-            <!-- sea -->
-            <rect y="130" width="400" height="50" fill="url(#c4w)"/>
-            <path d="M216 130 h40 l26 50 h-92 z" fill="url(#c4p)"/>
-            <g opacity=".5" stroke="#FFF1CE" fill="none" stroke-width="1.5" stroke-linecap="round">
-              <path class="wv" d="M40 142 h38 M120 152 h30 M300 146 h36"/>
-              <path class="wv2" d="M70 166 h44 M180 172 h34 M320 168 h40"/>
-            </g>
-            <!-- wet sand + beach -->
-            <path d="M0 180 C80 172 170 188 260 180 C320 174 356 186 400 180 L400 225 L0 225 Z" fill="#B99A72"/>
-            <path d="M0 196 C90 190 180 204 270 196 C330 191 358 200 400 196 L400 225 L0 225 Z" fill="#D9C19A"/>
-            <g opacity=".45" stroke="#FFF1CE" fill="none" stroke-width="1.3">
-              <path class="wv" d="M0 182 C80 174 170 190 260 182 C320 176 356 188 400 182"/>
-            </g>
-            <!-- footprints -->
-            <g fill="#A98B64" opacity=".8">
-              <ellipse cx="60" cy="214" rx="4" ry="2.6"/><ellipse cx="78" cy="208" rx="4" ry="2.6"/>
-              <ellipse cx="96" cy="214" rx="4" ry="2.6"/><ellipse cx="114" cy="208" rx="4" ry="2.6"/>
-              <ellipse cx="132" cy="214" rx="4" ry="2.6"/>
-            </g>
-            <!-- seagulls -->
-            <g stroke="#FFF4DC" stroke-width="1.7" fill="none" opacity=".9" stroke-linecap="round">
-              <path class="bob" d="M100 62 l7 -6 l7 6"/>
-              <path class="bob" d="M138 44 l6 -5 l6 5"/>
-              <path class="bob" d="M322 70 l6 -5 l6 5"/>
-            </g>
-            <!-- maple on sand -->
-            <g fill="#C0402A"><svg x="296" y="194" width="22" height="22" viewBox="0 0 100 100"><use href="#maple"/></svg></g>
-          </svg>
+          <img src="img/haeundae-sunrise.jpg" alt="海雲台海灘日出，太陽貼著海面升起，左側是 Marine City 大樓剪影" loading="lazy" decoding="async" style="object-position:50% 50%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
@@ -677,7 +681,7 @@
       </article>
 
       <!-- card 5 T1 -->
-      <article class="card">
+      <article class="card t3">
         <div class="thumb">
           <img src="img/t1-base.jpg" alt="T1 BASE CAMP 釜山店紅色招牌的夜間街景" loading="lazy" decoding="async" style="object-position:50% 38%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
@@ -690,7 +694,7 @@
       </article>
 
       <!-- card 6 gwangalli / food -->
-      <article class="card">
+      <article class="card t4">
         <div class="thumb">
           <img src="img/gwangan-bridge.jpg" alt="夜晚亮燈的廣安大橋與海面倒影" loading="lazy" decoding="async" style="object-position:50% 50%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
@@ -705,78 +709,16 @@
   </div>
 </section>
 
-<div class="mdiv wrap" aria-hidden="true"><i></i><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><i></i></div>
-
-<!-- ============================ MAPLESTORY FEATURE ============================ -->
-<section class="sec warm maple-feat" id="maplestory">
-  <div class="leaves" aria-hidden="true">
-    <span class="leaf" style="--x:8%;  --d:20s; --delay:0s;   --s:.75; --c:#C0402A"><svg class="mp"><use href="#maple"/></svg></span>
-    <span class="leaf" style="--x:34%; --d:24s; --delay:6s;   --s:.55; --c:#D98B32"><svg class="mp"><use href="#maple"/></svg></span>
-    <span class="leaf" style="--x:62%; --d:18s; --delay:11s;  --s:.9;  --c:#B33E22"><svg class="mp"><use href="#maple"/></svg></span>
-    <span class="leaf" style="--x:90%; --d:22s; --delay:3.5s; --s:.65; --c:#E0A541"><svg class="mp"><use href="#maple"/></svg></span>
-  </div>
-  <div class="wrap">
-    <div class="mfgrid">
-      <div class="mfart">
-        <svg viewBox="0 0 400 225" role="img" aria-label="楓之谷聯名的蘑菇城堡、橘色蘑菇與粉紅豆插畫">
-          <defs><linearGradient id="mfs" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8CC5E6"/><stop offset="55%" stop-color="#CFE6F2"/><stop offset="100%" stop-color="#F6E3C6"/></linearGradient>
-          <linearGradient id="mfg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8CBE6A"/><stop offset="100%" stop-color="#5E8A4C"/></linearGradient></defs>
-          <rect width="400" height="225" fill="url(#mfs)"/>
-          <g fill="#FFFFFF" opacity=".75"><ellipse cx="62" cy="40" rx="28" ry="13"/><ellipse cx="86" cy="34" rx="18" ry="10"/><ellipse cx="330" cy="50" rx="24" ry="11"/><ellipse cx="310" cy="44" rx="15" ry="8"/></g>
-          <!-- mushroom castle -->
-          <g>
-            <rect x="150" y="104" width="100" height="62" fill="#F0E2CB"/>
-            <rect x="150" y="104" width="100" height="8" fill="#D9C7A9"/>
-            <g fill="#E8762C">
-              <path d="M138 108 q22 -34 44 0 z"/><path d="M186 96 q26 -40 52 0 z"/><path d="M234 108 q22 -34 44 0 z"/>
-            </g>
-            <g fill="#FBE0C4"><ellipse cx="152" cy="98" rx="5" ry="4"/><ellipse cx="206" cy="84" rx="6" ry="4.5"/><ellipse cx="252" cy="98" rx="5" ry="4"/></g>
-            <g fill="#4E7E9A"><rect x="166" y="124" width="14" height="18" rx="6"/><rect x="220" y="124" width="14" height="18" rx="6"/></g>
-            <path d="M190 166 v-30 a10 10 0 0 1 20 0 v30 z" fill="#9A6B45"/>
-            <rect x="130" y="100" width="12" height="66" fill="#E3D4BB"/><rect x="258" y="100" width="12" height="66" fill="#E3D4BB"/>
-          </g>
-          <!-- ground -->
-          <path d="M0 166 C70 158 140 170 210 164 C290 157 340 170 400 162 L400 225 L0 225 Z" fill="url(#mfg)"/>
-          <g fill="#4E7A40" opacity=".5"><ellipse cx="60" cy="196" rx="30" ry="7"/><ellipse cx="300" cy="206" rx="34" ry="8"/></g>
-          <!-- characters -->
-          <svg x="44" y="146" width="56" height="56" viewBox="0 0 100 100" class="bob" aria-hidden="true"><use href="#mushroom"/></svg>
-          <svg x="296" y="152" width="52" height="52" viewBox="0 0 100 100" aria-hidden="true"><use href="#pinkbean"/></svg>
-          <!-- stage lights -->
-          <g opacity=".3"><path d="M110 225 L150 150 L180 225 Z" fill="#FFE9B0"/><path d="M290 225 L250 150 L222 225 Z" fill="#FFE9B0"/></g>
-          <!-- maple leaves -->
-          <g fill="#C0402A"><svg x="20" y="52" width="24" height="24" viewBox="0 0 100 100"><use href="#maple"/></svg></g>
-          <g fill="#D98B32"><svg x="356" y="92" width="20" height="20" viewBox="0 0 100 100"><use href="#maple"/></svg></g>
-          <g fill="#E0A541"><svg x="98" y="86" width="15" height="15" viewBox="0 0 100 100"><use href="#maple"/></svg></g>
-        </svg>
-      </div>
-
-      <div class="mfbody">
-        <p class="kicker eyebrow" style="color:var(--ink-3)">Seasonal feature ‧ Day 2</p>
-        <h2>整座樂園都在楓之谷裡</h2>
-        <span class="mfruns"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg> 秋季檔期 ‧ 跑到 11/22</span>
-        <p>Nexon 與樂天樂園釜山的秋季聯名 <b>「MapleStory in LOTTE WORLD BUSAN」</b>，全園區布置成楓之谷的世界。你們 11/10 去，<b>完整落在檔期內</b>。</p>
-        <ul class="mflist">
-          <li>
-            <svg class="ic" viewBox="0 0 100 100" aria-hidden="true"><use href="#maple"/></svg>
-            <span><b>楓之谷：Dance Together!</b><span class="kr">댄스 투게더</span>加了新怪物舞者的聯名遊行，全園最大場的表演，值得提早去站第一排。</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 100 100" aria-hidden="true"><use href="#mushroom"/></svg>
-            <span><b>蘑菇城堡 Garden Stage</b><span class="kr">버섯의 성</span>掃 QR 自選髮型與服裝，做好的角色會跳上舞台的數位螢幕。</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 100 100" aria-hidden="true"><use href="#pinkbean"/></svg>
-            <span><b>粉紅豆拍照時間</b><span class="kr">핑크빈 포토타임</span>固定時段出沒，另有粉紅豆 Greeting Band 與楓之谷街頭演出。</span>
-          </li>
-        </ul>
-        <p style="font-size:.88rem; color:var(--ink-3)">進園第一件事：到服務台拿<b style="color:var(--ink)">當日遊行與表演時刻表</b>，整天照它排。平日 10:00–20:00，會因天候或人潮提前閉園。</p>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="mdiv wrap" aria-hidden="true"><i></i><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><i></i></div>
 
 <!-- ============================ DAYS ============================ -->
-<section class="sec alt">
+<section class="sec alt maple-feat">
+  <div class="leaves" aria-hidden="true">
+    <span class="leaf" style="--x:4%; --d:30s; --delay:0s; --s:.5; --c:#DC4722"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:31%; --d:26s; --delay:11s; --s:.62; --c:#F2922E"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:58%; --d:34s; --delay:5s; --s:.45; --c:#EFB942"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
+    <span class="leaf" style="--x:83%; --d:28s; --delay:17s; --s:.7; --c:#DC4722"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
+  </div>
   <div class="wrap">
     <div class="sechead">
       <p class="kicker"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span>Itinerary</span></p>
@@ -786,7 +728,7 @@
   </div>
 
   <!-- ===== DAY 1 ===== -->
-  <div class="day wrap" id="d1">
+  <div class="day wrap t1" id="d1">
     <div class="daybanner">
       <svg viewBox="0 0 400 171" role="img" aria-label="夜晚抵達海雲台海灘的插畫">
         <defs><linearGradient id="d1s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0D1826"/><stop offset="100%" stop-color="#2A3A4C"/></linearGradient>
@@ -848,7 +790,7 @@
   </div>
 
   <!-- ===== DAY 2 ===== -->
-  <div class="day wrap" id="d2">
+  <div class="day wrap t2" id="d2">
     <div class="daybanner">
       <svg viewBox="0 0 400 171" role="img" aria-label="樂天樂園的旋轉木馬、摩天輪與雲霄飛車插畫">
         <defs><linearGradient id="d2s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7CB6DA"/><stop offset="100%" stop-color="#F7E6CA"/></linearGradient>
@@ -902,7 +844,12 @@
       <li class="tl-item is-move"><div class="tl-time">09:20</div><div class="tl-body"><p class="tl-plain">海雲台站搭 <b>東海線（동해선）往北 → 오시리아站</b>，約 12 分。東海線和地鐵 2 號線是不同系統、同站可轉乘，<b>班距較長（15–30 分），出門前先查發車時間</b>。</p></div></li>
       <li class="tl-item is-key"><div class="tl-time">10:00</div><div class="tl-body">
         <h3 class="tl-name">樂天樂園釜山 <span class="kr">롯데월드 어드벤처 부산</span> <span class="pin">主場</span></h3>
-        <p class="tl-desc">2022 年開幕，<b>釜山唯一的大型主題樂園</b>，六個主題園區沿著山谷展開，招牌是木質雲霄飛車 <b>Giant Digger</b>。這季正好是楓之谷聯名季——詳情看上面的<a href="#maplestory">楓之谷專區</a>。今天沒有其他行程，<b>10:00 開園就進場</b>，第一批進去排隊最短，整天有七個半小時可以玩。</p>
+        <p class="tl-desc">2022 年開幕，<b>釜山唯一的大型主題樂園</b>，六個主題園區沿著山谷展開，招牌是木質雲霄飛車 <b>Giant Digger</b>。這季整個園區都在跑 Nexon 聯名的 <b>「MapleStory in LOTTE WORLD BUSAN」秋季檔期（到 11/22）</b>。今天沒有其他行程，<b>10:00 開園就進場</b>，第一批進去排隊最短，整天有七個半小時可以玩。</p>
+        <div class="alt-list">
+          <p class="opt"><b>楓之谷：Dance Together!</b> <span class="kr">댄스 투게더</span> — 加了新怪物舞者的聯名遊行，全園最大場的表演，提早去站第一排</p>
+          <p class="opt"><b>蘑菇城堡 Garden Stage</b> <span class="kr">버섯의 성</span> — 掃 QR 自選髮型與服裝，做好的角色會跳上舞台的數位螢幕</p>
+          <p class="opt"><b>粉紅豆拍照時間</b> <span class="kr">핑크빈 포토타임</span> — 固定時段出沒，另有粉紅豆 Greeting Band 與楓之谷街頭演出</p>
+        </div>
         <dl class="meta">
           <div><dt>營業</dt><dd>平日 <b>10:00–20:00</b>（週末到 21:00）‧ 售票截止閉園前 1 小時 ‧ 全年無休</dd></div>
           <div><dt>門票</dt><dd>線上（KKday / Klook）買<b>比現場便宜</b>，出發前先買好一日券</dd></div>
@@ -927,7 +874,7 @@
   </div>
 
   <!-- ===== DAY 3 ===== -->
-  <div class="day wrap" id="d3">
+  <div class="day wrap t3" id="d3">
     <div class="daybanner">
       <svg viewBox="0 0 400 171" role="img" aria-label="海雲台海岸與天空膠囊列車的插畫">
         <defs><linearGradient id="d3s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9AD0DE"/><stop offset="100%" stop-color="#F0EBDC"/></linearGradient>
@@ -972,6 +919,10 @@
       <li class="tl-item is-place"><div class="tl-time">07:30</div><div class="tl-body">
         <h3 class="tl-name">海灘日出散步 <span class="pin sea">住宿紅利</span></h3>
         <p class="tl-desc">11 月中海雲台日出約 <b>07:00</b>。沙灘 1.5 公里長、朝東南，<b>太陽直接從海面升起</b>。這個時間沙灘上只有晨跑的當地人和海鷗，下樓就到，別睡掉。</p>
+        <figure class="shot tl-shot wide">
+          <img src="img/haeundae-sunrise.jpg" alt="海雲台海灘日出，太陽貼著海面升起，左側是 Marine City 大樓剪影" loading="lazy" decoding="async">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>往東南邊看</b>：太陽從海平面直接升起，左手邊是 Marine City 的剪影</span></figcaption>
+        </figure>
       </div></li>
       <li class="tl-item is-move"><div class="tl-time">09:30</div><div class="tl-body"><p class="tl-plain">飯店 → <b>青沙浦（청사포）</b>，計程車約 10 分、₩5,000 上下。</p></div></li>
       <li class="tl-item is-key"><div class="tl-time">10:00</div><div class="tl-body">
@@ -1032,7 +983,7 @@
   </div>
 
   <!-- ===== DAY 4 ===== -->
-  <div class="day wrap" id="d4">
+  <div class="day wrap t4" id="d4">
     <div class="daybanner">
       <svg viewBox="0 0 400 171" role="img" aria-label="荒嶺山俯瞰廣安大橋夜景與西面街景的插畫">
         <defs><linearGradient id="d4s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#121F38"/><stop offset="55%" stop-color="#3A3B55"/><stop offset="100%" stop-color="#7C5658"/></linearGradient></defs>
@@ -1134,7 +1085,7 @@
   </div>
 
   <!-- ===== DAY 5 ===== -->
-  <div class="day wrap" id="d5">
+  <div class="day wrap t5" id="d5">
     <div class="daybanner">
       <svg viewBox="0 0 400 171" role="img" aria-label="清晨海雲台沙灘與起飛的飛機插畫">
         <defs><linearGradient id="d5s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4E7FA0"/><stop offset="50%" stop-color="#E9B98A"/><stop offset="100%" stop-color="#F8E4C8"/></linearGradient>
@@ -1190,10 +1141,11 @@
   </div>
 </section>
 
-<div class="mdiv wrap" aria-hidden="true"><i></i><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><i></i></div>
+<div class="mdiv wrap" aria-hidden="true"><i></i><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><i></i></div>
 
 <!-- ============================ FOOD ============================ -->
 <section class="sec maple-feat" id="food">
+  <img class="wm l" src="img/maple-leaf.png" alt="" aria-hidden="true">
   <div class="leaves" aria-hidden="true">
     <span class="leaf" style="--x:12%; --d:25s; --delay:2s; --s:.5; --c:#D98B32"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
     <span class="leaf" style="--x:40%; --d:20s; --delay:8s; --s:.7; --c:#C0402A"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg></span>
@@ -1281,6 +1233,7 @@
 
 <!-- ============================ BOOKING ============================ -->
 <section class="sec alt" id="book">
+  <img class="wm r" src="img/maple-leaf.png" alt="" aria-hidden="true">
   <div class="wrap">
     <div class="twocol">
       <div>
@@ -1347,10 +1300,11 @@
   </div>
 </section>
 
-<div class="mdiv wrap" aria-hidden="true"><i></i><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><i></i></div>
+<div class="mdiv wrap" aria-hidden="true"><i></i><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><i></i></div>
 
 <!-- ============================ TRANSPORT ============================ -->
 <section class="sec" id="move">
+  <img class="wm l" src="img/maple-leaf.png" alt="" aria-hidden="true">
   <div class="wrap">
     <div class="sechead">
       <p class="kicker"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span>Getting around</span></p>
@@ -1385,6 +1339,7 @@
 
 <!-- ============================ PLAN B ============================ -->
 <section class="sec warm" id="plan-b">
+  <img class="wm r" src="img/maple-leaf.png" alt="" aria-hidden="true">
   <div class="wrap">
     <div class="sechead">
       <p class="kicker"><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span>Plan B</span></p>
@@ -1402,7 +1357,7 @@
 </section>
 
 <button class="totop" id="totop" type="button" aria-label="回到頁首">
-  <svg class="mp" aria-hidden="true"><use href="#maple"/></svg>
+  <img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true">
 </button>
 
 <footer>
@@ -1469,7 +1424,7 @@
          first frame of the page is never blank) ---- */
   if ('IntersectionObserver' in window && !reduced()) {
     var items = Array.prototype.slice.call(document.querySelectorAll(
-      '.card, .food, .daybanner, .tl-shot, .tablewrap, .checks, .mfart'
+      '.card, .food, .daybanner, .tl-shot, .tablewrap, .checks'
     ));
     var hidden = items.filter(function(el){
       return el.getBoundingClientRect().top > window.innerHeight * 0.92;
