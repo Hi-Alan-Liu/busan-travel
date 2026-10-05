@@ -91,6 +91,8 @@
   }
   .topnav a:hover{color:var(--ink); background:var(--surface-2)}
   .topnav a[aria-current="true"]{color:var(--maple); font-weight:700}
+  .topnav a .zh{margin-left:.32em; font-weight:400; opacity:.82}
+  @media (max-width:620px){ .topnav a .zh{display:none} }
   @media (max-width:760px){
     .topbar .wrap{gap:.6rem; padding-inline:14px}
     .brand .bs{display:none}
@@ -554,11 +556,11 @@
     </a>
     <nav class="topnav" aria-label="網站導覽">
       <a href="#highlights">行程亮點</a>
-      <a href="#d1">D1</a>
-      <a href="#d2">D2</a>
-      <a href="#d3">D3</a>
-      <a href="#d4">D4</a>
-      <a href="#d5">D5</a>
+      <a href="#d1">D1<span class="zh">抵達</span></a>
+      <a href="#d2">D2<span class="zh">海雲台</span></a>
+      <a href="#d3">D3<span class="zh">樂天世界</span></a>
+      <a href="#d4">D4<span class="zh">西面</span></a>
+      <a href="#d5">D5<span class="zh">返程</span></a>
       <a href="#food">美食</a>
       <a href="#book">預約</a>
       <a href="#move">交通</a>
@@ -629,26 +631,26 @@
 
     <div class="cards">
       <!-- card 1 sky capsule -->
-      <article class="card t3">
+      <article class="card t2">
         <div class="thumb">
           <img src="img/sky-capsule.webp" alt="天空膠囊列車的綠色與藍色車廂行駛在海岸高架軌道上" loading="lazy" decoding="async" style="object-position:50% 50%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
-          <span class="ctag">Day 3 ‧ 10:00</span>
+          <span class="ctag">Day 2 ‧ 10:00</span>
           <h3>天空膠囊列車<span class="kr">스카이캡슐</span></h3>
           <p>四人一艙的糖果色車廂，架在廢棄鐵道上以步行速度貼著海岸線走 2 公里。<b>務必線上預約</b>。</p>
         </div>
       </article>
 
       <!-- card 2 lotte world -->
-      <article class="card t2">
+      <article class="card t3">
         <div class="thumb">
           <img src="img/lotte-maple.jpg" alt="樂天樂園楓之谷聯名主視覺" loading="lazy" decoding="async" style="object-position:50% 56%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
-          <span class="ctag">Day 2 ‧ 10:00</span>
+          <span class="ctag">Day 3 ‧ 10:00</span>
           <h3>樂天樂園 × 楓之谷<span class="kr">롯데월드 부산</span></h3>
           <p>釜山唯一的大型主題樂園，整園區正在跑楓之谷聯名季。從海雲台<b>東海線兩站、12 分鐘</b>。</p>
         </div>
@@ -668,26 +670,26 @@
       </article>
 
       <!-- card 4 haeundae sunrise -->
-      <article class="card t3">
+      <article class="card t2">
         <div class="thumb">
           <img src="img/haeundae-sunrise.jpg" alt="海雲台海灘日出，太陽貼著海面升起，左側是 Marine City 大樓剪影" loading="lazy" decoding="async" style="object-position:50% 50%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
-          <span class="ctag">Day 3 ‧ 07:30</span>
+          <span class="ctag">Day 2 ‧ 07:30</span>
           <h3>海雲台海灘日出<span class="kr">해운대해수욕장</span></h3>
           <p>1.5 公里白沙、朝東南，<b>太陽直接從海面升起</b>。日出約 07:00，下樓就到——這是住沙灘旁最大的紅利。</p>
         </div>
       </article>
 
       <!-- card 5 T1 -->
-      <article class="card t3">
+      <article class="card t2">
         <div class="thumb">
           <img src="img/t1-base.jpg" alt="T1 BASE CAMP 釜山店紅色招牌的夜間街景" loading="lazy" decoding="async" style="object-position:50% 38%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
-          <span class="ctag">Day 3 ‧ 15:30</span>
+          <span class="ctag">Day 2 ‧ 15:30</span>
           <h3>T1 BASE CAMP<span class="kr">T1 베이스 캠프</span></h3>
           <p>T1 官方基地二號店，就在海雲台 Marisol Hotel 二樓。頂規 PC 區、周邊店，還有<b>全韓第一間 T1 PUB</b>。</p>
         </div>
@@ -700,29 +702,29 @@
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
-          <span class="ctag">Day 4 ‧ 13:00</span>
+          <span class="ctag">Day 4 ‧ 12:45</span>
           <h3>廣安里與廣安大橋<span class="kr">광안리</span></h3>
           <p>海雲台是觀光區，廣安里是釜山人自己的海邊。7.4 公里長橋橫過海面，後面整排炸雞啤酒。</p>
         </div>
       </article>
-      <article class="card t3">
+      <article class="card t2">
         <div class="thumb">
           <img src="img/the-bay-101.jpg" alt="The Bay 101 水面倒映整排 Marine City 大樓燈光" loading="lazy" decoding="async" style="object-position:50% 50%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
-          <span class="ctag">Day 3 ‧ 18:30</span>
+          <span class="ctag">Day 2 ‧ 18:30</span>
           <h3>The Bay 101<span class="kr">더베이 101</span></h3>
           <p>釜山夜景明信片的那一張：<b>水面倒映整排 Marine City 的燈</b>。炸魚薯條配啤酒，大家就坐在岸邊地上吃。</p>
         </div>
       </article>
-      <article class="card t3">
+      <article class="card t2">
         <div class="thumb">
           <img src="img/haeundae-market.jpg" alt="海雲台市場小吃街，兩側掛滿韓文招牌與球形燈飾" loading="lazy" decoding="async" style="object-position:50% 45%">
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
-          <span class="ctag">Day 3 ‧ 12:30</span>
+          <span class="ctag">Day 2 ‧ 12:30</span>
           <h3>海雲台市場<span class="kr">해운대시장</span></h3>
           <p>離海灘幾分鐘的老市場小吃街。豬肉湯飯、豬腳、烤盲鰻、糖餅，<b>站著吃、一攤一樣</b>。</p>
         </div>
@@ -733,7 +735,7 @@
           <svg class="mp leafbadge" aria-hidden="true"><use href="#maple"/></svg>
         </div>
         <div class="cbody">
-          <span class="ctag">Day 4 ‧ 21:00</span>
+          <span class="ctag">Day 4 ‧ 14:10</span>
           <h3>西面商圈<span class="kr">서면</span></h3>
           <p>釜山最大的商圈，1、2 號線交會。<b>整趟唯一認真逛街的機會</b>，Olive Young 要買的在這天買完。</p>
         </div>
@@ -795,35 +797,163 @@
         </div>
       </div>
     </div>
-    <p class="daysub">實際能動的時間只有一小時多。今晚的任務只有三件：<b>平安進海雲台、沙灘走一圈、吃到第一碗湯飯</b>。</p>
+    <p class="daysub">實際能動的時間只有一個半小時，而且全部在飯店走得到的範圍內。今晚只有三件事：<b>放下行李、逛海雲台大街、吃到第一碗豬肉湯飯</b>，最後散步去看夜裡的海水浴場。</p>
 
     <ol class="tl">
       <li class="tl-item is-move"><div class="tl-time">17:05</div><div class="tl-body"><p class="tl-plain">高雄小港起飛。<b>建議 15:00 到機場</b>，國際線報到加安檢抓兩小時。</p></div></li>
       <li class="tl-item is-move"><div class="tl-time">20:35</div><div class="tl-body"><p class="tl-plain">金海國際機場落地。入境審查＋提行李，<b>實際出關約 21:15~21:30</b>。</p></div></li>
       <li class="tl-item is-key"><div class="tl-time">21:30</div><div class="tl-body">
-        <h3 class="tl-name">機場 → 海雲台 <span class="pin">今晚唯一難關</span></h3>
-        <p class="tl-desc">金海機場在釜山<b>最西邊</b>，海雲台在<b>最東邊</b>，是全市最長的一段對角線。機場利木津巴士末班約 21:00 前後、這班飛機趕不上；大眾運輸要轉三段近 75 分鐘。<b>帶行李直接叫車最實在</b>。</p>
+        <h3 class="tl-name">計程車直奔飯店 <span class="pin">今晚唯一難關</span></h3>
+        <p class="tl-desc">金海機場在釜山<b>最西邊</b>、海雲台在<b>最東邊</b>，是全市最長的一段對角線。機場巴士末班約 21:00 前後、這班飛機趕不上，大眾運輸要轉三段近 75 分鐘——<b>帶著行李就是直接叫車，沒有別的選項</b>。</p>
         <dl class="meta">
-          <div><dt>計程車</dt><dd><b>約 50 分 ‧ ₩35,000~45,000</b>（含機場加成與高速費）。出關後走到 Taxi 招呼站，或用 Kakao T 叫車</dd></div>
-          <div><dt>大眾運輸</dt><dd>金海輕軌 → 沙上站轉 2 號線 → 海雲台站，約 75 分 ‧ ₩1,900。<b>輕軌末班約 22:30</b>，班機誤點就不要賭</dd></div>
-          <div><dt>先辦好</dt><dd>便利店買 <b>Cashbee / T-money</b> 交通卡；機場就有便利店</dd></div>
+          <div><dt>車資</dt><dd><b>約 50 分 ‧ ₩35,000~45,000</b>（含機場加成與高速費）</dd></div>
+          <div><dt>怎麼搭</dt><dd>出關後循指標走到 <b>Taxi 招呼站</b>直接排；或用 Kakao T 叫車。把飯店韓文地址先截圖存好給司機看</dd></div>
+          <div><dt>先辦好</dt><dd>機場便利店買 <b>Cashbee / T-money</b> 交通卡，明天開始天天用</dd></div>
         </dl>
       </div></li>
-      <li class="tl-item is-move"><div class="tl-time">22:30</div><div class="tl-body"><p class="tl-plain">飯店 Check-in、放行李。</p></div></li>
-      <li class="tl-item is-place"><div class="tl-time">22:50</div><div class="tl-body">
-        <h3 class="tl-name">海雲台海灘夜散步 <span class="kr">해운대해수욕장</span></h3>
-        <p class="tl-desc">住這裡的第一個紅利。深夜的沙灘幾乎沒人，背後是 Marine City 的玻璃大樓牆，左手邊遠處看得到<b>廣安大橋的燈</b>。先走一段，順便認一下回飯店的路。</p>
+      <li class="tl-item is-move"><div class="tl-time">22:15</div><div class="tl-body"><p class="tl-plain">Check-in、<b>放下行李</b>。換雙好走的鞋再出門。</p></div></li>
+      <li class="tl-item is-place"><div class="tl-time">22:30</div><div class="tl-body">
+        <h3 class="tl-name">散步逛海雲台大街 <span class="kr">구남로</span></h3>
+        <p class="tl-desc">從海雲台站一路通到沙灘的<b>行人徒步大街</b>，是海雲台的主動脈：兩側餐廳、炸雞店、咖啡廳、藥妝店全部開著，中央廣場常有街頭表演。<b>整條都是平路、燈很亮</b>，第一晚拿來認路剛剛好——明天白天還會再走一次。</p>
       </div></li>
-      <li class="tl-item"><div class="tl-time">23:10</div><div class="tl-body">
-        <h3 class="tl-name">宵夜：海雲台市場 <span class="kr">해운대시장</span></h3>
-        <p class="tl-desc">離沙灘走路 5~8 分。市場裡有<b>營業到深夜或 24 小時的豬肉湯飯</b>，第一餐就吃釜山本命。想輕一點就便利店，韓國便利店的飯捲和杯麵不會讓你失望。</p>
-        <dl class="meta"><div><dt>順帶說</dt><dd>Olive Young 海雲台店多在 <b>22:30 前打烊</b>，今晚來不及；採買排在 Day 4 的西面一次買完</dd></div></dl>
+      <li class="tl-item is-key"><div class="tl-time">23:00</div><div class="tl-body">
+        <h3 class="tl-name">宵夜：24 小時豬肉湯飯 <span class="kr">돼지국밥</span> <span class="pin">第一餐</span></h3>
+        <p class="tl-desc">豬肉湯飯是釜山的靈魂食物——豬骨熬到乳白的湯、一碗飯、一碟蝦醬，深夜吃最對。<b>海雲台大街和市場一帶有好幾家 24 小時營業</b>，不必挑，哪家亮著就進去。</p>
+        <dl class="meta">
+          <div><dt>本地吃法</dt><dd>湯裡自己加<b>蝦醬（새우젓）</b>調鹹、再放韭菜，別直接喝原味</dd></div>
+          <div><dt>怕腥</dt><dd>點 <b>항정국밥（豬頸肉湯飯）</b>，用松阪部位，軟嫩不腥</dd></div>
+          <div><dt>順路</dt><dd>旁邊就是<b>海雲台市場</b>，深夜還有幾攤在賣，可以順便逛一圈</dd></div>
+        </dl>
+        <figure class="shot tl-shot wide">
+          <img src="img/haeundae-market.jpg" alt="海雲台市場的小吃街，兩側掛滿韓文招牌與球形燈飾" loading="lazy" decoding="async" style="object-position:50% 45%">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>認招牌</b>：「국밥」是湯飯、「족발」是豬腳、「곰장어」是烤盲鰻</span></figcaption>
+        </figure>
+      </div></li>
+      <li class="tl-item is-place"><div class="tl-time">23:45</div><div class="tl-body">
+        <h3 class="tl-name">夜晚的海雲台海水浴場 <span class="kr">해운대해수욕장</span></h3>
+        <p class="tl-desc">從大街底端直接走進沙灘，住這裡的第一個紅利。<b>深夜的海灘幾乎沒人</b>，背後是 Marine City 整面發光的玻璃大樓牆，左手邊遠處看得到廣安大橋的燈。浪聲很大、風很涼，走一段再回飯店，第一天就結束得很漂亮。</p>
+        <dl class="meta">
+          <div><dt>提醒</dt><dd>十一月的海邊<b>入夜風很大</b>，外套帶著再下樓</dd></div>
+        </dl>
       </div></li>
     </ol>
   </div>
 
   <!-- ===== DAY 2 ===== -->
   <div class="day wrap t2" id="d2">
+    <div class="daybanner">
+      <svg viewBox="0 0 400 171" role="img" aria-label="海雲台海岸與天空膠囊列車的插畫">
+        <defs><linearGradient id="d3s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9AD0DE"/><stop offset="100%" stop-color="#F0EBDC"/></linearGradient>
+        <linearGradient id="d3w" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4E9AAC"/><stop offset="100%" stop-color="#1E5467"/></linearGradient></defs>
+        <rect width="400" height="171" fill="url(#d3s)"/>
+        <circle cx="340" cy="34" r="18" fill="#FFF2D0"/>
+        <g stroke="#E9DCC6" stroke-width="1.4" fill="none" opacity=".85" stroke-linecap="round">
+          <path class="bob" d="M90 40 l6 -5 l6 5"/><path class="bob" d="M120 28 l5 -4 l5 4"/>
+        </g>
+        <path d="M0 92 L54 72 L104 92 L150 80 L190 96 L0 96 Z" fill="#88A68A" opacity=".65"/>
+        <rect y="96" width="400" height="48" fill="url(#d3w)"/>
+        <g opacity=".45" stroke="#CFE9EE" fill="none" stroke-width="1.5" stroke-linecap="round">
+          <path class="wv" d="M40 110 h36 M140 122 h30 M250 112 h38 M330 126 h30"/>
+          <path class="wv2" d="M80 134 h40 M200 140 h34 M300 136 h38"/>
+        </g>
+        <!-- pine cliff -->
+        <path d="M0 80 L40 62 L76 88 L76 171 L0 171 Z" fill="#3E5B4A"/>
+        <g fill="#2C4537"><path d="M14 66 l7 -15 l7 15 z"/><path d="M34 58 l6 -13 l6 13 z"/><path d="M54 78 l6 -13 l6 13 z"/></g>
+        <!-- track + capsules -->
+        <rect x="56" y="100" width="344" height="4" fill="#9AA6A0"/>
+        <g fill="#8C9892"><rect x="110" y="104" width="6" height="34"/><rect x="190" y="104" width="6" height="38"/><rect x="270" y="104" width="6" height="42"/><rect x="350" y="104" width="6" height="46"/></g>
+        <g class="ride">
+          <svg x="60" y="74" width="56" height="34" viewBox="0 0 100 60" style="color:#7FD1C4" aria-hidden="true"><use href="#capsule"/></svg>
+          <svg x="130" y="74" width="56" height="34" viewBox="0 0 100 60" style="color:#F09A86" aria-hidden="true"><use href="#capsule"/></svg>
+          <svg x="200" y="74" width="56" height="34" viewBox="0 0 100 60" style="color:#F3CE72" aria-hidden="true"><use href="#capsule"/></svg>
+        </g>
+        <!-- lighthouse + beach -->
+        <g><rect x="372" y="64" width="9" height="32" fill="#F2EDE4"/><rect x="372" y="64" width="9" height="7" fill="#C0402A"/><rect x="370" y="58" width="13" height="7" rx="2" fill="#C0402A"/></g>
+        <path d="M0 144 C90 136 180 152 270 144 C330 138 360 150 400 144 L400 171 L0 171 Z" fill="#D3B98E"/>
+        <g fill="#C0402A"><svg x="300" y="46" width="18" height="18" viewBox="0 0 100 100"><use href="#maple"/></svg></g>
+      </svg>
+      <div class="cap">
+        <div>
+          <div class="dmeta"><span class="dnum">Day 2</span><span class="ddate">11/10 (二)</span></div>
+          <h2>海雲台一日：膠囊列車、T1、夜景</h2>
+        </div>
+      </div>
+    </div>
+    <p class="daysub">第一個完整的日子，而且幾乎不用搭地鐵——全部在步行或一趟計程車的範圍內。<b>昨晚走過的海雲台大街，今天白天再走一次</b>；因為住在沙灘旁，早上和晚上各賺一段海。</p>
+
+    <ol class="tl">
+      <li class="tl-item is-place"><div class="tl-time">07:30</div><div class="tl-body">
+        <h3 class="tl-name">海灘日出散步 <span class="pin sea">住宿紅利</span></h3>
+        <p class="tl-desc">11 月中海雲台日出約 <b>07:00</b>。沙灘 1.5 公里長、朝東南，<b>太陽直接從海面升起</b>。這個時間沙灘上只有晨跑的當地人和海鷗，下樓就到，別睡掉。</p>
+        <figure class="shot tl-shot wide">
+          <img src="img/haeundae-sunrise.jpg" alt="海雲台海灘日出，太陽貼著海面升起，左側是 Marine City 大樓剪影" loading="lazy" decoding="async">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>往東南邊看</b>：太陽從海平面直接升起，左手邊是 Marine City 的剪影</span></figcaption>
+        </figure>
+      </div></li>
+      <li class="tl-item is-move"><div class="tl-time">09:30</div><div class="tl-body"><p class="tl-plain">飯店 → <b>青沙浦（청사포）</b>，計程車約 10 分、₩5,000 上下。</p></div></li>
+      <li class="tl-item is-key"><div class="tl-time">10:00</div><div class="tl-body">
+        <h3 class="tl-name">天空膠囊列車 <span class="kr">스카이캡슐</span> <span class="pin">務必預約</span></h3>
+        <p class="tl-desc">Blueline Park 的招牌。<b>四人一艙的糖果色小車廂</b>，架高在廢棄的東海南部線舊鐵道上，以接近步行的速度貼著海岸線前進。單程約 2 公里、30 分鐘，<b>全程只有你們這一艙的人跟一整面海</b>。</p>
+        <dl class="meta">
+          <div><dt>方向</dt><dd>建議走 <b>青沙浦 → 尾浦</b>：海景在行進方向右手邊，而且這個方向的票相對好訂</dd></div>
+          <div><dt>預約</dt><dd><b>線上先訂</b>，熱門時段會滿。一艙 4 人同價，人少也是整艙包</dd></div>
+          <div><dt>營運</dt><dd>約 09:30 起跑，冬季末班較早，訂票頁會顯示當日場次</dd></div>
+        </dl>
+        <figure class="shot tl-shot wide">
+          <img src="img/sky-capsule.webp" alt="天空膠囊列車的綠色 45 號與藍色 25 號車廂行駛在海岸高架軌道上" loading="lazy" decoding="async" style="object-position:50% 50%">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>認車廂</b>：每台有編號，上車前先對一下票上的號碼</span></figcaption>
+        </figure>
+      </div></li>
+      <li class="tl-item is-place"><div class="tl-time">10:45</div><div class="tl-body">
+        <h3 class="tl-name">海邊列車 <span class="kr">해변열차</span></h3>
+        <p class="tl-desc">和膠囊列車同園區、不同系統的<b>平面觀景列車</b>，沿尾浦—青沙浦—松亭跑，座位全部面海、落地窗。<b>站站可以下車再上車</b>，是今天在海岸線之間移動的主要工具。可與膠囊列車買套票。</p>
+      </div></li>
+      <li class="tl-item is-place"><div class="tl-time">12:30</div><div class="tl-body">
+        <h3 class="tl-name">海雲台大街 ‧ 市場午餐 <span class="kr">구남로 ‧ 해운대시장</span></h3>
+        <p class="tl-desc">白天的<b>海雲台大街（구남로）</b>和昨晚完全兩個樣子：店全開了、街頭藝人在中央廣場表演。走到底轉進<b>海雲台市場</b>吃午餐——豬肉湯飯、現切生魚片、糖餅（호떡）、米腸（순대）、辣炒年糕，<b>站著吃、一攤一樣</b>，比坐下來點一桌有趣。</p>
+        <figure class="shot tl-shot wide">
+          <img src="img/haeundae-market.jpg" alt="海雲台市場的小吃街，兩側掛滿韓文招牌與球形燈飾，人潮穿梭" loading="lazy" decoding="async" style="object-position:50% 50%">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>認招牌</b>：紅底白字的「족발」是豬腳、「곰장어」是烤盲鰻，整條都是</span></figcaption>
+        </figure>
+      </div></li>
+      <li class="tl-item is-place"><div class="tl-time">14:00</div><div class="tl-body">
+        <h3 class="tl-name">海雲台海灘 <span class="kr">해운대해수욕장</span></h3>
+        <p class="tl-desc">釜山的門面，<b>1.5 公里白沙</b>。11 月不能下水，但人少、光線斜、沙灘超好拍。買一包蝦味先站在沙灘上，<b>海鷗會整群圍過來</b>——這是海雲台的固定節目。</p>
+      </div></li>
+      <li class="tl-item is-place"><div class="tl-time">15:30</div><div class="tl-body">
+        <h3 class="tl-name">T1 BASE CAMP 釜山店 <span class="kr">T1 베이스 캠프</span> <span class="pin sea">走路就到</span></h3>
+        <p class="tl-desc">韓國電競王朝 T1 的官方品牌基地<b>二號店</b>（一號店在首爾弘大），就開在<b>海雲台 Marisol Hotel 二樓</b>，從沙灘走過去幾分鐘。裡面有頂規電競 PC 區、官方周邊商店、小型電競賽場、拍照亭，還有<b>全韓國第一間 T1 PUB</b>——供應選手的招牌餐點和 T1 聯名飲品。</p>
+        <dl class="meta">
+          <div><dt>位置</dt><dd>海雲台 <b>마리쏠 호텔 2F</b>；Naver Map 搜「T1 베이스 캠프 부산」</dd></div>
+          <div><dt>怎麼玩</dt><dd>開一台機、喝一杯聯名、買周邊、拍照亭留念。粉絲可以待上兩小時</dd></div>
+          <div><dt>先查</dt><dd>遇 LCK 賽季會有<b>觀賽活動或包場</b>，去之前看一下官方 IG 公告</dd></div>
+        </dl>
+        <figure class="shot tl-shot wide">
+          <img src="img/t1-base.jpg" alt="T1 BASE CAMP 釜山店的紅色外牆招牌與夜間街景" loading="lazy" decoding="async" style="object-position:50% 36%">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>找路看這個</b>：紅底白字 BASE CAMP，招牌上方就是 MARY SOL（마리쏠）飯店</span></figcaption>
+        </figure>
+      </div></li>
+      <li class="tl-item is-place"><div class="tl-time">17:00</div><div class="tl-body">
+        <h3 class="tl-name">冬柏島海岸步道 <span class="kr">동백섬</span></h3>
+        <p class="tl-desc">海雲台沙灘<b>西端</b>的小半島，環島木棧步道一圈約 1.2 公里、平路好走。走到南側崖邊，可以把<b>廣安大橋</b>和 Marine City 的玻璃大樓群框進同一張照片。<b>17:20 日落</b>剛好在這裡。</p>
+      </div></li>
+      <li class="tl-item is-key"><div class="tl-time">18:30</div><div class="tl-body">
+        <h3 class="tl-name">The Bay 101 <span class="pin">經典機位</span></h3>
+        <p class="tl-desc">冬柏島旁的遊艇碼頭，釜山夜景明信片的那張就是在這裡拍的：<b>前方廣場的淺水池倒影 ＋ 後方 Marine City 整片亮燈的大樓牆</b>。現場有炸魚薯條和啤酒，大家端著坐在岸邊地上吃。<b>水池要沒風才有倒影</b>，風大就往碼頭邊走。</p>
+        <figure class="shot tl-shot wide">
+          <img src="img/the-bay-101.jpg" alt="The Bay 101 水面倒映整排 Marine City 大樓燈光，欄杆邊坐著一個人" loading="lazy" decoding="async" style="object-position:50% 50%">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>蹲低一點拍</b>：相機貼近水面，大樓和倒影才會對稱成一整片</span></figcaption>
+        </figure>
+      </div></li>
+      <li class="tl-item"><div class="tl-time">20:00</div><div class="tl-body">
+        <h3 class="tl-name">晚餐：海雲台烤肉或豬肉湯飯</h3>
+        <p class="tl-desc">海雲台站到沙灘之間整條都是餐廳。吃完<b>走回飯店</b>，今天不必算末班車——這是住海雲台最實在的好處。</p>
+      </div></li>
+    </ol>
+  </div>
+
+  <!-- ===== DAY 3 ===== -->
+  <div class="day wrap t3" id="d3">
     <div class="daybanner">
       <svg viewBox="0 0 400 171" role="img" aria-label="樂天樂園的旋轉木馬、摩天輪與雲霄飛車插畫">
         <defs><linearGradient id="d2s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7CB6DA"/><stop offset="100%" stop-color="#F7E6CA"/></linearGradient>
@@ -866,12 +996,12 @@
       </svg>
       <div class="cap">
         <div>
-          <div class="dmeta"><span class="dnum">Day 2</span><span class="ddate">11/10 (二)</span></div>
-          <h2>一整天都在楓之谷樂園</h2>
+          <div class="dmeta"><span class="dnum">Day 3</span><span class="ddate">11/11 (三)</span></div>
+          <h2>樂天世界：一整天都在楓之谷</h2>
         </div>
       </div>
     </div>
-    <p class="daysub">住海雲台讓這天變得很輕鬆——樂天樂園所在的 Osiria 觀光區，從海雲台站搭<b>東海線只有兩站、12 分鐘</b>。今天只有一個目標，所以<b>開園就進場、玩滿一整天</b>。</p>
+    <p class="daysub">全程唯一的主題樂園日。住海雲台讓這天變得很輕鬆——樂天世界所在的 Osiria 觀光區，從海雲台站搭<b>東海線只有兩站、12 分鐘</b>。今天只有一個目標，所以<b>開園就進場、玩滿一整天</b>。</p>
 
     <ol class="tl">
       <li class="tl-item is-move"><div class="tl-time">09:20</div><div class="tl-body"><p class="tl-plain">海雲台站搭 <b>東海線（동해선）往北 → 오시리아站</b>，約 12 分。東海線和地鐵 2 號線是不同系統、同站可轉乘，<b>班距較長（15–30 分），出門前先查發車時間</b>。</p></div></li>
@@ -903,119 +1033,6 @@
         <p class="tl-desc"><b>機張（기장）是松葉蟹的產地</b>，想吃海鮮就在這裡解決；不然坐東海線回海雲台，在市場吃烤肉。</p>
       </div></li>
       <li class="tl-item is-move"><div class="tl-time">21:00</div><div class="tl-body"><p class="tl-plain">東海線回海雲台，<b>12 分鐘就到家</b>——這是住海雲台今天最大的好處。</p></div></li>
-    </ol>
-  </div>
-
-  <!-- ===== DAY 3 ===== -->
-  <div class="day wrap t3" id="d3">
-    <div class="daybanner">
-      <svg viewBox="0 0 400 171" role="img" aria-label="海雲台海岸與天空膠囊列車的插畫">
-        <defs><linearGradient id="d3s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9AD0DE"/><stop offset="100%" stop-color="#F0EBDC"/></linearGradient>
-        <linearGradient id="d3w" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4E9AAC"/><stop offset="100%" stop-color="#1E5467"/></linearGradient></defs>
-        <rect width="400" height="171" fill="url(#d3s)"/>
-        <circle cx="340" cy="34" r="18" fill="#FFF2D0"/>
-        <g stroke="#E9DCC6" stroke-width="1.4" fill="none" opacity=".85" stroke-linecap="round">
-          <path class="bob" d="M90 40 l6 -5 l6 5"/><path class="bob" d="M120 28 l5 -4 l5 4"/>
-        </g>
-        <path d="M0 92 L54 72 L104 92 L150 80 L190 96 L0 96 Z" fill="#88A68A" opacity=".65"/>
-        <rect y="96" width="400" height="48" fill="url(#d3w)"/>
-        <g opacity=".45" stroke="#CFE9EE" fill="none" stroke-width="1.5" stroke-linecap="round">
-          <path class="wv" d="M40 110 h36 M140 122 h30 M250 112 h38 M330 126 h30"/>
-          <path class="wv2" d="M80 134 h40 M200 140 h34 M300 136 h38"/>
-        </g>
-        <!-- pine cliff -->
-        <path d="M0 80 L40 62 L76 88 L76 171 L0 171 Z" fill="#3E5B4A"/>
-        <g fill="#2C4537"><path d="M14 66 l7 -15 l7 15 z"/><path d="M34 58 l6 -13 l6 13 z"/><path d="M54 78 l6 -13 l6 13 z"/></g>
-        <!-- track + capsules -->
-        <rect x="56" y="100" width="344" height="4" fill="#9AA6A0"/>
-        <g fill="#8C9892"><rect x="110" y="104" width="6" height="34"/><rect x="190" y="104" width="6" height="38"/><rect x="270" y="104" width="6" height="42"/><rect x="350" y="104" width="6" height="46"/></g>
-        <g class="ride">
-          <svg x="60" y="74" width="56" height="34" viewBox="0 0 100 60" style="color:#7FD1C4" aria-hidden="true"><use href="#capsule"/></svg>
-          <svg x="130" y="74" width="56" height="34" viewBox="0 0 100 60" style="color:#F09A86" aria-hidden="true"><use href="#capsule"/></svg>
-          <svg x="200" y="74" width="56" height="34" viewBox="0 0 100 60" style="color:#F3CE72" aria-hidden="true"><use href="#capsule"/></svg>
-        </g>
-        <!-- lighthouse + beach -->
-        <g><rect x="372" y="64" width="9" height="32" fill="#F2EDE4"/><rect x="372" y="64" width="9" height="7" fill="#C0402A"/><rect x="370" y="58" width="13" height="7" rx="2" fill="#C0402A"/></g>
-        <path d="M0 144 C90 136 180 152 270 144 C330 138 360 150 400 144 L400 171 L0 171 Z" fill="#D3B98E"/>
-        <g fill="#C0402A"><svg x="300" y="46" width="18" height="18" viewBox="0 0 100 100"><use href="#maple"/></svg></g>
-      </svg>
-      <div class="cap">
-        <div>
-          <div class="dmeta"><span class="dnum">Day 3</span><span class="ddate">11/11 (三)</span></div>
-          <h2>海雲台一日：膠囊列車、T1、夜景</h2>
-        </div>
-      </div>
-    </div>
-    <p class="daysub">今天幾乎不用搭地鐵，全部在步行或一趟計程車的範圍內。因為住在沙灘旁，<b>早上和晚上各賺一段海</b>。</p>
-
-    <ol class="tl">
-      <li class="tl-item is-place"><div class="tl-time">07:30</div><div class="tl-body">
-        <h3 class="tl-name">海灘日出散步 <span class="pin sea">住宿紅利</span></h3>
-        <p class="tl-desc">11 月中海雲台日出約 <b>07:00</b>。沙灘 1.5 公里長、朝東南，<b>太陽直接從海面升起</b>。這個時間沙灘上只有晨跑的當地人和海鷗，下樓就到，別睡掉。</p>
-        <figure class="shot tl-shot wide">
-          <img src="img/haeundae-sunrise.jpg" alt="海雲台海灘日出，太陽貼著海面升起，左側是 Marine City 大樓剪影" loading="lazy" decoding="async">
-          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>往東南邊看</b>：太陽從海平面直接升起，左手邊是 Marine City 的剪影</span></figcaption>
-        </figure>
-      </div></li>
-      <li class="tl-item is-move"><div class="tl-time">09:30</div><div class="tl-body"><p class="tl-plain">飯店 → <b>青沙浦（청사포）</b>，計程車約 10 分、₩5,000 上下。</p></div></li>
-      <li class="tl-item is-key"><div class="tl-time">10:00</div><div class="tl-body">
-        <h3 class="tl-name">天空膠囊列車 <span class="kr">스카이캡슐</span> <span class="pin">務必預約</span></h3>
-        <p class="tl-desc">Blueline Park 的招牌。<b>四人一艙的糖果色小車廂</b>，架高在廢棄的東海南部線舊鐵道上，以接近步行的速度貼著海岸線前進。單程約 2 公里、30 分鐘，<b>全程只有你們這一艙的人跟一整面海</b>。</p>
-        <dl class="meta">
-          <div><dt>方向</dt><dd>建議走 <b>青沙浦 → 尾浦</b>：海景在行進方向右手邊，而且這個方向的票相對好訂</dd></div>
-          <div><dt>預約</dt><dd><b>線上先訂</b>，熱門時段會滿。一艙 4 人同價，人少也是整艙包</dd></div>
-          <div><dt>營運</dt><dd>約 09:30 起跑，冬季末班較早，訂票頁會顯示當日場次</dd></div>
-        </dl>
-        <figure class="shot tl-shot wide">
-          <img src="img/sky-capsule.webp" alt="天空膠囊列車的綠色 45 號與藍色 25 號車廂行駛在海岸高架軌道上" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>認車廂</b>：每台有編號，上車前先對一下票上的號碼</span></figcaption>
-        </figure>
-      </div></li>
-      <li class="tl-item is-place"><div class="tl-time">10:45</div><div class="tl-body">
-        <h3 class="tl-name">海邊列車 <span class="kr">해변열차</span></h3>
-        <p class="tl-desc">和膠囊列車同園區、不同系統的<b>平面觀景列車</b>，沿尾浦—青沙浦—松亭跑，座位全部面海、落地窗。<b>站站可以下車再上車</b>，是今天在海岸線之間移動的主要工具。可與膠囊列車買套票。</p>
-      </div></li>
-      <li class="tl-item is-place"><div class="tl-time">12:30</div><div class="tl-body">
-        <h3 class="tl-name">午餐：海雲台市場 <span class="kr">해운대시장</span></h3>
-        <p class="tl-desc">離海灘幾分鐘的老市場小吃街：豬肉湯飯、現切生魚片、糖餅（호떡）、米腸（순대）、辣炒年糕。<b>站著吃、一攤一樣</b>，比坐下來點一桌有趣。</p>
-        <figure class="shot tl-shot wide">
-          <img src="img/haeundae-market.jpg" alt="海雲台市場的小吃街，兩側掛滿韓文招牌與球形燈飾，人潮穿梭" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>認招牌</b>：紅底白字的「족발」是豬腳、「곰장어」是烤盲鰻，整條都是</span></figcaption>
-        </figure>
-      </div></li>
-      <li class="tl-item is-place"><div class="tl-time">14:00</div><div class="tl-body">
-        <h3 class="tl-name">海雲台海灘 <span class="kr">해운대해수욕장</span></h3>
-        <p class="tl-desc">釜山的門面，<b>1.5 公里白沙</b>。11 月不能下水，但人少、光線斜、沙灘超好拍。買一包蝦味先站在沙灘上，<b>海鷗會整群圍過來</b>——這是海雲台的固定節目。</p>
-      </div></li>
-      <li class="tl-item is-place"><div class="tl-time">15:30</div><div class="tl-body">
-        <h3 class="tl-name">T1 BASE CAMP 釜山店 <span class="kr">T1 베이스 캠프</span> <span class="pin sea">走路就到</span></h3>
-        <p class="tl-desc">韓國電競王朝 T1 的官方品牌基地<b>二號店</b>（一號店在首爾弘大），就開在<b>海雲台 Marisol Hotel 二樓</b>，從沙灘走過去幾分鐘。裡面有頂規電競 PC 區、官方周邊商店、小型電競賽場、拍照亭，還有<b>全韓國第一間 T1 PUB</b>——供應選手的招牌餐點和 T1 聯名飲品。</p>
-        <dl class="meta">
-          <div><dt>位置</dt><dd>海雲台 <b>마리쏠 호텔 2F</b>；Naver Map 搜「T1 베이스 캠프 부산」</dd></div>
-          <div><dt>怎麼玩</dt><dd>開一台機、喝一杯聯名、買周邊、拍照亭留念。粉絲可以待上兩小時</dd></div>
-          <div><dt>先查</dt><dd>遇 LCK 賽季會有<b>觀賽活動或包場</b>，去之前看一下官方 IG 公告</dd></div>
-        </dl>
-        <figure class="shot tl-shot wide">
-          <img src="img/t1-base.jpg" alt="T1 BASE CAMP 釜山店的紅色外牆招牌與夜間街景" loading="lazy" decoding="async" style="object-position:50% 36%">
-          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>找路看這個</b>：紅底白字 BASE CAMP，招牌上方就是 MARY SOL（마리쏠）飯店</span></figcaption>
-        </figure>
-      </div></li>
-      <li class="tl-item is-place"><div class="tl-time">17:00</div><div class="tl-body">
-        <h3 class="tl-name">冬柏島海岸步道 <span class="kr">동백섬</span></h3>
-        <p class="tl-desc">海雲台沙灘<b>西端</b>的小半島，環島木棧步道一圈約 1.2 公里、平路好走。走到南側崖邊，可以把<b>廣安大橋</b>和 Marine City 的玻璃大樓群框進同一張照片。<b>17:20 日落</b>剛好在這裡。</p>
-      </div></li>
-      <li class="tl-item is-key"><div class="tl-time">18:30</div><div class="tl-body">
-        <h3 class="tl-name">The Bay 101 <span class="pin">經典機位</span></h3>
-        <p class="tl-desc">冬柏島旁的遊艇碼頭，釜山夜景明信片的那張就是在這裡拍的：<b>前方廣場的淺水池倒影 ＋ 後方 Marine City 整片亮燈的大樓牆</b>。現場有炸魚薯條和啤酒，大家端著坐在岸邊地上吃。<b>水池要沒風才有倒影</b>，風大就往碼頭邊走。</p>
-        <figure class="shot tl-shot wide">
-          <img src="img/the-bay-101.jpg" alt="The Bay 101 水面倒映整排 Marine City 大樓燈光，欄杆邊坐著一個人" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>蹲低一點拍</b>：相機貼近水面，大樓和倒影才會對稱成一整片</span></figcaption>
-        </figure>
-      </div></li>
-      <li class="tl-item"><div class="tl-time">20:00</div><div class="tl-body">
-        <h3 class="tl-name">晚餐：海雲台烤肉或豬肉湯飯</h3>
-        <p class="tl-desc">海雲台站到沙灘之間整條都是餐廳。吃完<b>走回飯店</b>，今天不必算末班車——這是住海雲台最實在的好處。</p>
-      </div></li>
     </ol>
   </div>
 
@@ -1055,38 +1072,58 @@
         </div>
       </div>
     </div>
-    <p class="daysub">全程最長的移動日，也是美食重頭戲。你要吃的三家和荒嶺山全在<b>廣安里 → 西面</b>這條軸線上。<b>時間支點是 16:40 必須站在荒嶺山展望台</b>，前面延誤就砍沙灘散步。</p>
+    <p class="daysub">唯一離開海雲台的一天。順著 2 號線一路往西：<b>廣安里吃午餐 → 西面逛街拍照 → 荒嶺山看夜景 → 回西面吃豬頸肉</b>。<b>時間支點是 16:40 必須站在荒嶺山展望台</b>，前面延誤就砍廣安里的散步。</p>
 
     <ol class="tl">
-      <li class="tl-item is-move"><div class="tl-time">10:30</div><div class="tl-body"><p class="tl-plain">海雲台站 <b>2 號線</b> → 金蓮山站（금련산）或廣安站（광안），約 20 分。</p></div></li>
-      <li class="tl-item is-place"><div class="tl-time">11:30</div><div class="tl-body">
+      <li class="tl-item is-move"><div class="tl-time">10:30</div><div class="tl-body"><p class="tl-plain">海雲台站搭 <b>2 號線往서면方向</b> → 廣安站（광안），約 20 分。廣安里剛好在海雲台和西面的中間，<b>順路停一站吃午餐不花額外車程</b>。</p></div></li>
+
+      <li class="tl-item is-place"><div class="tl-time">11:15</div><div class="tl-body">
         <h3 class="tl-name">午餐：水邊王豬腳包飯 <span class="kr">수변 왕족발보쌈</span></h3>
         <p class="tl-desc">民樂水邊公園一帶的豬腳店。<b>족발（醬滷豬腳）配 보쌈（白切肉包生菜）</b>是韓國的下酒雙拼：豬腳帶膠質、冷熱都好吃；包飯用生菜＋辣蘿蔔絲＋蝦醬一口捲起來。</p>
         <dl class="meta">
           <div><dt>點法</dt><dd><b>兩人點中份就夠</b>，份量比看起來大很多；豬腳＋包飯雙拼一次吃到兩種</dd></div>
           <div><dt>定位</dt><dd>水邊公園周邊同招牌不只一家，用 Naver Map 搜 <b>「왕족발보쌈 민락」</b> 比對評價再進</dd></div>
+          <div><dt>想續攤</dt><dd>同一區的 <b>水邊最高豬肉湯飯（수변최고돼지국밥）24 小時營業</b>，招牌是豬頸肉湯飯；吃得下就走過去再來一碗</dd></div>
         </dl>
       </div></li>
-      <li class="tl-item is-place"><div class="tl-time">13:00</div><div class="tl-body">
+
+      <li class="tl-item is-place"><div class="tl-time">12:45</div><div class="tl-body">
         <h3 class="tl-name">廣安里海灘與廣安大橋 <span class="kr">광안리해수욕장</span></h3>
-        <p class="tl-desc">海雲台是觀光區，<b>廣安里是釜山人自己的海邊</b>。眼前橫過海面的是 <b>7.4 公里長的廣安大橋</b>，沙灘後面整排是炸雞啤酒（치맥）店和海景咖啡廳。白天先認路，晚上大橋會打燈。</p>
+        <p class="tl-desc">海雲台是觀光區，<b>廣安里是釜山人自己的海邊</b>。眼前橫過海面的是 <b>7.4 公里長的廣安大橋</b>，沙灘後面整排是炸雞啤酒（치맥）店和海景咖啡廳。吃飽了沿沙灘走一段消化，順便把大橋拍進去。</p>
         <figure class="shot tl-shot wide">
-          <img src="img/gwangan-bridge.jpg" alt="夜晚亮著紫粉色燈光的廣安大橋與海面倒影" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>晚上再來一次</b>：大橋入夜打燈，沙灘整排都是坐著喝啤酒的人</span></figcaption>
+          <img src="img/gwangan-bridge.jpg" alt="夜晚亮著紫粉色燈光的廣安大橋與海面倒影" loading="lazy" decoding="async">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>白天先認路</b>：大橋入夜會打燈成這樣，想拍夜景可以改天再來</span></figcaption>
         </figure>
       </div></li>
-      <li class="tl-item is-place"><div class="tl-time">14:30</div><div class="tl-body">
-        <h3 class="tl-name">水邊最高豬肉湯飯 <span class="kr">수변최고돼지국밥 민락본점</span></h3>
-        <p class="tl-desc">釜山的靈魂食物是豬肉湯飯，這家的招牌是<b>豬頸肉湯飯（항정국밥）</b>——用油花細的松阪部位，軟嫩、沒有豬騷味，對不習慣內臟湯頭的人最友善。湯裡自己加蝦醬（새우젓）和韭菜調味才是本地吃法。</p>
+
+      <li class="tl-item is-move"><div class="tl-time">13:50</div><div class="tl-body"><p class="tl-plain">廣安站 <b>2 號線</b> → 西面站（서면），約 15 分。</p></div></li>
+
+      <li class="tl-item is-place"><div class="tl-time">14:10</div><div class="tl-body">
+        <h3 class="tl-name">西面逛街 <span class="kr">서면</span></h3>
+        <p class="tl-desc">西面是<b>釜山最大的商圈</b>，地鐵 1、2 號線在這裡交會。樂天百貨、Judies 太華（쥬디스태화）、西面一號街和整片地下街擠在一起，<b>一個下午走不完</b>。因為你們住海雲台，這是整趟唯一認真逛街的機會。</p>
         <dl class="meta">
-          <div><dt>地址</dt><dd>부산 수영구 광안해변로370번길 9-32</dd></div>
-          <div><dt>營業</dt><dd><b>24 小時、全年無休</b>——所以排在下午當第二攤最保險，任何時段都能補</dd></div>
-          <div><dt>排隊</dt><dd>人多時用 <b>Tabling</b> App 線上抽號</dd></div>
+          <div><dt>怎麼逛</dt><dd><b>地下街</b>（서면지하상가）便宜小物多；<b>樂天百貨</b>有退稅櫃台；<b>西面一號街</b>是年輕品牌與小店</dd></div>
+          <div><dt>省力</dt><dd>下雨或太冷就全程走<b>地下街</b>，可以從西面站直通好幾個街區不用上地面</dd></div>
+        </dl>
+        <figure class="shot tl-shot wide">
+          <img src="img/seomyeon.jpg" alt="西面商圈夜晚的街道，兩側滿是霓虹招牌與車潮" loading="lazy" decoding="async">
+          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>西面的晚上長這樣</b>：招牌疊成一面牆，店開得很晚，吃完飯再回來逛也來得及</span></figcaption>
+        </figure>
+      </div></li>
+
+      <li class="tl-item is-place"><div class="tl-time">15:30</div><div class="tl-body">
+        <h3 class="tl-name">咖啡廳歇腳 ‧ 拍照 <span class="kr">카페</span></h3>
+        <p class="tl-desc">西面的咖啡廳密度是釜山最高的，<b>很多開在二三樓</b>，落地窗正對街口，拍人像剛好有霓虹招牌當背景。走了一上午在這裡坐下來充電，<b>順便把相機和手機充飽</b>——晚上荒嶺山很耗電。</p>
+        <dl class="meta">
+          <div><dt>怎麼挑</dt><dd>Naver Map 搜 <b>「서면 카페」</b>，看照片挑二樓以上、靠窗的</dd></div>
+          <div><dt>拍照點</dt><dd>西面一號街入口、地下街出口的霓虹招牌牆，<b>天黑後最好拍</b></dd></div>
         </dl>
       </div></li>
-      <li class="tl-item is-move"><div class="tl-time">16:00</div><div class="tl-body"><p class="tl-plain">到 <b>金蓮山站 6 號出口</b> 搭計程車上山。<b>目的地一定要說「황령산 전망쉼터」（荒嶺山展望休憩所）</b>——只說「황령산」會被放在登山口，得多走半小時。車資約 <b>₩6,000~7,000</b>。</p></div></li>
+
+      <li class="tl-item is-move"><div class="tl-time">16:05</div><div class="tl-body"><p class="tl-plain">西面搭計程車上山，約 15 分、₩8,000 上下。<b>目的地一定要說「황령산 전망쉼터」（荒嶺山展望休憩所）</b>——只說「황령산」會被放在登山口，得多走半小時。</p></div></li>
+
       <li class="tl-item is-key"><div class="tl-time">16:40</div><div class="tl-body">
-        <h3 class="tl-name">荒嶺山展望台 <span class="kr">황령산 봉수대</span> <span class="pin">今天的時間支點</span></h3>
+        <h3 class="tl-name">荒嶺山展望台看夜景 <span class="kr">황령산 봉수대</span> <span class="pin">今天的時間支點</span></h3>
         <p class="tl-desc"><b>海拔 427 公尺</b>，一座朝鮮時代的烽火台立在釜山正中央的山頂上，<b>360 度無遮蔽</b>：廣安大橋、海雲台、西面市區、釜山港一次看完。這是全市看釜山全景最好的位置，而且<b>24 小時免費開放</b>。</p>
         <dl class="meta">
           <div><dt>為何這時</dt><dd>日落約 <b>17:20</b>。16:40 上去，<b>夕陽和夜景一次收</b>，不必來兩趟</dd></div>
@@ -1099,9 +1136,11 @@
           <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>就是這個畫面</b>：木棧步道往下走，整座釜山在腳下攤開</span></figcaption>
         </figure>
       </div></li>
-      <li class="tl-item is-move"><div class="tl-time">19:00</div><div class="tl-body"><p class="tl-plain">計程車下山往西面，約 15 分。<b>山上有時叫不到車</b>——上山時留司機電話，或請咖啡廳幫忙叫，別打算走下山（山路彎又暗）。</p></div></li>
+
+      <li class="tl-item is-move"><div class="tl-time">19:00</div><div class="tl-body"><p class="tl-plain">計程車下山回西面，約 15 分。<b>山上有時叫不到車</b>——上山時留司機電話，或請咖啡廳幫忙叫，別打算走下山（山路彎又暗）。</p></div></li>
+
       <li class="tl-item is-key"><div class="tl-time">19:30</div><div class="tl-body">
-        <h3 class="tl-name">晚餐：醬烤豬頸肉 <span class="kr">간장 돼지목살</span></h3>
+        <h3 class="tl-name">晚餐：醬烤豬頸肉 <span class="kr">간장 돼지목살</span> <span class="pin">今天的正餐</span></h3>
         <p class="tl-desc">豬頸肉（목살／松阪豬）是整頭豬油花最漂亮的部位，<b>先用醬油基底醃過再上炭火</b>，邊緣焦糖化、裡面還是嫩的。釜山的烤肉店多半<b>全程由店員代烤</b>，你只要負責包生菜。以下三家都在西面站步行範圍內，當天看排隊決定：</p>
         <div class="alt-list">
           <p class="opt"><b>固定點</b> <span class="kr">고정점</span> — 西面站旁的人氣店，醬烤豬肉與烤豬皮，專人代烤後直接端上桌</p>
@@ -1109,18 +1148,17 @@
           <p class="opt"><b>味贊王鹽烤肉 西面店</b> <span class="kr">맛찬들</span> — 主打 <b>3.5 公分厚切</b>五花與松阪豬頸肉，服務人員代烤</p>
         </div>
       </div></li>
+
       <li class="tl-item is-key"><div class="tl-time">21:00</div><div class="tl-body">
-        <h3 class="tl-name">西面逛街 ＋ Olive Young 大採買 <span class="kr">서면</span> <span class="pin">一次買齊</span></h3>
-        <p class="tl-desc">西面是<b>釜山最大的商圈</b>，地鐵 1、2 號線交會，樂天百貨、Judies 太華、西面一號街和地下街擠在一起，店開到很晚。因為你們住海雲台，<b>這是整趟唯一認真逛街的機會</b>，Olive Young 要買的今天買完，不要留到最後一天。</p>
+        <h3 class="tl-name">Olive Young 大採買 <span class="kr">올리브영</span> <span class="pin">最後機會</span></h3>
+        <p class="tl-desc">西面有好幾家分店，<b>多數開到 22:30</b>。刻意排在吃完飯之後——<b>先買就得扛著戰利品上荒嶺山</b>，很不划算。這是整趟最後一次認真採購，明天海雲台的分店規模小很多。</p>
         <dl class="meta">
-          <div><dt>退稅</dt><dd>Olive Young <b>單筆滿 ₩30,000 結帳時出示護照即時退稅</b>，不用在機場排隊</dd></div>
+          <div><dt>退稅</dt><dd><b>單筆滿 ₩30,000</b> 結帳時出示護照即時退稅，不用在機場排隊；想退稅就<b>一次結清</b>，分開結會各自計算</dd></div>
           <div><dt>注意</dt><dd>很多商品貼 <b>1+1 / 2+1</b>，拿滿才划算</dd></div>
+          <div><dt>熱門</dt><dd>Numbuzin、Beauty of Joseon 防曬、Round Lab、VT 蒜片面膜、Medicube、Rom&amp;nd</dd></div>
         </dl>
-        <figure class="shot tl-shot wide">
-          <img src="img/seomyeon.jpg" alt="西面商圈夜晚的街道，兩側是滿滿的霓虹招牌與車潮" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <figcaption><svg class="mp" aria-hidden="true"><use href="#maple"/></svg><span><b>西面的晚上長這樣</b>：招牌直接疊成一面牆，店開得很晚</span></figcaption>
-        </figure>
       </div></li>
+
       <li class="tl-item is-move"><div class="tl-time">22:30</div><div class="tl-body"><p class="tl-plain">西面站 <b>2 號線往장산（長山）方向</b> → 海雲台站，約 35 分。<b>末班車約 23:30 前後</b>（站內看板寫「막차」）；逛過頭就叫車，西面→海雲台計程車約 ₩18,000。</p></div></li>
     </ol>
   </div>
@@ -1387,10 +1425,10 @@
       <h2>出狀況的時候</h2>
     </div>
     <ul class="notes">
-      <li><span class="k w">樂天樂園遇雨</span><span>楓之谷檔期到 <b>11/22</b>，和 Day 3 的海雲台對調即可。真的整天下雨就改去<b>新世界 Centum City</b>（世界最大百貨，2 號線 10 分鐘）＋ SEA LIFE 水族館。</span></li>
+      <li><span class="k w">樂天樂園遇雨</span><span>楓之谷檔期到 <b>11/22</b>，和 Day 2 的海雲台對調即可。真的整天下雨就改去<b>新世界 Centum City</b>（世界最大百貨，2 號線 10 分鐘）＋ SEA LIFE 水族館。</span></li>
       <li><span class="k w">膠囊列車訂不到</span><span>改搭<b>海邊列車全程</b>（尾浦 ↔ 松亭），風景一樣、票價低很多，而且能站站下車。</span></li>
       <li><span class="k w">荒嶺山濃霧或下雨</span><span>改去 <b>釜山 X the SKY</b>——海雲台 LCT 大樓 100 樓的室內展望台，<b>走路就到、不受天氣影響</b>，住海雲台的最佳替代；或鬧區的 Diamond Tower。</span></li>
-      <li><span class="k">想加老城區</span><span>甘川洞文化村、札嘎其市場、BIFF 廣場、影島絕影海岸散步路。Day 4 已經很滿，比較適合取代 Day 2 的 Outlet 時段。</span></li>
+      <li><span class="k">想加老城區</span><span>甘川洞文化村、札嘎其市場、BIFF 廣場、影島絕影海岸散步路。Day 4 已經很滿，比較適合取代 Day 3 的 Outlet 時段。</span></li>
       <li><span class="k">天氣太冷</span><span>海雲台一帶本來就是溫泉區，Club D Oasis 這類水療設施可以泡掉一個下午。</span></li>
       <li><span class="k">還沒確認的</span><span><b>水邊王豬腳包飯</b>的正式店名（民樂一帶同招牌多家，用 Naver Map 比對評價）、<b>醬烤豬頸肉</b>是否指特定某家店（目前列西面三家候選）。</span></li>
     </ul>
