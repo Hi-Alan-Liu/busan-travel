@@ -1,3 +1,17 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="2026/11/09–11/13 釜山五天四夜行程：以海雲台海灘為基地，含天空膠囊列車、BUSAN X the SKY、斜坡滑車、樂天世界楓之谷季、荒嶺山夜景與每日路線。">
+<meta name="theme-color" content="#DC4722">
+<link rel="icon" href="img/maple-leaf.png" type="image/png">
+<link rel="apple-touch-icon" href="img/maple-leaf.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="釜山海雲台五日">
+<meta property="og:description" content="2026/11/09–11/13 ‧ 以海雲台海灘為基地的五天四夜，逐日路線、交通時間與店家資訊。">
+<meta property="og:url" content="https://hi-alan-liu.github.io/busan-travel/">
+<meta property="og:image" content="https://hi-alan-liu.github.io/busan-travel/img/haeundae-beach.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <title>釜山海雲台五日</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -1389,7 +1403,7 @@
           <li><label class="crow" for="c7"><input type="checkbox" id="c7" data-check="airporttaxi"><span class="ct">想好 11/09 落地的機場交通<small>21:30 出關，巴士末班已過；對角線到海雲台，建議直接計程車</small></span></label></li>
           <li><label class="crow" for="c8"><input type="checkbox" id="c8" data-check="hwangryeong"><span class="ct">荒嶺山的下山方案<small>山上訊號與車源不穩，先想好 Plan B</small></span></label></li>
         </ul>
-        <p class="synced" id="syncnote">本機記錄</p>
+        <p class="synced" id="syncnote">勾選記在這台裝置上</p>
       </div>
 
       <div>
@@ -1610,7 +1624,7 @@
       docRef.set({ items: state, updatedAt: Date.now() })['catch'](function(err){
         if (err && (err.code === 'invalid_argument' || err.code === 'revoked')) {
           docRef = null;
-          if (noteEl) noteEl.textContent = '本機記錄';
+          if (noteEl) noteEl.textContent = '勾選記在這台裝置上';
         }
       });
     }
@@ -1636,10 +1650,10 @@
           try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {}
           paint();
         }
-        if (noteEl) noteEl.textContent = '已同步 ‧ 兩人共用同一份';
+        if (noteEl) noteEl.textContent = '已同步 ‧ 大家看到同一份';
       }, function(){
         docRef = null;
-        if (noteEl) noteEl.textContent = '本機記錄';
+        if (noteEl) noteEl.textContent = '勾選記在這台裝置上';
       });
     })['catch'](function(){});
   }
