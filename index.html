@@ -13,10 +13,30 @@
 <meta property="og:image" content="https://hi-alan-liu.github.io/busan-travel/img/haeundae-beach.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <title>釜山海雲台五日</title>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<meta name="color-scheme" content="light dark">
+<link rel="preload" as="image" href="img/haeundae-beach.jpg" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="fonts/busan-sans.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/busan-serif.woff2" crossorigin>
 <style>
+  /* Self-hosted variable subsets, cut to the characters this page actually shows
+     (see tools/build-fonts.py). Google's full CJK webfonts cost ~3 MB over ~46
+     requests; these three are ~450 KB over 3, same origin, and they still arrive
+     on a bad hotel connection. */
+  @font-face{
+    font-family:"Noto Sans TC"; font-style:normal; font-weight:400 700;
+    font-display:swap; src:url("fonts/busan-sans.woff2") format("woff2");
+  }
+  @font-face{
+    font-family:"Noto Serif TC"; font-style:normal; font-weight:700 900;
+    font-display:swap; src:url("fonts/busan-serif.woff2") format("woff2");
+  }
+  @font-face{
+    font-family:"JetBrains Mono"; font-style:normal; font-weight:400 600;
+    font-display:swap; src:url("fonts/busan-mono.woff2") format("woff2");
+  }
+
   :root{
+    color-scheme:light;
     --ground:#F3F1EC; --surface:#FFFFFF; --surface-2:#F8F6F1; --band:#FDEEDC;
     --ink:#14222B; --ink-2:#4A6069; --ink-3:#7E9099;
     --line:#DFD9CF; --line-strong:#C2B9AC;
@@ -29,13 +49,14 @@
     --d5:#D99A2B; --d5b:#FBEBCE;
     --shadow:0 1px 2px rgba(17,34,45,.05), 0 8px 24px -12px rgba(17,34,45,.18);
     --shadow-lift:0 2px 4px rgba(17,34,45,.06), 0 18px 40px -16px rgba(17,34,45,.26);
-    --serif:"Noto Serif TC",Georgia,serif;
+    --serif:"Noto Serif TC","Songti TC","Source Han Serif TC","Noto Serif CJK TC",Georgia,serif;
     --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
     --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
     --wrap:72rem;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
+      color-scheme:dark;
       --ground:#0B151C; --surface:#11212B; --surface-2:#162A35; --band:#241A12;
       --ink:#E3ECEA; --ink-2:#A2B5BB; --ink-3:#798E96;
       --line:#2A3A42; --line-strong:#3D5563;
@@ -51,6 +72,7 @@
     }
   }
   :root[data-theme="dark"]{
+    color-scheme:dark;
     --ground:#0B151C; --surface:#11212B; --surface-2:#162A35; --band:#241A12;
     --ink:#E3ECEA; --ink-2:#A2B5BB; --ink-3:#798E96;
     --line:#2A3A42; --line-strong:#3D5563;
@@ -71,7 +93,8 @@
     margin:0; background:var(--ground); color:var(--ink);
     font-family:var(--sans); font-size:16px; line-height:1.74; letter-spacing:.01em;
   }
-  .wrap{width:100%; max-width:var(--wrap); margin:0 auto; padding-inline:20px}
+  .wrap{width:100%; max-width:var(--wrap); margin:0 auto;
+    padding-inline:calc(20px + env(safe-area-inset-left,0px)) calc(20px + env(safe-area-inset-right,0px))}
   h1,h2,h3,h4{font-family:var(--serif); font-weight:700; text-wrap:balance; margin:0; line-height:1.3}
   p{margin:0}
   a{color:var(--sea); text-underline-offset:3px}
@@ -97,18 +120,32 @@
   .topnav{display:flex; gap:.05rem; overflow-x:auto; scrollbar-width:none; margin-left:auto}
   .topnav::-webkit-scrollbar{display:none}
   .topnav a{
-    flex:0 0 auto; text-decoration:none; color:var(--ink-2); white-space:nowrap;
+    flex:0 0 auto; display:flex; align-items:center; min-height:44px;
+    text-decoration:none; color:var(--ink-2); white-space:nowrap;
     font-size:.84rem; font-weight:500; padding:.5rem .6rem; border-radius:3px;
     transition:color .18s ease, background .18s ease;
+  }
+  /* on narrow screens the nav scrolls sideways — fade the edges so that reads as "there is more" */
+  @media (max-width:880px){
+    .topnav{
+      -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 20px),transparent 100%);
+      mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 20px),transparent 100%);
+    }
   }
   .topnav a:hover{color:var(--ink); background:var(--surface-2)}
   .topnav a[aria-current="true"]{color:var(--maple); font-weight:700}
   .topnav a .zh{margin-left:.32em; font-weight:400; opacity:.82}
   @media (max-width:620px){ .topnav a .zh{display:none} }
   @media (max-width:760px){
-    .topbar .wrap{gap:.6rem; padding-inline:14px}
+    .topbar .wrap{gap:.6rem;
+      padding-inline:calc(14px + env(safe-area-inset-left,0px)) calc(14px + env(safe-area-inset-right,0px))}
     .brand .bs{display:none}
     .topnav a{font-size:.8rem; padding:.5rem .45rem}
+  }
+  /* on a phone the title eats the nav — keep the leaf as the home button, drop the words */
+  @media (max-width:520px){
+    .brand .bt{display:none}
+    .brand{margin-right:.2rem}
   }
 
   /* ===== hero ===== */
@@ -155,6 +192,9 @@
   /* falling leaves */
   .leaves{position:absolute; inset:0; z-index:2; overflow:hidden; pointer-events:none}
   .leaf{position:absolute; top:0; left:var(--x); width:calc(24px * var(--s)); height:calc(24px * var(--s)); color:var(--c)}
+  /* leaves only animate while their section is on screen (set by JS) */
+  .leaves.is-idle .leaf, .leaves.is-idle .leaf .pleaf{animation-play-state:paused}
+  @media (max-width:640px){ .leaf:nth-child(n+9){display:none} }
 
   /* ===== section shell ===== */
   .sec{padding-block:clamp(2.6rem,6vw,4.2rem); scroll-margin-top:3.6rem}
@@ -208,7 +248,7 @@
     background:linear-gradient(180deg, rgba(10,22,30,0) 0%, rgba(10,22,30,.82) 70%);
     color:#fff; display:flex; align-items:flex-end; justify-content:space-between; gap:1rem; flex-wrap:wrap;
   }
-  .daybanner .cap h2{font-size:clamp(1.25rem,4vw,2rem); color:#fff; letter-spacing:.02em}
+  .daybanner .cap h3{font-size:clamp(1.25rem,4vw,2rem); color:#fff; letter-spacing:.02em}
   .daybanner .cap .dmeta{display:flex; align-items:center; gap:.55rem; margin-bottom:.3rem}
   .daybanner .cap .dnum{
     font-family:var(--mono); font-size:.64rem; font-weight:600; letter-spacing:.18em;
@@ -267,7 +307,7 @@
   .alt-list .opt{font-size:.9rem; color:var(--ink-2); position:relative; padding-left:1.5rem}
   .alt-list .opt::before{
     content:""; position:absolute; left:0; top:.4em; width:.95rem; height:.95rem;
-    background:url("img/maple-leaf.png") center/contain no-repeat; opacity:.9;
+    background:url("img/maple-leaf-sm.png") center/contain no-repeat; opacity:.9;
   }
   .alt-list .opt b{color:var(--ink); font-weight:500}
   .alt-list .opt .kr{font-family:var(--mono); font-size:.72rem; color:var(--ink-3)}
@@ -364,7 +404,7 @@
   .shop li{margin:.15rem 0}
 
   footer{border-top:1px solid var(--line); background:var(--surface)}
-  footer .wrap{padding-block:2rem; display:flex; flex-wrap:wrap; gap:.8rem 1.5rem; justify-content:space-between; align-items:center}
+  footer .wrap{padding-block:2rem calc(2rem + env(safe-area-inset-bottom,0px)); display:flex; flex-wrap:wrap; gap:.8rem 1.5rem; justify-content:space-between; align-items:center}
   footer .fl{display:flex; align-items:center; gap:.6rem; color:var(--maple)}
   footer p{font-size:.82rem; color:var(--ink-3); max-width:42em}
   footer .mono{font-family:var(--mono); font-size:.7rem; letter-spacing:.12em; color:var(--ink-3)}
@@ -380,7 +420,7 @@
   .leaf .pleaf{width:100%; height:100%; opacity:.92; filter:var(--f,none)}
 
   /* big faded leaf watermark behind section headings */
-  .sec{position:relative; overflow:hidden}
+  .sec{position:relative; overflow:clip}
   .wm{
     position:absolute; pointer-events:none; opacity:.07; z-index:0;
     width:clamp(9rem,22vw,17rem); transform:rotate(-16deg);
@@ -448,9 +488,9 @@
 
   /* ===== scroll progress ===== */
   .progress{
-    position:absolute; left:0; bottom:-1px; height:2px; width:0;
+    position:absolute; left:0; bottom:-1px; height:2px; width:100%;
     background:linear-gradient(90deg, var(--maple), var(--maple-2), var(--amber));
-    z-index:2; transition:width .12s linear;
+    z-index:2; transform:scaleX(0); transform-origin:0 50%; will-change:transform;
   }
 
   /* ===== maple divider ===== */
@@ -463,7 +503,8 @@
 
   /* ===== back to top ===== */
   .totop{
-    position:fixed; right:1rem; bottom:1rem; z-index:50;
+    position:fixed; z-index:50;
+    right:calc(1rem + env(safe-area-inset-right,0px)); bottom:calc(1rem + env(safe-area-inset-bottom,0px));
     width:2.9rem; height:2.9rem; border-radius:50%; border:1px solid var(--line);
     background:var(--surface); color:var(--maple); box-shadow:var(--shadow-lift);
     display:grid; place-items:center; cursor:pointer; padding:0;
@@ -530,7 +571,105 @@
     .wv2{animation:drift 9.5s ease-in-out infinite reverse}
     .bob{animation:bob 4s ease-in-out infinite; transform-box:view-box}
   }
+  /* ===== skip link ===== */
+  .skip{
+    position:absolute; left:50%; top:0; z-index:60; transform:translate(-50%,-130%);
+    background:var(--maple); color:#fff; font-size:.85rem; font-weight:700;
+    padding:.65rem 1.15rem; border-radius:0 0 4px 4px; text-decoration:none;
+    transition:transform .2s ease;
+  }
+  .skip:focus{transform:translate(-50%,0)}
+  main:focus{outline:none}
+
+  /* ===== theme toggle (auto / light / dark) ===== */
+  .themebtn{
+    flex:0 0 auto; display:grid; place-items:center; width:2.4rem; height:2.4rem;
+    margin-left:.3rem; padding:0; cursor:pointer;
+    border:1px solid var(--line); border-radius:4px;
+    background:var(--surface-2); color:var(--ink-2);
+    transition:color .18s ease, border-color .18s ease;
+  }
+  @media (hover:hover){ .themebtn:hover{color:var(--maple); border-color:var(--line-strong)} }
+  .themebtn svg{
+    width:1.08rem; height:1.08rem; display:none;
+    fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;
+  }
+  :root:not([data-theme]) .themebtn .i-auto{display:block}
+  :root[data-theme="light"] .themebtn .i-light{display:block}
+  :root[data-theme="dark"] .themebtn .i-dark{display:block}
+
+  /* ===== one-tap Naver Map link on each place ===== */
+  .maplink{
+    flex:0 0 auto; display:inline-flex; align-items:center; gap:.28rem;
+    font-family:var(--mono); font-size:.61rem; font-weight:600; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--sea); text-decoration:none;
+    border:1px solid var(--sea); border-radius:2px; padding:.14rem .42rem;
+    transition:background .18s ease, color .18s ease;
+  }
+  .maplink svg{width:.7rem; height:.7rem; fill:currentColor; stroke:none; flex:0 0 auto}
+  @media (hover:hover){ .maplink:hover{background:var(--sea); color:var(--surface)} }
+
+  /* ===== "today" marker — only lights up during the trip ===== */
+  .todaytag{
+    display:none; font-family:var(--mono); font-size:.58rem; font-weight:600; letter-spacing:.16em;
+    background:var(--maple); color:#fff; padding:.2rem .42rem; border-radius:2px;
+  }
+  .day.is-today .todaytag{display:inline-block}
+  .topnav a.is-today{color:var(--maple); font-weight:700}
+  .topnav a.is-today::after{
+    content:""; width:5px; height:5px; border-radius:50%; background:var(--maple);
+    margin-left:.32em; flex:0 0 auto;
+  }
+
+  /* ===== the transport table scrolls sideways on phones — say so ===== */
+  .scrollhint{
+    display:none; align-items:center; gap:.4rem; margin-top:.6rem;
+    font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; color:var(--ink-3);
+  }
+  @media (max-width:720px){ .scrollhint{display:flex} }
+
+  /* ===== print: a carry-in-your-pocket itinerary, one day per page ===== */
+  @media print{
+    @page{margin:14mm}
+    :root, :root[data-theme="dark"], :root[data-theme="light"]{
+      color-scheme:light;
+      --ground:#fff; --surface:#fff; --surface-2:#fff; --band:#fff;
+      --ink:#000; --ink-2:#2b2b2b; --ink-3:#555;
+      --line:#bbb; --line-strong:#888;
+      --maple:#000; --sea:#000; --maple-soft:#eee; --sea-soft:#eee;
+      --shadow:none; --shadow-lift:none;
+    }
+    body{font-size:10.5pt; line-height:1.6; background:#fff}
+    .topbar,.totop,.leaves,.wm,.mdiv,.skip,.progress,.maplink,
+    .hero-ill,.hero-shade,.leafbadge,.shot,.tl-shot,
+    .card .thumb,.food .fthumb,.daybanner>svg{display:none !important}
+    .hero{min-height:0; background:#fff; border-bottom:1px solid #bbb}
+    .hero .inner{color:#000; max-width:none}
+    .hero h1{color:#000; text-shadow:none}
+    .hero .lede, .hero .lede b{color:#000}
+    .hero .eyebrow, .hero .leafline span{color:#444}
+    .heroband{background:none; border:1px solid #bbb; backdrop-filter:none; margin-top:1rem}
+    .heroband dt{color:#555} .heroband dd{color:#000}
+    .heroband div+div{border-left:1px solid #ddd}
+    .daybanner{aspect-ratio:auto; border:none; box-shadow:none; margin-bottom:.5rem}
+    .daybanner .cap{position:static; padding:0; background:none; color:#000}
+    .daybanner .cap h3{color:#000}
+    .daybanner .cap .ddate{color:#444}
+    .daybanner .cap .dnum{background:#000; color:#fff}
+    .day+.day{break-before:page; border-top:none}
+    .day{padding-block:0 1rem}
+    .sec{padding-block:1.2rem}
+    .tl-item,.card,.food,.checks li,.notes li,.shop section{break-inside:avoid}
+    .tablewrap{overflow:visible; box-shadow:none}
+    table{min-width:0}
+    a{color:#000; text-decoration:none}
+    .rv,.rv-pre{opacity:1 !important; transform:none !important}
+  }
 </style>
+
+<script>/* set the saved theme before first paint so there is no flash */
+try{var m=localStorage.getItem('busan-theme');if(m==='light'||m==='dark')document.documentElement.setAttribute('data-theme',m);}catch(e){}
+</script>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="mushroom" viewBox="0 0 100 100">
@@ -558,16 +697,18 @@
   </symbol>
 </svg>
 
+<a class="skip" href="#main">跳到主要內容</a>
+
 <div class="topbar">
   <div class="wrap">
     <a class="brand" href="#top">
-      <img class="mark-img" src="img/maple-leaf.png" alt="" aria-hidden="true">
+      <img class="mark-img" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
       <span>
         <span class="bt">釜山海雲台五日</span>
         <span class="bs">Busan ‧ Autumn 2026</span>
       </span>
     </a>
-    <nav class="topnav" aria-label="網站導覽">
+    <nav class="topnav" id="topnav" aria-label="網站導覽">
       <a href="#highlights">行程亮點</a>
       <a href="#d1">D1<span class="zh">抵達</span></a>
       <a href="#d2">D2<span class="zh">海雲台</span></a>
@@ -577,40 +718,48 @@
       <a href="#food">美食</a>
       <a href="#book">預約</a>
       <a href="#move">交通</a>
+      <a href="#plan-b">備案</a>
     </nav>
+    <button class="themebtn" id="themebtn" type="button" aria-label="切換配色">
+      <svg class="i-auto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.2"/><path d="M12 3.8a8.2 8.2 0 0 1 0 16.4Z" fill="currentColor" stroke="none"/></svg>
+      <svg class="i-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.1M12 19.3v2.1M4.3 4.3l1.5 1.5M18.2 18.2l1.5 1.5M2.6 12h2.1M19.3 12h2.1M4.3 19.7l1.5-1.5M18.2 5.8l1.5-1.5"/></svg>
+      <svg class="i-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.4A8.3 8.3 0 0 1 9.6 3.8a8.5 8.5 0 1 0 10.6 10.6Z"/></svg>
+    </button>
   </div>
   <div class="progress" id="progress" aria-hidden="true"></div>
 </div>
 
 <!-- ============================ HERO ============================ -->
+<main id="main" tabindex="-1">
+
 <header class="hero" id="top">
   <div class="hero-ill" aria-hidden="true">
     <img src="img/haeundae-beach.jpg" alt="">
   </div>
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="leaves" aria-hidden="true">
-    <span class="leaf" style="--x:5%;  --d:13s;   --delay:0s;   --s:1.0; --c:#C8502C; --f:hue-rotate(-10deg) saturate(1.2)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:17%; --d:17s;   --delay:2.4s; --s:.65; --c:#D98B32; --f:hue-rotate(18deg) brightness(1.1)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:29%; --d:11.5s; --delay:5.1s; --s:1.3; --c:#B33E22; --f:hue-rotate(-18deg) saturate(1.35) brightness(.92)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:41%; --d:19s;   --delay:1.2s; --s:.8;  --c:#E0A541; --f:hue-rotate(26deg) saturate(.9) brightness(1.18)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:54%; --d:14.5s; --delay:7.3s; --s:1.1; --c:#C8502C; --f:hue-rotate(-10deg) saturate(1.2)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:66%; --d:16s;   --delay:3.6s; --s:.7;  --c:#D98B32; --f:hue-rotate(18deg) brightness(1.1)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:78%; --d:12.5s; --delay:8.8s; --s:1.2; --c:#9E3A24; --f:hue-rotate(-20deg) saturate(1.4) brightness(.85)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:88%; --d:18s;   --delay:4.9s; --s:.85; --c:#E0A541; --f:hue-rotate(26deg) saturate(.9) brightness(1.18)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:96%; --d:15s;   --delay:10.4s;--s:.6;  --c:#C8502C; --f:hue-rotate(-10deg) saturate(1.2)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:11%; --d:21s;   --delay:6.2s; --s:1.45;--c:#A8351F; --f:hue-rotate(-22deg) saturate(1.45) brightness(.82)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:23%; --d:10s;   --delay:12.1s;--s:.5;  --c:#E8B45A; --f:hue-rotate(30deg) saturate(.85) brightness(1.24)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:35%; --d:16.5s; --delay:9.4s; --s:.95; --c:#D06038; --f:hue-rotate(-4deg) saturate(1.1)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:47%; --d:13.5s; --delay:14s;  --s:.72; --c:#C8502C; --f:hue-rotate(-10deg) saturate(1.2)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:60%; --d:20s;   --delay:11.6s;--s:1.35;--c:#D98B32; --f:hue-rotate(18deg) brightness(1.1)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:72%; --d:11s;   --delay:6.8s; --s:.55; --c:#E0A541; --f:hue-rotate(26deg) saturate(.9) brightness(1.18)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:84%; --d:17.5s; --delay:13.2s;--s:1.05;--c:#B33E22; --f:hue-rotate(-18deg) saturate(1.35) brightness(.92)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:5%;  --d:13s;   --delay:0s;   --s:1.0; --c:#C8502C; --f:hue-rotate(-10deg) saturate(1.2)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:17%; --d:17s;   --delay:2.4s; --s:.65; --c:#D98B32; --f:hue-rotate(18deg) brightness(1.1)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:29%; --d:11.5s; --delay:5.1s; --s:1.3; --c:#B33E22; --f:hue-rotate(-18deg) saturate(1.35) brightness(.92)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:41%; --d:19s;   --delay:1.2s; --s:.8;  --c:#E0A541; --f:hue-rotate(26deg) saturate(.9) brightness(1.18)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:54%; --d:14.5s; --delay:7.3s; --s:1.1; --c:#C8502C; --f:hue-rotate(-10deg) saturate(1.2)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:66%; --d:16s;   --delay:3.6s; --s:.7;  --c:#D98B32; --f:hue-rotate(18deg) brightness(1.1)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:78%; --d:12.5s; --delay:8.8s; --s:1.2; --c:#9E3A24; --f:hue-rotate(-20deg) saturate(1.4) brightness(.85)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:88%; --d:18s;   --delay:4.9s; --s:.85; --c:#E0A541; --f:hue-rotate(26deg) saturate(.9) brightness(1.18)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:96%; --d:15s;   --delay:10.4s;--s:.6;  --c:#C8502C; --f:hue-rotate(-10deg) saturate(1.2)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:11%; --d:21s;   --delay:6.2s; --s:1.45;--c:#A8351F; --f:hue-rotate(-22deg) saturate(1.45) brightness(.82)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:23%; --d:10s;   --delay:12.1s;--s:.5;  --c:#E8B45A; --f:hue-rotate(30deg) saturate(.85) brightness(1.24)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:35%; --d:16.5s; --delay:9.4s; --s:.95; --c:#D06038; --f:hue-rotate(-4deg) saturate(1.1)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:47%; --d:13.5s; --delay:14s;  --s:.72; --c:#C8502C; --f:hue-rotate(-10deg) saturate(1.2)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:60%; --d:20s;   --delay:11.6s;--s:1.35;--c:#D98B32; --f:hue-rotate(18deg) brightness(1.1)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:72%; --d:11s;   --delay:6.8s; --s:.55; --c:#E0A541; --f:hue-rotate(26deg) saturate(.9) brightness(1.18)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:84%; --d:17.5s; --delay:13.2s;--s:1.05;--c:#B33E22; --f:hue-rotate(-18deg) saturate(1.35) brightness(.92)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
   </div>
 
   <div class="wrap">
     <div class="inner">
       <p class="leafline">
-        <img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true">
+        <img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         <span>2026 楓葉季 ‧ 五天四夜</span>
       </p>
       <h1>釜山海雲台五日</h1>
@@ -629,15 +778,15 @@
 <section class="sec maple-feat" id="highlights">
   <img class="wm r" src="img/maple-leaf.png" alt="" aria-hidden="true">
   <div class="leaves" aria-hidden="true">
-    <span class="leaf" style="--x:7%; --d:23s; --delay:0s; --s:.6; --c:#C0402A; --f:none"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:26%; --d:19s; --delay:5s; --s:.45; --c:#D98B32; --f:hue-rotate(18deg) brightness(1.1)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:48%; --d:26s; --delay:9s; --s:.75; --c:#B33E22; --f:hue-rotate(-18deg) saturate(1.35) brightness(.92)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:69%; --d:21s; --delay:14s; --s:.5; --c:#E0A541; --f:hue-rotate(26deg) saturate(.9) brightness(1.18)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:88%; --d:17s; --delay:3s; --s:.65; --c:#C8502C; --f:hue-rotate(-10deg) saturate(1.2)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:7%; --d:23s; --delay:0s; --s:.6; --c:#C0402A; --f:none"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:26%; --d:19s; --delay:5s; --s:.45; --c:#D98B32; --f:hue-rotate(18deg) brightness(1.1)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:48%; --d:26s; --delay:9s; --s:.75; --c:#B33E22; --f:hue-rotate(-18deg) saturate(1.35) brightness(.92)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:69%; --d:21s; --delay:14s; --s:.5; --c:#E0A541; --f:hue-rotate(26deg) saturate(.9) brightness(1.18)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:88%; --d:17s; --delay:3s; --s:.65; --c:#C8502C; --f:hue-rotate(-10deg) saturate(1.2)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
   </div>
   <div class="wrap">
     <div class="sechead">
-      <p class="kicker"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span>Highlights</span></p>
+      <p class="kicker"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span>Highlights</span></p>
       <h2>這趟的六個重點</h2>
       <p>從沙灘走得到的電競基地，到海拔 427 公尺的全景夜色——六個你清單上的願望，已經排進對應的日子裡。</p>
     </div>
@@ -647,7 +796,7 @@
       <article class="card t2">
         <div class="thumb">
           <img src="img/sky-capsule.webp" alt="天空膠囊列車的綠色與藍色車廂行駛在海岸高架軌道上" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 2 ‧ 上午</span>
@@ -660,7 +809,7 @@
       <article class="card t3">
         <div class="thumb">
           <img src="img/lotte-maple.jpg" alt="樂天樂園楓之谷聯名主視覺" loading="lazy" decoding="async" style="object-position:50% 56%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 3 ‧ 全天</span>
@@ -673,7 +822,7 @@
       <article class="card t4">
         <div class="thumb">
           <img src="img/hwangnyeongsan.jpg" alt="從荒嶺山木棧步道俯瞰釜山市區夜景" loading="lazy" decoding="async" style="object-position:50% 32%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 4 ‧ 傍晚</span>
@@ -686,7 +835,7 @@
       <article class="card t2">
         <div class="thumb">
           <img src="img/haeundae-sunrise.jpg" alt="海雲台海灘日出，太陽貼著海面升起，左側是 Marine City 大樓剪影" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 2 ‧ 清晨</span>
@@ -699,7 +848,7 @@
       <article class="card t2">
         <div class="thumb">
           <img src="img/t1-base.jpg" alt="T1 BASE CAMP 釜山店紅色招牌的夜間街景" loading="lazy" decoding="async" style="object-position:50% 38%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 2 ‧ 下午</span>
@@ -712,7 +861,7 @@
       <article class="card t4">
         <div class="thumb">
           <img src="img/gwangan-bridge.jpg" alt="夜晚亮燈的廣安大橋與海面倒影" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 4 ‧ 深夜</span>
@@ -723,7 +872,7 @@
       <article class="card t2">
         <div class="thumb">
           <img src="img/the-bay-101.jpg" alt="The Bay 101 水面倒映整排 Marine City 大樓燈光" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 2 ‧ 傍晚</span>
@@ -734,7 +883,7 @@
       <article class="card t2">
         <div class="thumb">
           <img src="img/haeundae-market.jpg" alt="海雲台市場小吃街，兩側掛滿韓文招牌與球形燈飾" loading="lazy" decoding="async" style="object-position:50% 45%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 2 ‧ 中午</span>
@@ -745,7 +894,7 @@
       <article class="card t4">
         <div class="thumb">
           <img src="img/seomyeon.jpg" alt="西面商圈夜晚的街道，兩側滿是霓虹招牌與車潮" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 4 ‧ 下午</span>
@@ -756,7 +905,7 @@
       <article class="card t2">
         <div class="thumb">
           <img src="img/x-the-sky.jpg" alt="從 X the Sky 俯瞰海雲台海灘與市區，以及館內的玻璃樓梯" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 2 ‧ 上午</span>
@@ -767,7 +916,7 @@
       <article class="card t3">
         <div class="thumb">
           <img src="img/skyline-luge.webp" alt="三位遊客駕駛斜坡滑車通過黃黑護欄的彎道" loading="lazy" decoding="async" style="object-position:50% 55%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 3 ‧ 上午</span>
@@ -778,7 +927,7 @@
       <article class="card t4">
         <div class="thumb">
           <img src="img/pork-neck.jpg" alt="店員在烤盤旁備好的生豬頸肉與沾醬" loading="lazy" decoding="async" style="object-position:50% 45%">
-          <img class="pleaf leafbadge" src="img/maple-leaf.png" alt="" aria-hidden="true">
+          <img class="pleaf leafbadge" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
         </div>
         <div class="cbody">
           <span class="ctag">Day 4 ‧ 晚上</span>
@@ -790,26 +939,26 @@
   </div>
 </section>
 
-<div class="mdiv wrap" aria-hidden="true"><i></i><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><i></i></div>
+<div class="mdiv wrap" aria-hidden="true"><i></i><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><i></i></div>
 
 <!-- ============================ DAYS ============================ -->
 <section class="sec alt maple-feat">
   <div class="leaves" aria-hidden="true">
-    <span class="leaf" style="--x:4%; --d:30s; --delay:0s; --s:.5; --c:#DC4722; --f:hue-rotate(-8deg) saturate(1.25)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:31%; --d:26s; --delay:11s; --s:.62; --c:#F2922E; --f:hue-rotate(20deg) brightness(1.12)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:58%; --d:34s; --delay:5s; --s:.45; --c:#EFB942; --f:hue-rotate(28deg) saturate(.88) brightness(1.2)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:83%; --d:28s; --delay:17s; --s:.7; --c:#DC4722; --f:hue-rotate(-8deg) saturate(1.25)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:4%; --d:30s; --delay:0s; --s:.5; --c:#DC4722; --f:hue-rotate(-8deg) saturate(1.25)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:31%; --d:26s; --delay:11s; --s:.62; --c:#F2922E; --f:hue-rotate(20deg) brightness(1.12)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:58%; --d:34s; --delay:5s; --s:.45; --c:#EFB942; --f:hue-rotate(28deg) saturate(.88) brightness(1.2)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:83%; --d:28s; --delay:17s; --s:.7; --c:#DC4722; --f:hue-rotate(-8deg) saturate(1.25)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
   </div>
   <div class="wrap">
     <div class="sechead">
-      <p class="kicker"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span>Itinerary</span></p>
+      <p class="kicker"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span>Itinerary</span></p>
       <h2>五天的逐時安排</h2>
       <p>住海雲台的通則：<b>往東（東釜山）很近，往西（西面、機場）要算時間</b>。整份行程都照這個前提排。</p>
     </div>
   </div>
 
   <!-- ===== DAY 1 ===== -->
-  <div class="day wrap t1" id="d1">
+  <section class="day wrap t1" id="d1" aria-labelledby="d1h" data-date="2026-11-09">
     <div class="daybanner">
       <svg viewBox="0 0 400 171" role="img" aria-label="夜晚抵達海雲台海灘的插畫">
         <defs><linearGradient id="d1s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0D1826"/><stop offset="100%" stop-color="#2A3A4C"/></linearGradient>
@@ -834,12 +983,12 @@
         <rect y="106" width="400" height="36" fill="url(#d1w)"/>
         <g opacity=".4" stroke="#CFE3E8" fill="none" stroke-width="1.3" stroke-linecap="round"><path class="wv" d="M40 116 h36 M150 124 h30 M280 118 h34"/></g>
         <path d="M0 142 C90 134 180 150 270 142 C330 136 360 148 400 142 L400 171 L0 171 Z" fill="#231F1C"/>
-        <g fill="#E0A541" opacity=".9"><image href="img/maple-leaf.png" x="340" y="112" width="18" height="18"/></g>
+        <g fill="#E0A541" opacity=".9"><image href="img/maple-leaf-sm.png" x="340" y="112" width="18" height="18"/></g>
       </svg>
       <div class="cap">
         <div>
-          <div class="dmeta"><span class="dnum">Day 1</span><span class="ddate">11/09 (一)</span></div>
-          <h2>落地、進海雲台、把家找好</h2>
+          <div class="dmeta"><span class="dnum">Day 1</span><span class="ddate">11/09 (一)</span><span class="todaytag">今天</span></div>
+          <h3 id="d1h">落地、進海雲台、把家找好</h3>
         </div>
       </div>
     </div>
@@ -849,7 +998,7 @@
       <li class="tl-item is-move"><div class="tl-time">出發</div><div class="tl-body"><p class="tl-plain"><b>17:05</b> 高雄小港起飛。國際線報到加安檢抓兩小時，<b>15:00 前到機場</b>就很從容。</p></div></li>
       <li class="tl-item is-move"><div class="tl-time">抵達</div><div class="tl-body"><p class="tl-plain"><b>20:35</b> 金海國際機場落地。入境審查＋提行李大概要半小時到一小時，<b>出關通常是九點多</b>。</p></div></li>
       <li class="tl-item is-key"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">計程車直奔飯店 <span class="pin">今晚唯一難關</span></h3>
+        <h4 class="tl-name">計程車直奔飯店 <span class="pin">今晚唯一難關</span></h4>
         <p class="tl-desc">金海機場在釜山<b>最西邊</b>、海雲台在<b>最東邊</b>，是全市最長的一段對角線。機場巴士末班約 21:00 前後、這班飛機趕不上，大眾運輸要轉三段近 75 分鐘——<b>帶著行李就是直接叫車，沒有別的選項</b>。</p>
         <dl class="meta">
           <div><dt>車資</dt><dd><b>約 50 分 ‧ ₩35,000~45,000</b>（含機場加成與高速費）</dd></div>
@@ -859,11 +1008,11 @@
       </div></li>
       <li class="tl-item is-move"><div class="tl-time"></div><div class="tl-body"><p class="tl-plain">Check-in、<b>放下行李</b>。換雙好走的鞋再出門。</p></div></li>
       <li class="tl-item is-place"><div class="tl-time">入夜</div><div class="tl-body">
-        <h3 class="tl-name">散步逛海雲台大街 <span class="kr">구남로</span></h3>
+        <h4 class="tl-name">散步逛海雲台大街 <span class="kr">구남로</span> <a class="maplink" href="https://map.naver.com/p/search/%EA%B5%AC%EB%82%A8%EB%A1%9C" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 구남로"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">從海雲台站一路通到沙灘的<b>行人徒步大街</b>，是海雲台的主動脈：兩側餐廳、炸雞店、咖啡廳、藥妝店全部開著，中央廣場常有街頭表演。<b>整條都是平路、燈很亮</b>，第一晚拿來認路剛剛好——明天白天還會再走一次。</p>
       </div></li>
       <li class="tl-item is-key"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">宵夜：24 小時豬肉湯飯 <span class="kr">돼지국밥</span> <span class="pin">第一餐</span></h3>
+        <h4 class="tl-name">宵夜：24 小時豬肉湯飯 <span class="kr">돼지국밥</span> <span class="pin">第一餐</span> <a class="maplink" href="https://map.naver.com/p/search/%EB%8F%BC%EC%A7%80%EA%B5%AD%EB%B0%A5" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 돼지국밥"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">豬肉湯飯是釜山的靈魂食物——豬骨熬到乳白的湯、一碗飯、一碟蝦醬，深夜吃最對。<b>海雲台大街和市場一帶有好幾家 24 小時營業</b>，不必挑，哪家亮著就進去。</p>
         <dl class="meta">
           <div><dt>本地吃法</dt><dd>湯裡自己加<b>蝦醬（새우젓）</b>調鹹、再放韭菜，別直接喝原味</dd></div>
@@ -872,21 +1021,21 @@
         </dl>
         <figure class="shot tl-shot wide">
           <img src="img/haeundae-market.jpg" alt="海雲台市場的小吃街，兩側掛滿韓文招牌與球形燈飾" loading="lazy" decoding="async" style="object-position:50% 45%">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>認招牌</b>：「국밥」是湯飯、「족발」是豬腳、「곰장어」是烤盲鰻</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>認招牌</b>：「국밥」是湯飯、「족발」是豬腳、「곰장어」是烤盲鰻</span></figcaption>
         </figure>
       </div></li>
       <li class="tl-item is-place"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">夜晚的海雲台海水浴場 <span class="kr">해운대해수욕장</span></h3>
+        <h4 class="tl-name">夜晚的海雲台海水浴場 <span class="kr">해운대해수욕장</span> <a class="maplink" href="https://map.naver.com/p/search/%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 해운대해수욕장"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">從大街底端直接走進沙灘，住這裡的第一個紅利。<b>深夜的海灘幾乎沒人</b>，背後是 Marine City 整面發光的玻璃大樓牆，左手邊遠處看得到廣安大橋的燈。浪聲很大、風很涼，走一段再回飯店，第一天就結束得很漂亮。</p>
         <dl class="meta">
           <div><dt>提醒</dt><dd>十一月的海邊<b>入夜風很大</b>，外套帶著再下樓</dd></div>
         </dl>
       </div></li>
     </ol>
-  </div>
+  </section>
 
   <!-- ===== DAY 2 ===== -->
-  <div class="day wrap t2" id="d2">
+  <section class="day wrap t2" id="d2" aria-labelledby="d2h" data-date="2026-11-10">
     <div class="daybanner">
       <svg viewBox="0 0 400 171" role="img" aria-label="海雲台海岸與天空膠囊列車的插畫">
         <defs><linearGradient id="d3s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9AD0DE"/><stop offset="100%" stop-color="#F0EBDC"/></linearGradient>
@@ -916,12 +1065,12 @@
         <!-- lighthouse + beach -->
         <g><rect x="372" y="64" width="9" height="32" fill="#F2EDE4"/><rect x="372" y="64" width="9" height="7" fill="#C0402A"/><rect x="370" y="58" width="13" height="7" rx="2" fill="#C0402A"/></g>
         <path d="M0 144 C90 136 180 152 270 144 C330 138 360 150 400 144 L400 171 L0 171 Z" fill="#D3B98E"/>
-        <g fill="#C0402A"><image href="img/maple-leaf.png" x="300" y="46" width="18" height="18"/></g>
+        <g fill="#C0402A"><image href="img/maple-leaf-sm.png" x="300" y="46" width="18" height="18"/></g>
       </svg>
       <div class="cap">
         <div>
-          <div class="dmeta"><span class="dnum">Day 2</span><span class="ddate">11/10 (二)</span></div>
-          <h2>海雲台一日：膠囊列車、T1、夜景</h2>
+          <div class="dmeta"><span class="dnum">Day 2</span><span class="ddate">11/10 (二)</span><span class="todaytag">今天</span></div>
+          <h3 id="d2h">海雲台一日：膠囊列車、T1、夜景</h3>
         </div>
       </div>
     </div>
@@ -929,16 +1078,16 @@
 
     <ol class="tl">
       <li class="tl-item is-place"><div class="tl-time">清晨</div><div class="tl-body">
-        <h3 class="tl-name">海灘日出散步 <span class="pin sea">住宿紅利</span></h3>
+        <h4 class="tl-name">海灘日出散步 <span class="pin sea">住宿紅利</span></h4>
         <p class="tl-desc">11 月中海雲台日出約 <b>07:00</b>。沙灘 1.5 公里長、朝東南，<b>太陽直接從海面升起</b>。這個時間沙灘上只有晨跑的當地人和海鷗，下樓就到，別睡掉。</p>
         <figure class="shot tl-shot wide">
           <img src="img/haeundae-sunrise.jpg" alt="海雲台海灘日出，太陽貼著海面升起，左側是 Marine City 大樓剪影" loading="lazy" decoding="async">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>往東南邊看</b>：太陽從海平面直接升起，左手邊是 Marine City 的剪影</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>往東南邊看</b>：太陽從海平面直接升起，左手邊是 Marine City 的剪影</span></figcaption>
         </figure>
       </div></li>
       <li class="tl-item is-move"><div class="tl-time">上午</div><div class="tl-body"><p class="tl-plain">飯店 → <b>青沙浦（청사포）</b>，計程車約 10 分、₩5,000 上下。</p></div></li>
       <li class="tl-item is-key"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">天空膠囊列車 <span class="kr">스카이캡슐</span> <span class="pin">務必預約</span></h3>
+        <h4 class="tl-name">天空膠囊列車 <span class="kr">스카이캡슐</span> <span class="pin">務必預約</span> <a class="maplink" href="https://map.naver.com/p/search/%EC%8A%A4%EC%B9%B4%EC%9D%B4%EC%BA%A1%EC%8A%90" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 스카이캡슐"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">Blueline Park 的招牌。<b>四人一艙的糖果色小車廂</b>，架高在廢棄的東海南部線舊鐵道上，以接近步行的速度貼著海岸線前進。單程約 2 公里、30 分鐘，<b>全程只有你們這一艙的人跟一整面海</b>。</p>
         <dl class="meta">
           <div><dt>方向</dt><dd>建議走 <b>青沙浦 → 尾浦</b>：海景在行進方向右手邊，而且這個方向的票相對好訂</dd></div>
@@ -947,11 +1096,11 @@
         </dl>
         <figure class="shot tl-shot wide">
           <img src="img/sky-capsule.webp" alt="天空膠囊列車的綠色 45 號與藍色 25 號車廂行駛在海岸高架軌道上" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>認車廂</b>：每台有編號，上車前先對一下票上的號碼</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>認車廂</b>：每台有編號，上車前先對一下票上的號碼</span></figcaption>
         </figure>
       </div></li>
       <li class="tl-item is-key"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">BUSAN X the SKY <span class="kr">부산엑스더스카이</span> <span class="pin sea">就在尾浦旁</span></h3>
+        <h4 class="tl-name">BUSAN X the SKY <span class="kr">부산엑스더스카이</span> <span class="pin sea">就在尾浦旁</span> <a class="maplink" href="https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%EC%97%91%EC%8A%A4%EB%8D%94%EC%8A%A4%EC%B9%B4%EC%9D%B4" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 부산엑스더스카이"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">膠囊列車的終點尾浦（미포）走幾分鐘就到。這是<b>海雲台 LCT 地標塔的 98～100 樓觀景台</b>，塔高 <b>411.6 公尺、韓國第二高</b>，也是全韓規模最大的展望台。上午上去<b>能見度最好</b>：海雲台整片沙灘、廣安大橋、釜山港大橋、二妓台、冬柏島一次收進眼底——等於先把今天接下來要走的地方從空中看過一遍。</p>
         <dl class="meta">
           <div><dt>地址</dt><dd>부산 해운대구 달맞이길 30（LCT 地標塔）</dd></div>
@@ -961,27 +1110,27 @@
         </dl>
         <figure class="shot tl-shot wide">
           <img src="img/x-the-sky.jpg" alt="從 X the Sky 俯瞰海雲台海灘與市區，以及館內的玻璃樓梯" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>左邊就是你們的沙灘</b>：冬柏島、海灘、廣安大橋在同一個畫面裡</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>左邊就是你們的沙灘</b>：冬柏島、海灘、廣安大橋在同一個畫面裡</span></figcaption>
         </figure>
       </div></li>
       <li class="tl-item is-place"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">海邊列車 <span class="kr">해변열차</span></h3>
+        <h4 class="tl-name">海邊列車 <span class="kr">해변열차</span> <a class="maplink" href="https://map.naver.com/p/search/%ED%95%B4%EB%B3%80%EC%97%B4%EC%B0%A8" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 해변열차"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">和膠囊列車同園區、不同系統的<b>平面觀景列車</b>，沿尾浦—青沙浦—松亭跑，座位全部面海、落地窗。<b>站站可以下車再上車</b>，是今天在海岸線之間移動的主要工具。可與膠囊列車買套票。</p>
       </div></li>
       <li class="tl-item is-place"><div class="tl-time">中午</div><div class="tl-body">
-        <h3 class="tl-name">海雲台大街 ‧ 市場午餐 <span class="kr">구남로 ‧ 해운대시장</span></h3>
+        <h4 class="tl-name">海雲台大街 ‧ 市場午餐 <span class="kr">구남로 ‧ 해운대시장</span> <a class="maplink" href="https://map.naver.com/p/search/%ED%95%B4%EC%9A%B4%EB%8C%80%EC%8B%9C%EC%9E%A5" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 해운대시장"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">白天的<b>海雲台大街（구남로）</b>和昨晚完全兩個樣子：店全開了、街頭藝人在中央廣場表演。走到底轉進<b>海雲台市場</b>吃午餐——豬肉湯飯、現切生魚片、糖餅（호떡）、米腸（순대）、辣炒年糕，<b>站著吃、一攤一樣</b>，比坐下來點一桌有趣。</p>
         <figure class="shot tl-shot wide">
           <img src="img/haeundae-market.jpg" alt="海雲台市場的小吃街，兩側掛滿韓文招牌與球形燈飾，人潮穿梭" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>認招牌</b>：紅底白字的「족발」是豬腳、「곰장어」是烤盲鰻，整條都是</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>認招牌</b>：紅底白字的「족발」是豬腳、「곰장어」是烤盲鰻，整條都是</span></figcaption>
         </figure>
       </div></li>
       <li class="tl-item is-place"><div class="tl-time">下午</div><div class="tl-body">
-        <h3 class="tl-name">海雲台海灘 <span class="kr">해운대해수욕장</span></h3>
+        <h4 class="tl-name">海雲台海灘 <span class="kr">해운대해수욕장</span> <a class="maplink" href="https://map.naver.com/p/search/%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 해운대해수욕장"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">釜山的門面，<b>1.5 公里白沙</b>。11 月不能下水，但人少、光線斜、沙灘超好拍。買一包蝦味先站在沙灘上，<b>海鷗會整群圍過來</b>——這是海雲台的固定節目。</p>
       </div></li>
       <li class="tl-item is-place"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">T1 BASE CAMP 釜山店 <span class="kr">T1 베이스 캠프</span> <span class="pin sea">走路就到</span></h3>
+        <h4 class="tl-name">T1 BASE CAMP 釜山店 <span class="kr">T1 베이스 캠프</span> <span class="pin sea">走路就到</span> <a class="maplink" href="https://map.naver.com/p/search/T1%20%EB%B2%A0%EC%9D%B4%EC%8A%A4%20%EC%BA%A0%ED%94%84" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 T1 베이스 캠프"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">韓國電競王朝 T1 的官方品牌基地<b>二號店</b>（一號店在首爾弘大），就開在<b>海雲台 Marisol Hotel 二樓</b>，從沙灘走過去幾分鐘。裡面有頂規電競 PC 區、官方周邊商店、小型電競賽場、拍照亭，還有<b>全韓國第一間 T1 PUB</b>——供應選手的招牌餐點和 T1 聯名飲品。</p>
         <dl class="meta">
           <div><dt>位置</dt><dd>海雲台 <b>마리쏠 호텔 2F</b>；Naver Map 搜「T1 베이스 캠프 부산」</dd></div>
@@ -990,27 +1139,27 @@
         </dl>
         <figure class="shot tl-shot wide">
           <img src="img/t1-base.jpg" alt="T1 BASE CAMP 釜山店的紅色外牆招牌與夜間街景" loading="lazy" decoding="async" style="object-position:50% 36%">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>找路看這個</b>：紅底白字 BASE CAMP，招牌上方就是 MARY SOL（마리쏠）飯店</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>找路看這個</b>：紅底白字 BASE CAMP，招牌上方就是 MARY SOL（마리쏠）飯店</span></figcaption>
         </figure>
       </div></li>
       <li class="tl-item is-place"><div class="tl-time">傍晚</div><div class="tl-body">
-        <h3 class="tl-name">冬柏島海岸步道 <span class="kr">동백섬</span></h3>
+        <h4 class="tl-name">冬柏島海岸步道 <span class="kr">동백섬</span> <a class="maplink" href="https://map.naver.com/p/search/%EB%8F%99%EB%B0%B1%EC%84%AC" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 동백섬"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">海雲台沙灘<b>西端</b>的小半島，環島木棧步道一圈約 1.2 公里、平路好走。走到南側崖邊，可以把<b>廣安大橋</b>和 Marine City 的玻璃大樓群框進同一張照片。<b>17:20 日落</b>剛好在這裡。</p>
       </div></li>
       <li class="tl-item is-key"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">The Bay 101 <span class="pin">經典機位</span></h3>
+        <h4 class="tl-name">The Bay 101 <span class="pin">經典機位</span> <a class="maplink" href="https://map.naver.com/p/search/%EB%8D%94%EB%B2%A0%EC%9D%B4101" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 더베이101"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">冬柏島旁的遊艇碼頭，釜山夜景明信片的那張就是在這裡拍的：<b>前方廣場的淺水池倒影 ＋ 後方 Marine City 整片亮燈的大樓牆</b>。現場有炸魚薯條和啤酒，大家端著坐在岸邊地上吃。<b>水池要沒風才有倒影</b>，風大就往碼頭邊走。</p>
         <figure class="shot tl-shot wide">
           <img src="img/the-bay-101.jpg" alt="The Bay 101 水面倒映整排 Marine City 大樓燈光，欄杆邊坐著一個人" loading="lazy" decoding="async" style="object-position:50% 50%">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>蹲低一點拍</b>：相機貼近水面，大樓和倒影才會對稱成一整片</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>蹲低一點拍</b>：相機貼近水面，大樓和倒影才會對稱成一整片</span></figcaption>
         </figure>
       </div></li>
       <li class="tl-item"><div class="tl-time">晚上</div><div class="tl-body">
-        <h3 class="tl-name">晚餐：海雲台烤肉或豬肉湯飯</h3>
+        <h4 class="tl-name">晚餐：海雲台烤肉或豬肉湯飯</h4>
         <p class="tl-desc">海雲台站到沙灘之間整條都是餐廳。吃完<b>走回飯店</b>，今天不必算末班車——這是住海雲台最實在的好處。</p>
       </div></li>
       <li class="tl-item is-place"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">Olive Young 海雲台店 <span class="kr">올리브영</span></h3>
+        <h4 class="tl-name">Olive Young 海雲台店 <span class="kr">올리브영</span> <a class="maplink" href="https://map.naver.com/p/search/%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%98%81" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 올리브영"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">回飯店的路上順手逛。<b>海雲台大街（구남로）上就有分店</b>，規模比西面小，但<b>人也少很多、好挑好試</b>。今晚先把想買的牌子摸過一輪、記下價錢，Day 4 到西面再一次掃貨最有效率——遇到喜歡又剛好 1+1 的就直接下手。</p>
         <dl class="meta">
           <div><dt>營業</dt><dd>多數分店開到 <b>22:30 前後</b>，吃完晚餐去剛剛好</dd></div>
@@ -1019,10 +1168,10 @@
         </dl>
       </div></li>
     </ol>
-  </div>
+  </section>
 
   <!-- ===== DAY 3 ===== -->
-  <div class="day wrap t3" id="d3">
+  <section class="day wrap t3" id="d3" aria-labelledby="d3h" data-date="2026-11-11">
     <div class="daybanner">
       <svg viewBox="0 0 400 171" role="img" aria-label="樂天樂園的旋轉木馬、摩天輪與雲霄飛車插畫">
         <defs><linearGradient id="d2s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7CB6DA"/><stop offset="100%" stop-color="#F7E6CA"/></linearGradient>
@@ -1060,13 +1209,13 @@
         <!-- characters -->
         <svg x="206" y="112" width="40" height="40" viewBox="0 0 100 100" class="bob" aria-hidden="true"><use href="#mushroom"/></svg>
         <svg x="246" y="118" width="34" height="34" viewBox="0 0 100 100" aria-hidden="true"><use href="#pinkbean"/></svg>
-        <g fill="#C0402A"><image href="img/maple-leaf.png" x="120" y="34" width="20" height="20"/></g>
-        <g fill="#D98B32"><image href="img/maple-leaf.png" x="372" y="40" width="16" height="16"/></g>
+        <g fill="#C0402A"><image href="img/maple-leaf-sm.png" x="120" y="34" width="20" height="20"/></g>
+        <g fill="#D98B32"><image href="img/maple-leaf-sm.png" x="372" y="40" width="16" height="16"/></g>
       </svg>
       <div class="cap">
         <div>
-          <div class="dmeta"><span class="dnum">Day 3</span><span class="ddate">11/11 (三)</span></div>
-          <h2>東釜山：斜坡滑車 ＋ 楓之谷</h2>
+          <div class="dmeta"><span class="dnum">Day 3</span><span class="ddate">11/11 (三)</span><span class="todaytag">今天</span></div>
+          <h3 id="d3h">東釜山：斜坡滑車 ＋ 楓之谷</h3>
         </div>
       </div>
     </div>
@@ -1076,7 +1225,7 @@
       <li class="tl-item is-move"><div class="tl-time">上午</div><div class="tl-body"><p class="tl-plain">海雲台站搭 <b>東海線（동해선）往北 → 기장站</b>，約 20 分。東海線和地鐵 2 號線是不同系統、同站可轉乘，<b>班距較長（15–30 分），出門前先查發車時間</b>。</p></div></li>
 
       <li class="tl-item is-key"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">Skyline Luge 斜坡滑車 <span class="kr">스카이라인 루지 부산</span> <span class="pin">今天的主菜之一</span></h3>
+        <h4 class="tl-name">Skyline Luge 斜坡滑車 <span class="kr">스카이라인 루지 부산</span> <span class="pin">今天的主菜之一</span> <a class="maplink" href="https://map.naver.com/p/search/%EC%8A%A4%EC%B9%B4%EC%9D%B4%EB%9D%BC%EC%9D%B8%20%EB%A3%A8%EC%A7%80%20%EB%B6%80%EC%82%B0" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 스카이라인 루지 부산"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">紐西蘭來的重力滑車。先搭<b>吊椅（Skyride）升到山頂</b>，沿途就是海景；再坐上三輪小車，<b>自己控制把手煞車滑下來</b>——往前推是加速、往後拉是煞車，不用踩任何踏板。全場<b>四條賽道、總長 2.4 公里</b>，從最緩的新手道到最彎的進階道都有。刺激但不會太可怕，不會開車的人也能玩。</p>
         <dl class="meta">
           <div><dt>地址</dt><dd>부산 기장군 기장읍 기장해안로 205</dd></div>
@@ -1088,19 +1237,19 @@
         </dl>
         <figure class="shot tl-shot wide">
           <img src="img/skyline-luge.webp" alt="三位遊客駕駛斜坡滑車通過黃黑護欄的彎道" loading="lazy" decoding="async" style="object-position:50% 55%">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>就是這種車</b>：坐姿很低、重心穩，把手往後拉就煞車</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>就是這種車</b>：坐姿很低、重心穩，把手往後拉就煞車</span></figcaption>
         </figure>
       </div></li>
 
       <li class="tl-item is-place"><div class="tl-time">中午</div><div class="tl-body">
-        <h3 class="tl-name">午餐：機張一帶或東釜山 Outlet</h3>
+        <h4 class="tl-name">午餐：機張一帶或東釜山 Outlet</h4>
         <p class="tl-desc">滑完車往樂園方向移動，順路吃午餐。<b>機張（기장）是松葉蟹的產地</b>，想吃海鮮在這裡解決；或是坐東海線到오시리아站，在<b>新世界 Premium Outlet</b> 的餐廳區吃、順便吹暖氣休息。</p>
       </div></li>
 
       <li class="tl-item is-move"><div class="tl-time">下午</div><div class="tl-body"><p class="tl-plain">기장站搭 <b>東海線往南 → 오시리아站</b>，一站、約 5 分。樂天世界就在車站旁。</p></div></li>
 
       <li class="tl-item is-key"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">樂天世界釜山 × 楓之谷 <span class="kr">롯데월드 어드벤처 부산</span> <span class="pin">主場</span></h3>
+        <h4 class="tl-name">樂天世界釜山 × 楓之谷 <span class="kr">롯데월드 어드벤처 부산</span> <span class="pin">主場</span> <a class="maplink" href="https://map.naver.com/p/search/%EB%A1%AF%EB%8D%B0%EC%9B%94%EB%93%9C%20%EC%96%B4%EB%93%9C%EB%B2%A4%EC%B2%98%20%EB%B6%80%EC%82%B0" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 롯데월드 어드벤처 부산"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">2022 年開幕，<b>釜山唯一的大型主題樂園</b>，六個主題園區沿著山谷展開，招牌是木質雲霄飛車 <b>Giant Digger</b>。這季整個園區都在跑 Nexon 聯名的 <b>「MapleStory in LOTTE WORLD BUSAN」秋季檔期（到 11/22）</b>。</p>
         <p class="tl-desc"><b>下午三點左右進場</b>，平日開到 20:00，還有五個小時——而且這個時段剛好有一張便宜很多的票。</p>
         <dl class="meta">
@@ -1118,10 +1267,10 @@
 
       <li class="tl-item is-move"><div class="tl-time">晚上</div><div class="tl-body"><p class="tl-plain">閉園後東海線回海雲台，<b>12 分鐘就到家</b>——這是住海雲台今天最大的好處。晚餐可以回구남로上解決。</p></div></li>
     </ol>
-  </div>
+  </section>
 
   <!-- ===== DAY 4 ===== -->
-  <div class="day wrap t4" id="d4">
+  <section class="day wrap t4" id="d4" aria-labelledby="d4h" data-date="2026-11-12">
     <div class="daybanner">
       <svg viewBox="0 0 400 171" role="img" aria-label="荒嶺山俯瞰廣安大橋夜景與西面街景的插畫">
         <defs><linearGradient id="d4s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#121F38"/><stop offset="55%" stop-color="#3A3B55"/><stop offset="100%" stop-color="#7C5658"/></linearGradient></defs>
@@ -1146,13 +1295,13 @@
         <g fill="#2A3242"><path d="M56 114 l13 -9 l13 9 v12 h-26 z"/></g>
         <path d="M66 104 q4 -9 8 0 q-4 -4 -8 0 z" fill="#E0802B"/>
         <text x="96" y="162" fill="#8EA2AE" font-family="monospace" font-size="8" letter-spacing="1">427 m ‧ 황령산</text>
-        <g fill="#C0402A"><image href="img/maple-leaf.png" x="356" y="52" width="18" height="18"/></g>
-        <g fill="#D98B32"><image href="img/maple-leaf.png" x="312" y="76" width="14" height="14"/></g>
+        <g fill="#C0402A"><image href="img/maple-leaf-sm.png" x="356" y="52" width="18" height="18"/></g>
+        <g fill="#D98B32"><image href="img/maple-leaf-sm.png" x="312" y="76" width="14" height="14"/></g>
       </svg>
       <div class="cap">
         <div>
-          <div class="dmeta"><span class="dnum">Day 4</span><span class="ddate">11/12 (四)</span></div>
-          <h2>A 版：咖啡街、拍貼、西面、夜景</h2>
+          <div class="dmeta"><span class="dnum">Day 4</span><span class="ddate">11/12 (四)</span><span class="todaytag">今天</span></div>
+          <h3 id="d4h">A 版：咖啡街、拍貼、西面、夜景</h3>
         </div>
       </div>
     </div>
@@ -1162,7 +1311,7 @@
       <li class="tl-item is-move"><div class="tl-time">上午</div><div class="tl-body"><p class="tl-plain">海雲台站搭 <b>2 號線往서면方向</b> → 田浦站（전포），約 30 分。</p></div></li>
 
       <li class="tl-item is-place"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">田浦咖啡街 <span class="kr">전포 카페거리</span></h3>
+        <h4 class="tl-name">田浦咖啡街 <span class="kr">전포 카페거리</span> <a class="maplink" href="https://map.naver.com/p/search/%EC%A0%84%ED%8F%AC%20%EC%B9%B4%ED%8E%98%EA%B1%B0%EB%A6%AC" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 전포 카페거리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">釜山咖啡廳密度最高的一區。這裡本來是賣工具機具的<b>「工具街」（공구거리）</b>，老鐵工廠一間間被改成咖啡廳，招牌還留著當年的樣子，<b>2017 年被紐約時報選進「年度必訪 52 個地方」</b>之後就紅了。</p>
         <dl class="meta">
           <div><dt>怎麼逛</dt><dd>沒有單一一條主街，是<b>一整片巷弄</b>——隨便鑽，看到門面喜歡就進去</dd></div>
@@ -1172,7 +1321,7 @@
       </div></li>
 
       <li class="tl-item is-place"><div class="tl-time">中午</div><div class="tl-body">
-        <h3 class="tl-name">Moving Photo 動態拍貼 <span class="kr">무빙포토</span></h3>
+        <h4 class="tl-name">Moving Photo 動態拍貼 <span class="kr">무빙포토</span> <a class="maplink" href="https://map.naver.com/p/search/%EB%AC%B4%EB%B9%99%ED%8F%AC%ED%86%A0" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 무빙포토"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">韓國年輕人現在最流行的自助拍照店。和傳統拍貼不同的是，<b>拍出來的四格照片會動</b>——機器錄下幾秒影片，現場印出紙本、同時給你一支可以存手機的動圖。四個人擠進去一起拍剛剛好。</p>
         <dl class="meta">
           <div><dt>在哪</dt><dd>田浦與西面一帶有好幾家，<b>Naver Map 搜「무빙포토 서면」</b>挑近的；同類型的還有 인생네컷、포토이즘</dd></div>
@@ -1182,7 +1331,7 @@
       </div></li>
 
       <li class="tl-item is-place"><div class="tl-time">下午</div><div class="tl-body">
-        <h3 class="tl-name">西面逛街 <span class="kr">서면</span></h3>
+        <h4 class="tl-name">西面逛街 <span class="kr">서면</span> <a class="maplink" href="https://map.naver.com/p/search/%EC%84%9C%EB%A9%B4" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 서면"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">從田浦走過去或搭一站就到。西面是<b>釜山最大的商圈</b>，地鐵 1、2 號線在這裡交會，樂天百貨、Judies 太華（쥬디스태화）、西面一號街和整片地下街擠在一起，<b>一個下午走不完</b>。</p>
         <dl class="meta">
           <div><dt>怎麼逛</dt><dd><b>地下街</b>（서면지하상가）便宜小物多；<b>樂天百貨</b>有退稅櫃台；<b>西面一號街</b>是年輕品牌與小店</dd></div>
@@ -1190,14 +1339,14 @@
         </dl>
         <figure class="shot tl-shot wide">
           <img src="img/seomyeon.jpg" alt="西面商圈夜晚的街道，兩側滿是霓虹招牌與車潮" loading="lazy" decoding="async">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>西面的晚上長這樣</b>：招牌疊成一面牆，店開得很晚，看完夜景回來逛也來得及</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>西面的晚上長這樣</b>：招牌疊成一面牆，店開得很晚，看完夜景回來逛也來得及</span></figcaption>
         </figure>
       </div></li>
 
       <li class="tl-item is-move"><div class="tl-time">傍晚</div><div class="tl-body"><p class="tl-plain">看看天色差不多了，從西面搭計程車上山，約 15 分、₩8,000 上下。<b>目的地一定要說「황령산 전망쉼터」（荒嶺山展望休憩所）</b>——只說「황령산」會被放在登山口，得多走半小時。</p></div></li>
 
       <li class="tl-item is-key"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">荒嶺山展望台看夜景 <span class="kr">황령산 봉수대</span> <span class="pin">今天的夜景</span></h3>
+        <h4 class="tl-name">荒嶺山展望台看夜景 <span class="kr">황령산 봉수대</span> <span class="pin">今天的夜景</span> <a class="maplink" href="https://map.naver.com/p/search/%ED%99%A9%EB%A0%B9%EC%82%B0%20%EB%B4%89%EC%88%98%EB%8C%80" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 황령산 봉수대"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc"><b>海拔 427 公尺</b>，一座朝鮮時代的烽火台立在釜山正中央的山頂上，<b>360 度無遮蔽</b>：廣安大橋、海雲台、西面市區、釜山港一次看完。這是全市看釜山全景最好的位置，而且<b>24 小時免費開放</b>，不必趕關門。</p>
         <dl class="meta">
           <div><dt>什麼時候去</dt><dd>十一月日落約 <b>17:20</b>。<b>日落前一小時左右上山</b>，夕陽和夜景一次收，不必來兩趟</dd></div>
@@ -1207,14 +1356,14 @@
         </dl>
         <figure class="shot tl-shot">
           <img src="img/hwangnyeongsan.jpg" alt="從荒嶺山木棧步道往下看釜山市區的夜景" loading="lazy" decoding="async" style="object-position:50% 40%">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>就是這個畫面</b>：木棧步道往下走，整座釜山在腳下攤開</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>就是這個畫面</b>：木棧步道往下走，整座釜山在腳下攤開</span></figcaption>
         </figure>
       </div></li>
 
       <li class="tl-item is-move"><div class="tl-time">晚上</div><div class="tl-body"><p class="tl-plain">計程車下山回西面，約 15 分。<b>山上有時叫不到車</b>——上山時留司機電話，或請咖啡廳幫忙叫，別打算走下山（山路彎又暗）。</p></div></li>
 
       <li class="tl-item is-key"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">晚餐：醬烤豬頸肉 <span class="kr">간장 돼지목살</span> <span class="pin">今天的大餐</span></h3>
+        <h4 class="tl-name">晚餐：醬烤豬頸肉 <span class="kr">간장 돼지목살</span> <span class="pin">今天的大餐</span> <a class="maplink" href="https://map.naver.com/p/search/%EA%B0%84%EC%9E%A5%20%EB%8F%BC%EC%A7%80%EB%AA%A9%EC%82%B4" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 간장 돼지목살"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">豬頸肉（목살／松阪豬）是整頭豬油花最漂亮的部位，<b>先用醬油基底醃過再上炭火</b>，邊緣焦糖化、裡面還是嫩的。釜山的烤肉店多半<b>全程由店員代烤</b>，你只要負責包生菜。以下三家都在西面站步行範圍內，當天看排隊決定：</p>
         <div class="alt-list">
           <p class="opt"><b>固定點</b> <span class="kr">고정점</span> — 西面站旁的人氣店，醬烤豬肉與烤豬皮，專人代烤後直接端上桌</p>
@@ -1223,12 +1372,12 @@
         </div>
         <figure class="shot tl-shot">
           <img src="img/pork-neck.jpg" alt="店員在烤盤旁備好的生豬頸肉與沾醬" loading="lazy" decoding="async" style="object-position:50% 45%">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>照片是豬樹之愛</b>（돼지나무 사랑걸렸네）：肉端上來先給你看過，再由店員代烤</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>照片是豬樹之愛</b>（돼지나무 사랑걸렸네）：肉端上來先給你看過，再由店員代烤</span></figcaption>
         </figure>
       </div></li>
 
       <li class="tl-item is-key"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">Olive Young 大採買 <span class="kr">올리브영</span> <span class="pin">慢慢挑</span></h3>
+        <h4 class="tl-name">Olive Young 大採買 <span class="kr">올리브영</span> <span class="pin">慢慢挑</span> <a class="maplink" href="https://map.naver.com/p/search/%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%98%81" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 올리브영"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">西面有好幾家分店，<b>多數開到 22:30</b>，所以放在吃飽之後——<b>先買就得扛著戰利品上荒嶺山</b>，很不划算。Day 2 在海雲台已經先看過一輪，這裡貨色最齊，可以放心一次買足。</p>
         <dl class="meta">
           <div><dt>退稅</dt><dd><b>單筆滿 ₩30,000</b> 結帳時出示護照即時退稅，不用在機場排隊；想退稅就<b>一次結清</b>，分開結會各自計算</dd></div>
@@ -1238,7 +1387,7 @@
       </div></li>
 
       <li class="tl-item is-place"><div class="tl-time">深夜</div><div class="tl-body">
-        <h3 class="tl-name">廣安里海邊看廣安大橋 <span class="kr">광안리</span> <span class="pin sea">回程順路</span></h3>
+        <h4 class="tl-name">廣安里海邊看廣安大橋 <span class="kr">광안리</span> <span class="pin sea">回程順路</span> <a class="maplink" href="https://map.naver.com/p/search/%EA%B4%91%EC%95%88%EB%A6%AC" target="_blank" rel="noopener noreferrer" aria-label="在 Naver 地圖搜尋 광안리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>地圖</a></h4>
         <p class="tl-desc">回海雲台的路上<b>剛好經過廣安站</b>，下車走五分鐘就是海灘。<b>廣安里是釜山人自己的海邊</b>，7.4 公里長的廣安大橋橫在眼前、整座打著燈，沙灘後面整排炸雞啤酒（치맥）店還亮著。今天最後一站，走一段沙灘再回家。</p>
         <dl class="meta">
           <div><dt>想續攤</dt><dd>往東邊的<b>民樂水邊公園</b>走，<b>水邊王豬腳包飯</b>和 <b>24 小時的水邊最高豬肉湯飯</b>都在那一區——詳見下面的<a href="#food">美食專區</a></dd></div>
@@ -1246,14 +1395,14 @@
         </dl>
         <figure class="shot tl-shot wide">
           <img src="img/gwangan-bridge.jpg" alt="夜晚亮著紫粉色燈光的廣安大橋與海面倒影" loading="lazy" decoding="async">
-          <figcaption><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span><b>今天的收尾</b>：大橋整夜打燈，沙灘上都是坐著喝啤酒的人</span></figcaption>
+          <figcaption><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span><b>今天的收尾</b>：大橋整夜打燈，沙灘上都是坐著喝啤酒的人</span></figcaption>
         </figure>
       </div></li>
     </ol>
-  </div>
+  </section>
 
   <!-- ===== DAY 5 ===== -->
-  <div class="day wrap t5" id="d5">
+  <section class="day wrap t5" id="d5" aria-labelledby="d5h" data-date="2026-11-13">
     <div class="daybanner">
       <svg viewBox="0 0 400 171" role="img" aria-label="清晨海雲台沙灘與起飛的飛機插畫">
         <defs><linearGradient id="d5s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4E7FA0"/><stop offset="50%" stop-color="#E9B98A"/><stop offset="100%" stop-color="#F8E4C8"/></linearGradient>
@@ -1274,13 +1423,13 @@
           <path d="M292 46 l34 8 l10 -12 l8 2 l-4 12 l22 6 l0 5 l-22 6 l4 12 l-8 2 l-10 -12 l-34 8 l0 -5 l24 -11 l-24 -11 z"/>
         </g>
         <g stroke="#FFFFFF" stroke-width="1.6" opacity=".4" fill="none" stroke-dasharray="5 5"><path d="M160 72 C210 62 250 56 290 52"/></g>
-        <g fill="#C0402A"><image href="img/maple-leaf.png" x="60" y="56" width="20" height="20"/></g>
-        <g fill="#E0A541"><image href="img/maple-leaf.png" x="100" y="76" width="14" height="14"/></g>
+        <g fill="#C0402A"><image href="img/maple-leaf-sm.png" x="60" y="56" width="20" height="20"/></g>
+        <g fill="#E0A541"><image href="img/maple-leaf-sm.png" x="100" y="76" width="14" height="14"/></g>
       </svg>
       <div class="cap">
         <div>
-          <div class="dmeta"><span class="dnum">Day 5</span><span class="ddate">11/13 (五)</span></div>
-          <h2>最後一段海，然後回家</h2>
+          <div class="dmeta"><span class="dnum">Day 5</span><span class="ddate">11/13 (五)</span><span class="todaytag">今天</span></div>
+          <h3 id="d5h">最後一段海，然後回家</h3>
         </div>
       </div>
     </div>
@@ -1288,41 +1437,41 @@
 
     <ol class="tl">
       <li class="tl-item is-place"><div class="tl-time">清晨</div><div class="tl-body">
-        <h3 class="tl-name">海雲台海灘最後一次散步</h3>
+        <h4 class="tl-name">海雲台海灘最後一次散步</h4>
         <p class="tl-desc">行李打包好再下樓。<b>早上的沙灘最乾淨</b>，走到冬柏島方向再折回剛好一小時。</p>
       </div></li>
       <li class="tl-item"><div class="tl-time">上午</div><div class="tl-body">
-        <h3 class="tl-name">早餐：海雲台市場或飯店</h3>
+        <h4 class="tl-name">早餐：海雲台市場或飯店</h4>
         <p class="tl-desc">最後一碗豬肉湯飯，或市場的現做糖餅。</p>
       </div></li>
       <li class="tl-item"><div class="tl-time"></div><div class="tl-body">
-        <h3 class="tl-name">補貨（有需要才去）</h3>
+        <h4 class="tl-name">補貨（有需要才去）</h4>
         <p class="tl-desc">Olive Young 海雲台店多在 <b>10:00 開門</b>，時間很緊。<b>真正的伴手禮在超市</b>：蜂蜜奶油杏仁、辣雞麵、燒酒、海苔。要是 Day 4 在西面買齊了，這段就留給打包。</p>
       </div></li>
       <li class="tl-item is-key"><div class="tl-time">出發</div><div class="tl-body">
-        <h3 class="tl-name">退房 → 金海機場 <span class="pin">留足時間</span></h3>
+        <h4 class="tl-name">退房 → 金海機場 <span class="pin">留足時間</span></h4>
         <p class="tl-desc">海雲台到機場是穿越整個釜山的對角線。<b>計程車 50~60 分 ‧ 約 ₩35,000~45,000</b>；大眾運輸要 75 分以上、還要扛行李轉三次。<b>有行李就叫車</b>。平日早上市區會塞，10:30 出門是含緩衝的時間。</p>
       </div></li>
       <li class="tl-item is-move"><div class="tl-time"></div><div class="tl-body"><p class="tl-plain">抵達金海機場國際線航廈，報到、託運、退稅。<b>櫃檯最晚 12:05 前要報到</b>，剩下的時間逛免稅店。</p></div></li>
       <li class="tl-item is-move"><div class="tl-time"></div><div class="tl-body"><p class="tl-plain"><b>14:05</b> 起飛 ‧ <b>16:05</b> 抵達高雄小港。</p></div></li>
     </ol>
-  </div>
+  </section>
 </section>
 
-<div class="mdiv wrap" aria-hidden="true"><i></i><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><i></i></div>
+<div class="mdiv wrap" aria-hidden="true"><i></i><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><i></i></div>
 
 <!-- ============================ FOOD ============================ -->
 <section class="sec maple-feat" id="food">
   <img class="wm l" src="img/maple-leaf.png" alt="" aria-hidden="true">
   <div class="leaves" aria-hidden="true">
-    <span class="leaf" style="--x:12%; --d:25s; --delay:2s; --s:.5; --c:#D98B32; --f:hue-rotate(18deg) brightness(1.1)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:40%; --d:20s; --delay:8s; --s:.7; --c:#C0402A; --f:none"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:66%; --d:28s; --delay:13s; --s:.42; --c:#E0A541; --f:hue-rotate(26deg) saturate(.9) brightness(1.18)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
-    <span class="leaf" style="--x:91%; --d:22s; --delay:6s; --s:.58; --c:#B33E22; --f:hue-rotate(-18deg) saturate(1.35) brightness(.92)"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:12%; --d:25s; --delay:2s; --s:.5; --c:#D98B32; --f:hue-rotate(18deg) brightness(1.1)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:40%; --d:20s; --delay:8s; --s:.7; --c:#C0402A; --f:none"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:66%; --d:28s; --delay:13s; --s:.42; --c:#E0A541; --f:hue-rotate(26deg) saturate(.9) brightness(1.18)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
+    <span class="leaf" style="--x:91%; --d:22s; --delay:6s; --s:.58; --c:#B33E22; --f:hue-rotate(-18deg) saturate(1.35) brightness(.92)"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"></span>
   </div>
   <div class="wrap">
     <div class="sechead">
-      <p class="kicker"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span>Food</span></p>
+      <p class="kicker"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span>Food</span></p>
       <h2>你清單上的三家，全排在 Day 4</h2>
       <p>廣安里的民樂水邊公園吃兩家，晚上到西面吃第三家。<b>三家都在同一條軸線上</b>，不用來回跑。</p>
     </div>
@@ -1383,13 +1532,13 @@
     <div class="twocol">
       <div>
         <div class="sechead" style="margin-bottom:1rem">
-          <p class="kicker"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span>Before you fly</span></p>
+          <p class="kicker"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span>Before you fly</span></p>
           <h2>出發前要訂好的</h2>
-          <p>勾選會留在這個頁面上，<b>兩個人打開看到的是同一份</b>。</p>
+          <p>出發前逐項打勾。<b>勾選存在你這台裝置的瀏覽器裡</b>，換一台就要重新勾。</p>
         </div>
         <div class="checkhead">
           <p class="eyebrow">Checklist</p>
-          <span class="count" id="count">0 / 10</span>
+          <span class="count" id="count" role="status" aria-live="polite" aria-label="已完成項目">0 / 10</span>
         </div>
         <ul class="checks">
           <li><label class="crow" for="c1"><input type="checkbox" id="c1" data-check="skycapsule"><span class="ct">天空膠囊列車（青沙浦 → 尾浦）<small>Day 3 最關鍵的一筆，熱門時段會滿，務必線上先訂</small></span></label></li>
@@ -1408,7 +1557,7 @@
 
       <div>
         <div class="sechead" style="margin-bottom:1rem">
-          <p class="kicker"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span>Shopping</span></p>
+          <p class="kicker"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span>Shopping</span></p>
           <h2>Olive Young 與伴手禮</h2>
           <p>因為住海雲台，<b>Day 4 晚上的西面是主戰場</b>。海雲台也有分店，但規模與品項較小，適合補漏。</p>
         </div>
@@ -1447,14 +1596,14 @@
   </div>
 </section>
 
-<div class="mdiv wrap" aria-hidden="true"><i></i><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><i></i></div>
+<div class="mdiv wrap" aria-hidden="true"><i></i><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><i></i></div>
 
 <!-- ============================ TRANSPORT ============================ -->
 <section class="sec" id="move">
   <img class="wm l" src="img/maple-leaf.png" alt="" aria-hidden="true">
   <div class="wrap">
     <div class="sechead">
-      <p class="kicker"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span>Getting around</span></p>
+      <p class="kicker"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span>Getting around</span></p>
       <h2>從海雲台出發的路線表</h2>
       <p>住海雲台的通則：<b>往東（東釜山）很近，往西（西面、機場）要算時間</b>。海雲台站同時有地鐵 2 號線與東海線，分屬不同系統。</p>
     </div>
@@ -1478,6 +1627,8 @@
       </table>
     </div>
 
+    <p class="scrollhint" aria-hidden="true">← 左右滑動看完整表格 →</p>
+
     <ul class="notes" style="margin-top:1.6rem">
       <li><span class="k">交通卡</span><span>便利店買 <b>Cashbee 或 T-money</b>，地鐵、公車、計程車都能刷，轉乘還有折扣。</span></li>
       <li><span class="k">叫車</span><span><b>Kakao T</b> 是韓國的叫車 App。釜山計程車起步價不貴，三人以上短程常常比地鐵划算，別硬撐大眾運輸。</span></li>
@@ -1492,7 +1643,7 @@
   <img class="wm r" src="img/maple-leaf.png" alt="" aria-hidden="true">
   <div class="wrap">
     <div class="sechead">
-      <p class="kicker"><img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true"><span>Plan B</span></p>
+      <p class="kicker"><img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true"><span>Plan B</span></p>
       <h2>出狀況的時候</h2>
     </div>
     <ul class="notes">
@@ -1507,14 +1658,16 @@
   </div>
 </section>
 
+</main>
+
 <button class="totop" id="totop" type="button" aria-label="回到頁首">
-  <img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true">
+  <img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
 </button>
 
 <footer>
   <div class="wrap">
     <p class="fl">
-      <img class="pleaf" src="img/maple-leaf.png" alt="" aria-hidden="true">
+      <img class="pleaf" src="img/maple-leaf-sm.png" alt="" aria-hidden="true">
       <span style="color:var(--ink-3); font-size:.82rem">五天四夜 ‧ 以海雲台海灘為基地 ‧ 時段只是順序，走到哪算哪</span>
     </p>
     <p class="mono">11.09 — 11.13 ‧ BUSAN</p>
@@ -1526,16 +1679,35 @@
   /* ---- top nav: mark the section currently in view ---- */
   var links = Array.prototype.slice.call(document.querySelectorAll('.topnav a'));
   var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  var navbar = document.getElementById('topnav');
+  var lastBest;
 
   function markActive(){
-    var best = null, bestTop = -Infinity;
+    var best = null, bestTop = -Infinity, current = null;
     targets.forEach(function(t){
       var top = t.getBoundingClientRect().top;
       if (top <= 140 && top > bestTop) { bestTop = top; best = t.id; }
     });
     links.forEach(function(a){
-      a.setAttribute('aria-current', (best && a.getAttribute('href') === '#' + best) ? 'true' : 'false');
+      if (best && a.getAttribute('href') === '#' + best) {
+        a.setAttribute('aria-current', 'true');
+        current = a;
+      } else {
+        a.removeAttribute('aria-current');
+      }
     });
+    /* the nav scrolls sideways on phones — pull the active tab back into view */
+    if (best !== lastBest) {
+      lastBest = best;
+      if (current && navbar && navbar.scrollWidth > navbar.clientWidth + 4) {
+        var left = current.offsetLeft, right = left + current.offsetWidth;
+        if (left < navbar.scrollLeft + 24 || right > navbar.scrollLeft + navbar.clientWidth - 24) {
+          var to = left - (navbar.clientWidth - current.offsetWidth) / 2;
+          if (navbar.scrollTo) navbar.scrollTo({ left: to, behavior: reduced() ? 'auto' : 'smooth' });
+          else navbar.scrollLeft = to;
+        }
+      }
+    }
   }
   /* ---- scroll progress bar ---- */
   var bar = document.getElementById('progress');
@@ -1543,7 +1715,7 @@
     if (!bar) return;
     var h = document.documentElement.scrollHeight - window.innerHeight;
     var pct = h > 0 ? (window.scrollY / h) * 100 : 0;
-    bar.style.width = Math.max(0, Math.min(100, pct)) + '%';
+    bar.style.transform = 'scaleX(' + (Math.max(0, Math.min(100, pct)) / 100) + ')';
   }
 
   /* ---- back to top ---- */
@@ -1594,6 +1766,65 @@
       hidden.forEach(function(el){ ro.observe(el); });
     });
   }
+
+  /* ---- theme: auto -> light -> dark, remembered per device ---- */
+  var THEME_KEY = 'busan-theme';
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('themebtn');
+  var THEME_LABEL = { auto: '配色：跟隨系統（點一下改為淺色）',
+                      light: '配色：淺色（點一下改為深色）',
+                      dark: '配色：深色（點一下改為跟隨系統）' };
+
+  function applyTheme(mode){
+    if (mode !== 'light' && mode !== 'dark') mode = 'auto';
+    if (mode === 'auto') root.removeAttribute('data-theme');
+    else root.setAttribute('data-theme', mode);
+    if (themeBtn) {
+      themeBtn.setAttribute('aria-label', THEME_LABEL[mode]);
+      themeBtn.title = THEME_LABEL[mode];
+    }
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      var isDark = mode === 'dark' || (mode === 'auto' && window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches);
+      meta.setAttribute('content', isDark ? '#0B151C' : '#DC4722');
+    }
+    return mode;
+  }
+
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem(THEME_KEY); } catch (e) {}
+  var themeMode = applyTheme(savedTheme);
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function(){
+      themeMode = applyTheme({ auto: 'light', light: 'dark', dark: 'auto' }[themeMode]);
+      try {
+        if (themeMode === 'auto') localStorage.removeItem(THEME_KEY);
+        else localStorage.setItem(THEME_KEY, themeMode);
+      } catch (e) {}
+    });
+  }
+
+  /* ---- falling leaves: stop animating once their section is off screen ---- */
+  if ('IntersectionObserver' in window) {
+    var fields = Array.prototype.slice.call(document.querySelectorAll('.leaves'));
+    fields.forEach(function(el){ el.classList.add('is-idle'); });
+    var leafObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ e.target.classList.toggle('is-idle', !e.isIntersecting); });
+    }, { rootMargin: '150px 0px' });
+    fields.forEach(function(el){ leafObserver.observe(el); });
+  }
+
+  /* ---- during the trip itself, light up today's day ---- */
+  var now = new Date();
+  var todayKey = now.getFullYear() + '-' +
+    ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+  Array.prototype.slice.call(document.querySelectorAll('.day[data-date]')).forEach(function(d){
+    if (d.getAttribute('data-date') !== todayKey) return;
+    d.classList.add('is-today');
+    var link = document.querySelector('.topnav a[href="#' + d.id + '"]');
+    if (link) link.classList.add('is-today');
+  });
 
   /* ---- booking checklist: shared via db when available, local otherwise ---- */
   var LS = 'busan-haeundae-checklist-v1';
